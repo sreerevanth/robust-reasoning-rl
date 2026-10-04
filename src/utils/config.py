@@ -56,6 +56,8 @@ def validate(config: dict[str, Any]) -> None:
     if not isinstance(config["seed"], int) or not 0 <= config["seed"] < 2**32:
         raise ValueError("seed must be an integer in [0, 2**32)")
     g = config["generation"]
+    if not isinstance(g.get("sample_batch_size", 1), int) or g.get("sample_batch_size", 1) < 1:
+        raise ValueError("sample_batch_size must be a positive integer")
     for key in ("num_generations", "max_tokens"):
         if not isinstance(g[key], int) or isinstance(g[key], bool) or g[key] < 1:
             raise ValueError(f"generation.{key} must be a positive integer")

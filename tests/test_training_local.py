@@ -71,6 +71,10 @@ def test_real_local_grpo(tmp_path, strategy):
 
     inference = HFGenerator({**cfg["model"], "adapter": payload["checkpoint"]}, cfg["generation"])
     assert len(inference.generate("What is 2 + 3?", 2, 42)) == 2
+    inference.config = {**inference.config, "sample_batch_size": 2}
+    assert len(inference.generate("What is 2 + 3?", 2, 42)) == 2
+    assert len(inference.last_generation_metadata) == 2
+    assert all(1 <= m["generated_tokens"] <= 8 for m in inference.last_generation_metadata)
     inference.config = {**inference.config, "temperature": 0}
     greedy = inference.generate("What is 2 + 3?", 2, 42)
     assert greedy[0] == greedy[1]

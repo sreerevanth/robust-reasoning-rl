@@ -1,6 +1,7 @@
 """Centralized local JSONL and Hugging Face dataset adapters."""
 
 import json
+import random
 from pathlib import Path
 from typing import Any
 
@@ -23,14 +24,23 @@ def load_dataset(config: dict[str, Any]) -> list[Example]:
         )
     else:
         raise ValueError(f"Unknown dataset source: {source}")
+    indexed_rows = list(enumerate(rows))
+    if "shuffle_seed" in config:
+        random.Random(config["shuffle_seed"]).shuffle(indexed_rows)
+    offset = config.get("offset", 0)
+    if not isinstance(offset, int) or offset < 0:
+        raise ValueError("Dataset offset must be a nonnegative integer")
+    if "limit" in config and (not isinstance(config["limit"], int) or config["limit"] < 1):
+        raise ValueError("Dataset limit must be a positive integer")
+    indexed_rows = indexed_rows[offset:]
     examples = []
-    for index, row in enumerate(rows):
+    for index, row in indexed_rows:
         answer = str(row[config.get("answer_column", "reference")])
         if config.get("answer_separator"):
             answer = answer.rsplit(config["answer_separator"], 1)[-1].strip()
         examples.append(
             Example(
-                id=str(row.get(config.get("id_column", "id"), index)),
+                id=config.get("id_prefix", "") + str(row.get(config.get("id_column", "id"), index)),
                 question=str(row[config.get("question_column", "question")]),
                 reference=answer,
                 metadata=dict(row.get("metadata", {})),

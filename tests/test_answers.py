@@ -17,6 +17,12 @@ from src.rewards.answers import extract_answer, normalize_answer, numeric_value
         (r"work \boxed{42", None),
         ("Final answer:", None),
         ("Final answer: 2\nFinal answer: 3", "3"),
+        ("Final answer: 5 steps forward.", "5"),
+        ("Final answer: 96 second graders", "96"),
+        ("Final answer: $1,200 dollars.", "1,200"),
+        ("Final answer: 1/2 hours", "1/2"),
+        ("Final answer: 42 or 43", "42 or 43"),
+        ("Final answer: 2 + 3 = 5", "2 + 3 = 5"),
     ],
 )
 def test_extraction(text, answer):

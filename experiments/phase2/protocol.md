@@ -16,6 +16,11 @@ generations per prompt, temperature 0.7, top-p 0.95, 192 maximum output tokens, 
 questions, seeds 42/123/456, and corruption probabilities 0/0.2/0.4. It compares untouched
 SmolLM2-135M-Instruct, standard GRPO, and the existing combined robust strategy. All other
 parameters match. No learning-rate, penalty, threshold, or prompt tuning follows test results.
+For feasible CPU execution, the pilot samples four responses per inference call, rather than
+four sequential calls. This was fixed before any test-generation outcomes; RNG draws differ
+from the sequential validation smoke. The same decoding algorithm is used for all policies.
+Base responses are generated once per seed and rescored across corruption levels; reused
+responses are flagged per sample. No trained-policy responses are synthesized or substituted.
 Missing 10%/60% conditions are deferred to the GPU configuration, not silently omitted.
 
 Use the model's chat template consistently for training and inference. This was identified from

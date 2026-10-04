@@ -1,0 +1,59 @@
+# NOT executed locally. Larger preliminary GPU campaign, still not a full benchmark.
+seed: 42
+output_dir: results/gsm8k-gpu
+dataset:
+  source: huggingface
+  name: openai/gsm8k
+  subset: main
+  revision: 740312add88f781978c0658806c59bc2815b9866
+  split: test
+  question_column: question
+  answer_column: answer
+  answer_separator: '####'
+  id_prefix: gsm8k-test-
+  shuffle_seed: 20261004
+  limit: 128
+model:
+  backend: huggingface
+  name: HuggingFaceTB/SmolLM2-135M-Instruct
+  revision: 12fd25f77366fa6b3b4b768ec3050bf629380bac
+  prompt_format: chat
+  device: cuda
+generation: {num_generations: 8, sample_batch_size: 8, temperature: 0.7, top_p: 0.95, max_tokens: 512}
+evaluation: {k: [1, 4, 8]}
+training:
+  use_cpu: false
+  bf16: true
+  batch_size: 8
+  gradient_accumulation_steps: 2
+  gradient_checkpointing: true
+  max_steps: 200
+  save_steps: 50
+  logging_steps: 5
+  beta: 0.04
+  lora: {enabled: true, r: 8, alpha: 16, dropout: 0.05, target_modules: all-linear}
+training_verifier:
+  strategy: mean
+  members: [{kind: rule}, {kind: rule}, {kind: rule}]
+evaluation_verifier: {kind: rule}
+experiment:
+  label: preliminary_gpu_128_question_gsm8k_campaign
+  mode: train
+  reuse_base_generations: true
+  train_dataset:
+    source: huggingface
+    name: openai/gsm8k
+    subset: main
+    revision: 740312add88f781978c0658806c59bc2815b9866
+    split: train
+    question_column: question
+    answer_column: answer
+    answer_separator: '####'
+    id_prefix: gsm8k-train-
+    shuffle_seed: 20261004
+    limit: 256
+  seeds: [42, 123, 456]
+  levels: [0, 0.1, 0.2, 0.4, 0.6]
+  corruption: {kind: flip, confidence_scale: 1.0}
+  robust_reward: {strategy: combined, penalty: 0.2, moderate_threshold: 0.4,
+                  severe_threshold: 0.9, moderate_scale: 0.5, severe_scale: 0.0}

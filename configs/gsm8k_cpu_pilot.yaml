@@ -9,7 +9,7 @@ model:
   prompt_format: chat
   device: cpu
   cpu_threads: 4
-generation: {num_generations: 4, temperature: 0.7, top_p: 0.95, max_tokens: 192}
+generation: {num_generations: 4, sample_batch_size: 4, temperature: 0.7, top_p: 0.95, max_tokens: 192}
 evaluation: {k: [1, 4]}
 training:
   use_cpu: true
@@ -28,6 +28,7 @@ evaluation_verifier: {kind: rule}
 experiment:
   label: preliminary_cpu_two_update_four_question_pilot
   mode: train
+  reuse_base_generations: true
   train_dataset: {source: local, path: data/gsm8k_phase2_train.jsonl, limit: 8}
   seeds: [42, 123, 456]
   levels: [0, 0.2, 0.4]

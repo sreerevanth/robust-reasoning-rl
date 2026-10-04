@@ -72,6 +72,14 @@ def evaluate(config: dict[str, Any], generator: Generator | None = None) -> dict
             },
         )
     metrics = compute_metrics(records, config["evaluation"]["k"])
+    token_counts = [
+        r.metadata["generated_tokens"] for r in records if "generated_tokens" in r.metadata
+    ]
+    if token_counts:
+        metrics["mean_generated_tokens"] = sum(token_counts) / len(token_counts)
+        metrics["truncation_rate"] = sum(
+            r.metadata.get("finish_reason") == "length" for r in records
+        ) / len(records)
     payload = {
         "metadata": provenance(
             config,

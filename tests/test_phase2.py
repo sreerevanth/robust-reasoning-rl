@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from src.data.loading import load_dataset
-from src.models.generation import policy_prompt, prompt_for
+from src.models.generation import RecordedGenerator, policy_prompt, prompt_for
 from src.rewards.ensemble import Ensemble
 from src.rewards.shaping import RewardConfig
 from src.rewards.verifiers import RuleVerifier
@@ -15,6 +15,29 @@ def test_chat_prompt_uses_same_content_without_references():
     assert policy_prompt(question, {"prompt_format": "chat"}) == [
         {"role": "user", "content": prompt_for(question)}
     ]
+
+
+def test_recorded_generator_replays_measured_responses():
+    records = [{"response": "Final answer: 2", "metadata": {"question": "q", "sample_index": 0}}]
+    generator = RecordedGenerator(records)
+    assert generator.generate("q", 1, 42) == ["Final answer: 2"]
+    assert generator.last_generation_metadata[0]["reused_base_generation"]
+    import pytest
+
+    with pytest.raises(ValueError):
+        generator.generate("q", 2, 42)
+
+
+def test_deterministic_subset_offsets_and_namespaced_ids(tmp_path):
+    path = tmp_path / "rows.jsonl"
+    path.write_text(
+        "".join(json.dumps({"question": str(i), "reference": "2"}) + "\n" for i in range(10))
+    )
+    cfg = {"path": str(path), "shuffle_seed": 7, "limit": 4, "id_prefix": "train-"}
+    first = load_dataset(cfg)
+    assert first == load_dataset(cfg)
+    second = load_dataset({**cfg, "offset": 4})
+    assert not {e.id for e in first} & {e.id for e in second}
 
 
 def test_audit_is_logging_only_and_contains_raw_shaped_judgments(tmp_path):

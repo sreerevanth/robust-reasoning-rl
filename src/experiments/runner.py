@@ -1,6 +1,7 @@
 """Full sweeps train actual policies; fixture sweeps only exercise verifier plumbing."""
 
 import copy
+import gc
 from pathlib import Path
 from typing import Any
 
@@ -8,6 +9,7 @@ import pandas as pd
 
 from src.data.loading import load_dataset
 from src.evaluation.runner import evaluate
+from src.models.generation import RecordedGenerator
 from src.training.runner import train
 from src.utils.logging import event
 from src.utils.persistence import provenance, write_json
@@ -40,6 +42,7 @@ def experiment(config: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Fixture sweeps must use the explicitly labelled fixture backend")
     methods = ["base", "baseline", "robust"] if mode == "train" else ["fixture_verifier_audit"]
     rows = []
+    base_records: dict[int, list[dict[str, Any]]] = {}
     failures: list[dict[str, Any]] = []
     manifest = provenance(
         config, execution_kind="training_sweep" if mode == "train" else "software_fixture_sweep"
@@ -70,17 +73,30 @@ def experiment(config: dict[str, Any]) -> dict[str, Any]:
                             else exp.get("robust_reward", {"strategy": "combined"})
                         )
                         training_result = train(train_config)
+                        gc.collect()
                         if train_config["training"]["lora"]["enabled"]:
                             run["model"]["adapter"] = training_result["checkpoint"]
                         else:
                             run["model"]["name"] = training_result["checkpoint"]
-                    payload = evaluate(run)
+                    if (
+                        method == "base"
+                        and exp.get("reuse_base_generations")
+                        and seed in base_records
+                    ):
+                        payload = evaluate(run, RecordedGenerator(base_records[seed]))
+                    else:
+                        payload = evaluate(run)
+                    if method == "base" and exp.get("reuse_base_generations"):
+                        base_records[seed] = payload["records"]
+                    gc.collect()
                     row = {
                         "seed": seed,
                         "method": method,
                         "corruption_level": level,
                         "corruption_kind": exp.get("corruption", {}).get("kind", "flip"),
                         "execution_kind": manifest["execution_kind"],
+                        "experiment_label": exp.get("label"),
+                        "evaluation_seconds": payload.get("metadata", {}).get("elapsed_seconds"),
                         **payload["metrics"],
                     }
                     if training_result:
@@ -92,6 +108,27 @@ def experiment(config: dict[str, Any]) -> dict[str, Any]:
                                 for k, v in training_result["reward_statistics"].items()
                             }
                         )
+                        totals = training_result.get("reward_totals", {})
+                        sample_count = training_result["reward_statistics"].get("samples", 0)
+                        observed_count = totals.get("observed_samples", 0)
+                        if observed_count:
+                            row["training_observed_reward"] = (
+                                totals["observed_reward_sum"] / observed_count
+                            )
+                            row["training_reward_variance"] = (
+                                totals["observed_reward_square_sum"] / observed_count
+                                - row["training_observed_reward"] ** 2
+                            )
+                        if sample_count:
+                            for name, total in (
+                                ("shaped_reward", "shaped_reward_sum"),
+                                ("disagreement", "disagreement_sum"),
+                                ("confidence", "confidence_sum"),
+                                ("independent_accuracy", "independent_correct_sum"),
+                                ("uncertainty_penalty", "uncertainty_penalty_sum"),
+                            ):
+                                if total in totals:
+                                    row[f"training_{name}"] = totals[total] / sample_count
                     rows.append(row)
                     pd.DataFrame(rows).to_csv(output / "summary.csv", index=False)
                     write_json(

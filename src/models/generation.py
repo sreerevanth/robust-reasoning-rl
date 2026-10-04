@@ -97,25 +97,45 @@ class HFGenerator:
         self.last_generation_metadata = []
         # One call per sample keeps deterministic decoding compatible with count > 1.
         with torch.inference_mode():
-            for _ in range(count):
-                tokens = self.model.generate(**inputs, **options)
-                generated = tokens[0, inputs["input_ids"].shape[1] :]
-                self.last_generation_metadata.append(
-                    {
-                        "generated_tokens": len(generated),
-                        "prompt_tokens": inputs["input_ids"].shape[1],
-                        "finish_reason": "eos"
-                        if len(generated) and generated[-1].item() == self.tokenizer.eos_token_id
-                        else "length",
-                        "device": str(self.model.device),
-                    }
+            batch_size = self.config.get("sample_batch_size", 1) if options["do_sample"] else 1
+            for start in range(0, count, batch_size):
+                tokens = self.model.generate(
+                    **inputs, **options, num_return_sequences=min(batch_size, count - start)
                 )
-                outputs.append(
-                    self.tokenizer.decode(
-                        tokens[0, inputs["input_ids"].shape[1] :], skip_special_tokens=True
+                for sequence in tokens:
+                    generated = sequence[inputs["input_ids"].shape[1] :]
+                    # Batched generation pads sequences after EOS. Exclude this padding.
+                    eos_positions = (generated == self.tokenizer.eos_token_id).nonzero()
+                    terminated = len(eos_positions) > 0
+                    if terminated:
+                        generated = generated[: int(eos_positions[0].item()) + 1]
+                    self.last_generation_metadata.append(
+                        {
+                            "generated_tokens": len(generated),
+                            "prompt_tokens": inputs["input_ids"].shape[1],
+                            "finish_reason": "eos" if terminated else "length",
+                            "device": str(self.model.device),
+                        }
                     )
-                )
+                    outputs.append(self.tokenizer.decode(generated, skip_special_tokens=True))
         return outputs
+
+
+class RecordedGenerator:
+    """Replay actual base responses across corruption levels without rerunning inference."""
+
+    def __init__(self, records: list[dict[str, Any]]):
+        self.records = records
+        self.last_generation_metadata: list[dict[str, Any]] = []
+
+    def generate(self, question: str, count: int, seed: int) -> list[str]:
+        matches = [record for record in self.records if record["metadata"]["question"] == question]
+        if len(matches) != count:
+            raise ValueError("Recorded base generation budget mismatch")
+        self.last_generation_metadata = [
+            {**record["metadata"], "reused_base_generation": True} for record in matches
+        ]
+        return [record["response"] for record in matches]
 
 
 def build_generator(config: dict[str, Any]) -> Generator:

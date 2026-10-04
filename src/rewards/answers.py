@@ -43,6 +43,19 @@ def extract_answer(response: str) -> ExtractedAnswer:
         if nested:
             answer = nested[1]
         answer = answer.strip().rstrip(".!;").strip("$* ")
+        # Observed on validation generations. Only strip explicitly whitelisted count units;
+        # never choose a number from explanatory equations or ambiguous multiple answers.
+        scalar_units = re.fullmatch(
+            r"([$£€]?\s*[+-]?(?:\d[\d,]*(?:\.\d+)?|\.\d+)(?:/\d+)?)"
+            r"\s+(?:steps?(?:\s+(?:forward|backward|back))?|(?:first|second)\s+graders|"
+            r"dollars?|cents?|minutes?|hours?|days?|years?|miles?|students?|books?|apples?)",
+            answer,
+            re.I,
+        )
+        if scalar_units:
+            candidate = scalar_units[1].lstrip("$£€ ")
+            if numeric_value(candidate) is not None:
+                answer = candidate
         return ExtractedAnswer(text[: match.start()].strip(), answer or None)
     candidate = text.strip("$ ").rstrip(".!;")
     if numeric_value(candidate) is not None:
