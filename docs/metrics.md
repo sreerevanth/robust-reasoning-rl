@@ -49,3 +49,11 @@ metrics never replace independent correctness.
 Plots show means across seeds with empirical ±one standard deviation bands; these are **not
 confidence intervals** or significance tests. Scatter panels show individual seed/level runs.
 Sampling curves retain method and corruption level separately rather than pooling levels.
+
+Phase 2 generation telemetry reports mean generated tokens (including EOS when present,
+excluding prompt and post-EOS batch padding) and truncation rate (fraction terminated by the
+output-token limit rather than EOS). Training diagnostics report mean logged gradient norm,
+KL, zero-reward-variance group fraction, and LoRA B norm. TRL's `total_flos` may be zero
+because this trainer does not populate that accounting field; it does not mean no compute
+was used. Raw and shaped reward means are reported separately. Only two unique questions
+may be seen during a two-update run even if its configured candidate pool contains eight.
