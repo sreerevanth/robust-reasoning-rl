@@ -82,5 +82,7 @@ def test_severe_suppression_and_training_callback():
     )
     assert values == [0]
     assert reward.statistics["suppressed"] == 1
+    assert reward.totals["observed_reward_sum"] == 0.5
+    assert reward.totals["shaped_reward_sum"] == 0
     with pytest.raises(ValueError):
         reward(completions=[], reference=["1"], example_id=[], question=[], example_metadata=[])

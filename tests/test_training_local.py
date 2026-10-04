@@ -67,3 +67,10 @@ def test_real_local_grpo(tmp_path, strategy):
     assert payload["reward_statistics"]["samples"] >= 2
     assert (Path(payload["checkpoint"]) / "adapter_config.json").exists()
     assert (tmp_path / "training/training.json").exists()
+    from src.models.generation import HFGenerator
+
+    inference = HFGenerator({**cfg["model"], "adapter": payload["checkpoint"]}, cfg["generation"])
+    assert len(inference.generate("What is 2 + 3?", 2, 42)) == 2
+    inference.config = {**inference.config, "temperature": 0}
+    greedy = inference.generate("What is 2 + 3?", 2, 42)
+    assert greedy[0] == greedy[1]

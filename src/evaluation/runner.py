@@ -11,12 +11,14 @@ from src.evaluation.metrics import compute_metrics
 from src.models.generation import Generator, build_generator
 from src.rewards.answers import extract_answer
 from src.rewards.factory import build_ensemble, build_verifier
+from src.utils.config import validate
 from src.utils.logging import event
 from src.utils.persistence import provenance, write_json
 from src.utils.reproducibility import seed_everything
 
 
 def evaluate(config: dict[str, Any], generator: Generator | None = None) -> dict[str, Any]:
+    validate(config)
     seed_everything(config["seed"])
     examples = load_dataset(config["dataset"])
     generator = generator or build_generator(config)

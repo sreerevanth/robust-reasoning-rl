@@ -15,6 +15,13 @@ class RewardFunction:
     def __init__(self, ensemble: Ensemble, config: RewardConfig):
         self.ensemble, self.config = ensemble, config
         self.statistics: Counter[str] = Counter()
+        self.totals = {
+            "observed_reward_sum": 0.0,
+            "observed_samples": 0.0,
+            "shaped_reward_sum": 0.0,
+            "disagreement_sum": 0.0,
+            "confidence_sum": 0.0,
+        }
 
     def __call__(
         self,
@@ -42,6 +49,12 @@ class RewardFunction:
             shaped = shape_reward(result, self.config)
             rewards.append(shaped.value)
             disagreements.append(result.disagreement)
+            if result.reward is not None:
+                self.totals["observed_reward_sum"] += result.reward
+                self.totals["observed_samples"] += 1
+            self.totals["shaped_reward_sum"] += shaped.value
+            self.totals["disagreement_sum"] += result.disagreement
+            self.totals["confidence_sum"] += result.confidence
             self.statistics.update(
                 samples=1,
                 suppressed=int(shaped.suppressed),
@@ -52,6 +65,10 @@ class RewardFunction:
             event(
                 "reward_batch",
                 mean_reward=sum(rewards) / len(rewards),
+                cumulative_observed_reward=self.totals["observed_reward_sum"]
+                / self.totals["observed_samples"]
+                if self.totals["observed_samples"]
+                else None,
                 disagreement=sum(disagreements) / len(disagreements),
                 **dict(self.statistics),
             )

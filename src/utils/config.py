@@ -7,6 +7,7 @@ from typing import Any
 import yaml
 
 from src.rewards.corruption import CorruptionConfig
+from src.rewards.factory import build_ensemble, build_verifier
 from src.rewards.shaping import RewardConfig
 
 DEFAULTS: dict[str, Any] = {
@@ -52,6 +53,8 @@ def merge(base: dict[str, Any], update: dict[str, Any]) -> dict[str, Any]:
 
 
 def validate(config: dict[str, Any]) -> None:
+    if not isinstance(config["seed"], int) or not 0 <= config["seed"] < 2**32:
+        raise ValueError("seed must be an integer in [0, 2**32)")
     g = config["generation"]
     for key in ("num_generations", "max_tokens"):
         if not isinstance(g[key], int) or isinstance(g[key], bool) or g[key] < 1:
@@ -66,6 +69,8 @@ def validate(config: dict[str, Any]) -> None:
     RewardConfig(**config["reward"])
     if config["evaluation_verifier"].get("corruption"):
         raise ValueError("Independent evaluation verifier must not be corrupted")
+    build_verifier(config["evaluation_verifier"])
+    build_ensemble(config["training_verifier"])
     for member in config["training_verifier"]["members"]:
         if member.get("corruption"):
             CorruptionConfig(**member["corruption"])
@@ -81,6 +86,9 @@ def validate(config: dict[str, Any]) -> None:
             raise ValueError(f"training.{key} must be a positive integer")
     if not 0 < t["learning_rate"] < float("inf") or not 0 <= t["beta"] < float("inf"):
         raise ValueError("Invalid learning rate or KL coefficient")
+    lora = t["lora"]
+    if lora["r"] < 1 or lora["alpha"] < 1 or not 0 <= lora["dropout"] < 1:
+        raise ValueError("LoRA requires positive rank/alpha and dropout in [0,1)")
 
 
 def load_config(path: str | Path) -> dict[str, Any]:

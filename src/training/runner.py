@@ -116,6 +116,7 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
             "metadata": provenance(config, execution_kind="training_complete"),
             "metrics": result.metrics,
             "reward_statistics": dict(reward.statistics),
+            "reward_totals": reward.totals,
             "trainer_log_history": trainer.state.log_history,
             "checkpoint": str(output / "final"),
         }

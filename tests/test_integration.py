@@ -61,3 +61,44 @@ def test_fair_baseline_robust_configs():
     for key in ("model", "dataset", "generation", "training", "training_verifier", "seed"):
         assert baseline[key] == robust[key]
     assert baseline["reward"] != robust["reward"]
+
+
+def test_real_sweep_orchestration_preserves_controlled_comparison(tmp_path, monkeypatch):
+    cfg = load_config(ROOT / "configs/reward_corruption.yaml")
+    cfg["output_dir"] = str(tmp_path)
+    cfg["experiment"].update(seeds=[42], levels=[0.2])
+    training_configs = []
+    evaluation_configs = []
+
+    def record_training(config):
+        training_configs.append(config)
+        return {
+            "checkpoint": str(Path(config["output_dir"]) / "final"),
+            "metrics": {"train_loss": 0.25},
+            "reward_statistics": {"samples": 4},
+        }
+
+    def record_evaluation(config):
+        evaluation_configs.append(config)
+        return {"metrics": {"independent_accuracy": 0.5}}
+
+    monkeypatch.setattr("src.experiments.runner.train", record_training)
+    monkeypatch.setattr("src.experiments.runner.evaluate", record_evaluation)
+    result = experiment(cfg)
+    assert [row["method"] for row in result["runs"]] == ["base", "baseline", "robust"]
+    assert len(training_configs) == 2
+    baseline, robust = training_configs
+    for section in ("model", "dataset", "generation", "training", "training_verifier", "seed"):
+        assert baseline[section] == robust[section]
+    assert baseline["reward"]["strategy"] == "standard"
+    assert robust["reward"]["strategy"] == "combined"
+    assert "adapter" not in evaluation_configs[0]["model"]
+    assert all("adapter" in run["model"] for run in evaluation_configs[1:])
+
+
+def test_train_eval_leakage_rejected(tmp_path):
+    cfg = load_config(ROOT / "configs/reward_corruption.yaml")
+    cfg["output_dir"] = str(tmp_path)
+    cfg["experiment"]["train_dataset"] = cfg["dataset"]
+    with pytest.raises(ValueError, match="overlap"):
+        experiment(cfg)
