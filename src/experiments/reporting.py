@@ -116,6 +116,12 @@ def create_report(results: str | Path) -> dict[str, Any]:
             **payload["metrics"],
             **payload["reward_statistics"],
         }
+        audit = path.parent / "reward_audit.jsonl"
+        if audit.exists():
+            audit_rows = [
+                json.loads(line) for line in audit.read_text(encoding="utf-8").splitlines() if line
+            ]
+            row["training_unique_examples"] = len({r["example_id"] for r in audit_rows})
         for metric in (
             "grad_norm",
             "kl",

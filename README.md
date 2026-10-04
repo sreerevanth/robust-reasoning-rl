@@ -5,8 +5,10 @@ exploit noisy, incomplete, biased, and inconsistent verifier rewards. It impleme
 GRPO training paths, uncertainty-aware reward shaping, independent evaluation, and controlled
 corruption sweeps with complete per-generation records.
 
-**Evidence status:** runnable framework with CPU software validation. No benchmark numbers,
-trained pretrained-policy comparisons, superiority claims, or fabricated checkpoints are included.
+**Evidence status:** CPU-validated framework plus actual pretrained SmolLM2/GSM8K pipeline
+experiments. These budgets are preliminary and support no superiority or significance claim.
+See the [Phase 2 protocol and evidence](docs/phase2.md) and the automatically generated
+[pretrained smoke report](experiments/phase2/artifacts/pretrained-smoke/report.md).
 
 ## Motivation and questions
 
@@ -164,8 +166,9 @@ imputation and group centering need careful ablation. Single-process execution i
 Repeated output directories overwrite artifacts; use unique campaign paths.
 
 There are no fabricated results, simulated trained-model gains, or SOTA claims. Local random-model
-training tests validate engineering only. Meaningful research requires pretrained-model runs,
-larger held-out datasets, several seeds, measured compute, and external evaluation.
+training tests validate engineering only. Phase 2 preserves actual pretrained-model artifacts;
+meaningful conclusions still require larger budgets, held-out datasets, several seeds, measured
+compute, and stronger external evaluation.
 Potential research extensions include calibrated learned judges, genuinely independent transfer
 evaluators, loss-level sample masking, adaptive uncertainty, and multi-domain reward attacks.
 

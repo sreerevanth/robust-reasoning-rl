@@ -77,3 +77,18 @@ def test_gsm8k_frozen_splits_are_disjoint_and_match_manifest():
         assert not questions.intersection(e.question for e in examples)
         ids.update(e.id for e in examples)
         questions.update(e.question for e in examples)
+
+
+def test_archived_evidence_retains_recorded_bytes_without_weights():
+    import hashlib
+
+    root = Path(__file__).resolve().parents[1] / "experiments/phase2/artifacts"
+    manifests = list(root.glob("*/archive_manifest.json"))
+    assert manifests
+    for path in manifests:
+        manifest = json.loads(path.read_text())
+        for entry in manifest["files"]:
+            artifact = path.parent / entry["path"]
+            assert artifact.stat().st_size == entry["bytes"]
+            assert hashlib.sha256(artifact.read_bytes()).hexdigest() == entry["sha256"]
+            assert artifact.suffix not in {".bin", ".safetensors"}

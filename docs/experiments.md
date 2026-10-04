@@ -79,7 +79,8 @@ curves and PNG reward/correctness, disagreement, and sampling panels use only re
 
 ## Evidence status
 
-The repository ships no benchmark results and makes no claim that robust GRPO outperforms
-standard GRPO. CPU fixture audits and local random-model optimizer tests are software validation.
-Meaningful pretrained-policy corruption sweeps, benchmark evaluation, multiple-seed statistical
-analysis, and convergence/stability findings remain external-compute research experiments.
+The repository makes no claim that robust GRPO outperforms standard GRPO. CPU fixture audits
+and local random-model optimizer tests are software validation. Phase 2 adds measured pretrained
+SmolLM2/GSM8K smoke and preliminary CPU experiments: see [the evidence protocol](phase2.md).
+Larger benchmark evaluation, convergence studies, and meaningful statistical comparisons still
+require substantially more compute and data.
