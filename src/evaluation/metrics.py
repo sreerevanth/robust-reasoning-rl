@@ -38,31 +38,53 @@ def compute_metrics(records: list[Generation], ks: list[int]) -> dict[str, Any]:
     if len(available) > 1 and np.std(rewards) > 0 and np.std(correct) > 0:
         correlation = float(np.corrcoef(rewards, correct)[0, 1])
     result: dict[str, Any] = {
-        "num_examples": len(groups), "num_generations": len(records),
-        "independent_accuracy": accuracy, "independent_verifier_accuracy": accuracy,
-        "observed_reward": mean_reward, "reward_coverage": len(available) / len(records),
+        "num_examples": len(groups),
+        "num_generations": len(records),
+        "independent_accuracy": accuracy,
+        "independent_verifier_accuracy": accuracy,
+        "observed_reward": mean_reward,
+        "reward_coverage": len(available) / len(records),
         "paired_independent_accuracy": paired_accuracy,
-        "reward_hacking_gap": mean_reward - paired_accuracy if available else None,
-        "false_positive_reward_rate": float(np.mean([r.observed_reward >= .5 for r in wrong_rewards]))
-        if wrong_rewards else None,
-        "false_negative_rate": float(np.mean([r.observed_reward < .5 for r in right_rewards]))
-        if right_rewards else None,
+        "reward_hacking_gap": mean_reward - paired_accuracy
+        if mean_reward is not None and paired_accuracy is not None
+        else None,
+        "false_positive_reward_rate": float(
+            np.mean(
+                [r.observed_reward >= 0.5 for r in wrong_rewards if r.observed_reward is not None]
+            )
+        )
+        if wrong_rewards
+        else None,
+        "false_negative_rate": float(
+            np.mean(
+                [r.observed_reward < 0.5 for r in right_rewards if r.observed_reward is not None]
+            )
+        )
+        if right_rewards
+        else None,
         "reward_correctness_correlation": correlation,
         "verifier_disagreement": float(np.mean([r.disagreement for r in records])),
         "confidence": float(np.mean([r.confidence for r in records])),
     }
     for k in sorted(set([1, *ks])):
-        result[f"pass@{k}"] = float(np.mean([
-            pass_at_k(len(group), sum(r.independent_correctness for r in group), k)
-            for group in groups.values()
-        ]))
+        result[f"pass@{k}"] = float(
+            np.mean(
+                [
+                    pass_at_k(len(group), sum(r.independent_correctness for r in group), k)
+                    for group in groups.values()
+                ]
+            )
+        )
     # Same-answer pair rate, with failed extraction counted as a distinct failure symbol.
     pair_consistency, diversity = [], []
     for group in groups.values():
         answers = [normalize_answer(r.final_answer) for r in group]
         diversity.append(len(set(answers)) / len(answers))
-        pairs = [answers[i] == answers[j] for i in range(len(answers))
-                 for j in range(i + 1, len(answers))]
+        pairs = [
+            answers[i] == answers[j]
+            for i in range(len(answers))
+            for j in range(i + 1, len(answers))
+        ]
         if pairs:
             pair_consistency.append(float(np.mean(pairs)))
     result["answer_consistency"] = float(np.mean(pair_consistency)) if pair_consistency else None

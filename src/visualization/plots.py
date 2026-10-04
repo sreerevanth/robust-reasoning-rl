@@ -27,11 +27,20 @@ def plot_results(results: str | Path) -> list[Path]:
     generated = []
     fixture = "execution_kind" in frame and frame["execution_kind"].str.contains("fixture").any()
     suffix = " (software fixture; not research evidence)" if fixture else ""
-    plt.rcParams.update({"font.size": 11, "axes.spines.top": False, "axes.spines.right": False,
-                         "figure.dpi": 120, "savefig.dpi": 300})
-    panels = [("independent_accuracy", "Independent correctness", "robustness"),
-              ("reward_hacking_gap", "Reward − paired correctness", "reward_hacking"),
-              ("observed_reward", "Observed reward", "observed_reward")]
+    plt.rcParams.update(
+        {
+            "font.size": 11,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "figure.dpi": 120,
+            "savefig.dpi": 300,
+        }
+    )
+    panels = [
+        ("independent_accuracy", "Independent correctness", "robustness"),
+        ("reward_hacking_gap", "Reward − paired correctness", "reward_hacking"),
+        ("observed_reward", "Observed reward", "observed_reward"),
+    ]
     for metric, label, name in panels:
         fig, ax = plt.subplots(figsize=(7, 4.5), layout="constrained")
         for method, subset in frame.groupby("method"):
@@ -40,30 +49,42 @@ def plot_results(results: str | Path) -> list[Path]:
             y = grouped["mean"].to_numpy(dtype=float)
             std = grouped["std"].fillna(0).to_numpy(dtype=float)
             ax.plot(x, y, marker="o", label=str(method))
-            ax.fill_between(x, y - std, y + std, alpha=.15)
+            ax.fill_between(x, y - std, y + std, alpha=0.15)
         ax.set(xlabel="Reward corruption (%)", ylabel=label, title=label + suffix)
         ax.legend()
-        ax.grid(alpha=.2)
+        ax.grid(alpha=0.2)
         for ext in ("png", "pdf"):
             path = out / f"{name}.{ext}"
             fig.savefig(path)
             generated.append(path)
         plt.close(fig)
-    for x, y, name in [("observed_reward", "independent_accuracy", "reward_correctness"),
-                       ("verifier_disagreement", "independent_accuracy", "disagreement")]:
+    for x_metric, y_metric, name in [
+        ("observed_reward", "independent_accuracy", "reward_correctness"),
+        ("verifier_disagreement", "independent_accuracy", "disagreement"),
+    ]:
         fig, ax = plt.subplots(figsize=(7, 4.5), layout="constrained")
         for method, subset in frame.groupby("method"):
-            ax.scatter(subset[x], subset[y], label=str(method), alpha=.7)
-        ax.set(xlabel=x.replace("_", " "), ylabel="Independent correctness", title=name + suffix)
+            ax.scatter(subset[x_metric], subset[y_metric], label=str(method), alpha=0.7)
+        ax.set(
+            xlabel=x_metric.replace("_", " "), ylabel="Independent correctness", title=name + suffix
+        )
         ax.legend()
         path = out / f"{name}.png"
         fig.savefig(path)
         generated.append(path)
         plt.close(fig)
-    ks = sorted([column for column in frame if column.startswith("pass@")], key=lambda c: int(c[5:]))
+    ks = sorted(
+        [str(column) for column in frame if str(column).startswith("pass@")],
+        key=lambda c: int(c[5:]),
+    )
     fig, ax = plt.subplots(figsize=(7, 4.5), layout="constrained")
-    for method, subset in frame.groupby("method"):
-        ax.plot([int(k[5:]) for k in ks], [subset[k].mean() for k in ks], marker="o", label=str(method))
+    for (method, level), subset in frame.groupby(["method", "corruption_level"]):
+        ax.plot(
+            [int(k[5:]) for k in ks],
+            [subset[k].mean() for k in ks],
+            marker="o",
+            label=f"{method}, corruption={level:g}",
+        )
     ax.set(xlabel="Sampling budget k", ylabel="pass@k", title="Sampling attribution" + suffix)
     ax.legend()
     path = out / "sampling.png"

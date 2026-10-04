@@ -20,11 +20,23 @@ DEFAULTS: dict[str, Any] = {
     "reward": {"strategy": "standard"},
     "evaluation": {"k": [1, 2, 4]},
     "training": {
-        "learning_rate": 5e-6, "batch_size": 4, "gradient_accumulation_steps": 1,
-        "max_steps": 100, "save_steps": 50, "logging_steps": 5, "beta": 0.04,
-        "gradient_checkpointing": True, "bf16": False, "use_cpu": False,
-        "lora": {"enabled": True, "r": 8, "alpha": 16, "dropout": 0.05,
-                 "target_modules": "all-linear"},
+        "learning_rate": 5e-6,
+        "batch_size": 4,
+        "gradient_accumulation_steps": 1,
+        "max_steps": 100,
+        "save_steps": 50,
+        "logging_steps": 5,
+        "beta": 0.04,
+        "gradient_checkpointing": True,
+        "bf16": False,
+        "use_cpu": False,
+        "lora": {
+            "enabled": True,
+            "r": 8,
+            "alpha": 16,
+            "dropout": 0.05,
+            "target_modules": "all-linear",
+        },
     },
 }
 
@@ -58,7 +70,13 @@ def validate(config: dict[str, Any]) -> None:
         if member.get("corruption"):
             CorruptionConfig(**member["corruption"])
     t = config["training"]
-    for key in ("batch_size", "gradient_accumulation_steps", "max_steps", "save_steps", "logging_steps"):
+    for key in (
+        "batch_size",
+        "gradient_accumulation_steps",
+        "max_steps",
+        "save_steps",
+        "logging_steps",
+    ):
         if not isinstance(t[key], int) or t[key] < 1:
             raise ValueError(f"training.{key} must be a positive integer")
     if not 0 < t["learning_rate"] < float("inf") or not 0 <= t["beta"] < float("inf"):

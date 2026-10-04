@@ -27,15 +27,24 @@ def write_json(path: Path, value: Any) -> None:
 def provenance(config: dict[str, Any], **extra: Any) -> dict[str, Any]:
     def git(*args: str) -> str | None:
         try:
-            return subprocess.check_output(["git", *args], text=True, stderr=subprocess.DEVNULL).strip()
+            return subprocess.check_output(
+                ["git", *args], text=True, stderr=subprocess.DEVNULL
+            ).strip()
         except (subprocess.CalledProcessError, FileNotFoundError):
             return None
+
     packages = {}
     for name in ("numpy", "torch", "transformers", "trl", "peft", "datasets", "accelerate"):
         try:
             packages[name] = importlib.metadata.version(name)
         except importlib.metadata.PackageNotFoundError:
             pass
-    return {"timestamp": datetime.now(UTC).isoformat(), "git_commit": git("rev-parse", "HEAD"),
-            "git_dirty": bool(git("status", "--porcelain")), "python": platform.python_version(),
-            "packages": packages, "config": config, **extra}
+    return {
+        "timestamp": datetime.now(UTC).isoformat(),
+        "git_commit": git("rev-parse", "HEAD"),
+        "git_dirty": bool(git("status", "--porcelain")),
+        "python": platform.python_version(),
+        "packages": packages,
+        "config": config,
+        **extra,
+    }

@@ -33,3 +33,7 @@ python_version = "3.11"
 check_untyped_defs = true
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = ["torch.*", "transformers.*", "trl.*", "peft.*", "datasets.*", "accelerate.*"]
+follow_imports = "skip"
+

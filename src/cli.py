@@ -19,7 +19,9 @@ def main(argv: list[str] | None = None) -> int:
     plot = commands.add_parser("plot")
     plot.add_argument("--results", required=True)
     args = parser.parse_args(argv)
-    logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING, format="%(message)s")
+    logging.basicConfig(
+        level=logging.INFO if args.verbose else logging.WARNING, format="%(message)s"
+    )
     try:
         if args.command == "plot":
             from src.visualization.plots import plot_results
@@ -41,7 +43,11 @@ def main(argv: list[str] | None = None) -> int:
             from src.experiments.runner import experiment
 
             result = experiment(config)
-            print(json.dumps({"completed": len(result["runs"]), "failed": len(result["failures"])}, indent=2))
+            print(
+                json.dumps(
+                    {"completed": len(result["runs"]), "failed": len(result["failures"])}, indent=2
+                )
+            )
             return 1 if result["failures"] else 0
         return 0
     except (ValueError, OSError, ImportError) as error:

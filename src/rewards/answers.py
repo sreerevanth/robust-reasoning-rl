@@ -21,29 +21,29 @@ def _boxed(text: str) -> tuple[int, str] | None:
     for i in range(match.end(), len(text)):
         depth += (text[i] == "{") - (text[i] == "}")
         if depth == 0:
-            return match.start(), text[match.end():i]
+            return match.start(), text[match.end() : i]
     return match.start(), ""
 
 
 def extract_answer(response: str) -> ExtractedAnswer:
     """Use the last explicit final marker; only bare scalars get fallback parsing."""
     text = response.strip()
-    markers = list(re.finditer(
-        r"(?:final\s+answer\s*[:=]|the\s+answer\s+is\s*[:=]?|####)\s*", text, re.I
-    ))
+    markers = list(
+        re.finditer(r"(?:final\s+answer\s*[:=]|the\s+answer\s+is\s*[:=]?|####)\s*", text, re.I)
+    )
     box = _boxed(text)
     if box and (not markers or box[0] > markers[-1].start()):
         answer = box[1].strip()
-        return ExtractedAnswer(text[:box[0]].strip(), answer or None)
+        return ExtractedAnswer(text[: box[0]].strip(), answer or None)
     if markers:
         match = markers[-1]
-        tail = text[match.end():].splitlines()
+        tail = text[match.end() :].splitlines()
         answer = tail[0].strip() if tail else ""
         nested = _boxed(answer)
         if nested:
             answer = nested[1]
         answer = answer.strip().rstrip(".!;").strip("$* ")
-        return ExtractedAnswer(text[:match.start()].strip(), answer or None)
+        return ExtractedAnswer(text[: match.start()].strip(), answer or None)
     candidate = text.strip("$ ").rstrip(".!;")
     if numeric_value(candidate) is not None:
         return ExtractedAnswer("", candidate)

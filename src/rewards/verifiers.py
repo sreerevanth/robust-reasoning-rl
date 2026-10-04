@@ -17,7 +17,9 @@ class VerifierResult:
     def __post_init__(self) -> None:
         if not math.isfinite(self.confidence) or not 0 <= self.confidence <= 1:
             raise ValueError("Confidence must be finite in [0,1]")
-        if self.reward is not None and (not math.isfinite(self.reward) or not 0 <= self.reward <= 1):
+        if self.reward is not None and (
+            not math.isfinite(self.reward) or not 0 <= self.reward <= 1
+        ):
             raise ValueError("Reward must be None or finite in [0,1]")
 
 

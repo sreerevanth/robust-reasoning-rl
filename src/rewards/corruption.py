@@ -21,7 +21,14 @@ class CorruptionConfig:
     bias_reward: float = 1.0
 
     def __post_init__(self) -> None:
-        if self.kind not in {"flip", "false_positive", "false_negative", "missing", "noise", "bias"}:
+        if self.kind not in {
+            "flip",
+            "false_positive",
+            "false_negative",
+            "missing",
+            "noise",
+            "bias",
+        }:
             raise ValueError(f"Unknown corruption: {self.kind}")
         for name in ("probability", "confidence_scale", "bias_reward"):
             if not 0 <= getattr(self, name) <= 1:
@@ -59,6 +66,12 @@ class CorruptedVerifier:
                 reward = cfg.bias_reward
         # Degradation is deliberately independent of whether a particular flip occurred.
         confidence = 0.0 if reward is None else base.confidence * cfg.confidence_scale
-        return VerifierResult(reward, confidence, {
-            "corruption": cfg.kind, "applied": applied, "base": base.metadata,
-        })
+        return VerifierResult(
+            reward,
+            confidence,
+            {
+                "corruption": cfg.kind,
+                "applied": applied,
+                "base": base.metadata,
+            },
+        )

@@ -18,5 +18,7 @@ def build_verifier(config: dict[str, Any]) -> Verifier:
 
 
 def build_ensemble(config: dict[str, Any]) -> Ensemble:
-    return Ensemble([build_verifier(member) for member in config.get("members", [{"kind": "rule"}])],
-                    config.get("strategy", "mean"))
+    return Ensemble(
+        [build_verifier(member) for member in config.get("members", [{"kind": "rule"}])],
+        config.get("strategy", "mean"),
+    )

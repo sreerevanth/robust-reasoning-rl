@@ -24,12 +24,15 @@ class FixtureGenerator:
             raise ValueError("Fixture backend supports only tiny arithmetic questions")
         left, operator, right = match.groups()
         a, b = Fraction(left), Fraction(right)
-        value = {"+": lambda: a + b, "-": lambda: a - b,
-                 "*": lambda: a * b, "/": lambda: a / b}[operator]()
+        value = {"+": lambda: a + b, "-": lambda: a - b, "*": lambda: a * b, "/": lambda: a / b}[
+            operator
+        ]()
         key = int.from_bytes(hashlib.sha256(question.encode()).digest()[:8], "big")
         rng = random.Random(seed ^ key)
-        return [f"Fixture arithmetic computation. Final answer: {value if rng.random() < .7 else value + 1}"
-                for _ in range(count)]
+        return [
+            f"Fixture arithmetic. Final answer: {value if rng.random() < 0.7 else value + 1}"
+            for _ in range(count)
+        ]
 
 
 class HFGenerator:
@@ -40,10 +43,12 @@ class HFGenerator:
         self.config = generation_config
         self.tokenizer = AutoTokenizer.from_pretrained(
             model_config.get("tokenizer", model_config["name"]),
-            revision=model_config.get("revision"), trust_remote_code=False,
+            revision=model_config.get("revision"),
+            trust_remote_code=False,
         )
         self.model = AutoModelForCausalLM.from_pretrained(
-            model_config["name"], revision=model_config.get("revision"),
+            model_config["name"],
+            revision=model_config.get("revision"),
             trust_remote_code=False,
         )
         if model_config.get("adapter"):
@@ -62,9 +67,11 @@ class HFGenerator:
 
         set_seed(seed)
         inputs = self.tokenizer(prompt_for(question), return_tensors="pt").to(self.model.device)
-        options = {"max_new_tokens": self.config["max_tokens"],
-                   "pad_token_id": self.tokenizer.pad_token_id,
-                   "do_sample": self.config["temperature"] > 0}
+        options = {
+            "max_new_tokens": self.config["max_tokens"],
+            "pad_token_id": self.tokenizer.pad_token_id,
+            "do_sample": self.config["temperature"] > 0,
+        }
         if options["do_sample"]:
             options.update(temperature=self.config["temperature"], top_p=self.config["top_p"])
         outputs = []
@@ -72,8 +79,11 @@ class HFGenerator:
         with torch.inference_mode():
             for _ in range(count):
                 tokens = self.model.generate(**inputs, **options)
-                outputs.append(self.tokenizer.decode(
-                    tokens[0, inputs["input_ids"].shape[1]:], skip_special_tokens=True))
+                outputs.append(
+                    self.tokenizer.decode(
+                        tokens[0, inputs["input_ids"].shape[1] :], skip_special_tokens=True
+                    )
+                )
         return outputs
 
 

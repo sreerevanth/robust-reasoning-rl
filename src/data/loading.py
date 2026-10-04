@@ -16,7 +16,9 @@ def load_dataset(config: dict[str, Any]) -> list[Example]:
         from datasets import load_dataset as hf_load
 
         rows = hf_load(
-            config["name"], config.get("subset"), split=config.get("split", "test"),
+            config["name"],
+            config.get("subset"),
+            split=config.get("split", "test"),
             revision=config.get("revision"),
         )
     else:
@@ -26,12 +28,14 @@ def load_dataset(config: dict[str, Any]) -> list[Example]:
         answer = str(row[config.get("answer_column", "reference")])
         if config.get("answer_separator"):
             answer = answer.rsplit(config["answer_separator"], 1)[-1].strip()
-        examples.append(Example(
-            id=str(row.get(config.get("id_column", "id"), index)),
-            question=str(row[config.get("question_column", "question")]),
-            reference=answer,
-            metadata=dict(row.get("metadata", {})),
-        ))
+        examples.append(
+            Example(
+                id=str(row.get(config.get("id_column", "id"), index)),
+                question=str(row[config.get("question_column", "question")]),
+                reference=answer,
+                metadata=dict(row.get("metadata", {})),
+            )
+        )
         if config.get("limit") and len(examples) >= config["limit"]:
             break
     if not examples or len({e.id for e in examples}) != len(examples):

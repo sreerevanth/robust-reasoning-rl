@@ -25,23 +25,45 @@ def evaluate(config: dict[str, Any], generator: Generator | None = None) -> dict
     records = []
     for example in examples:
         key = int.from_bytes(hashlib.sha256(example.id.encode()).digest()[:4], "big")
-        outputs = generator.generate(example.question, config["generation"]["num_generations"],
-                                     (config["seed"] + key) % (2**32))
+        outputs = generator.generate(
+            example.question,
+            config["generation"]["num_generations"],
+            (config["seed"] + key) % (2**32),
+        )
         if len(outputs) != config["generation"]["num_generations"]:
             raise ValueError("Generator returned an unexpected sample count")
         for response in outputs:
             parsed = extract_answer(response)
             observed = reward_source.verify(example, response)
             judged = independent.verify(example, response)
-            records.append(Generation(example.id, response, parsed.reasoning, parsed.answer,
-                                      observed.to_dict(), observed.reward, observed.confidence,
-                                      observed.disagreement, judged.reward == 1.0,
-                                      {"evaluation_verifier": asdict(judged)}))
+            records.append(
+                Generation(
+                    example.id,
+                    response,
+                    parsed.reasoning,
+                    parsed.answer,
+                    observed.to_dict(),
+                    observed.reward,
+                    observed.confidence,
+                    observed.disagreement,
+                    judged.reward == 1.0,
+                    {"evaluation_verifier": asdict(judged)},
+                )
+            )
         event("evaluated_example", example_id=example.id, samples=len(outputs))
     metrics = compute_metrics(records, config["evaluation"]["k"])
-    payload = {"metadata": provenance(config, execution_kind=(
-        "software_fixture" if config["model"]["backend"] == "fixture" else "model_evaluation")),
-        "metrics": metrics, "records": [asdict(r) for r in records]}
+    payload = {
+        "metadata": provenance(
+            config,
+            execution_kind=(
+                "software_fixture"
+                if config["model"]["backend"] == "fixture"
+                else "model_evaluation"
+            ),
+        ),
+        "metrics": metrics,
+        "records": [asdict(r) for r in records],
+    }
     output = Path(config["output_dir"])
     write_json(output / "evaluation.json", payload)
     write_json(output / "config.json", config)

@@ -54,5 +54,6 @@ class Ensemble:
             reward = float(np.average(values, weights=weights))
         coverage = len(available) / len(members)
         confidence = float(np.mean(weights)) * coverage * (1 - disagreement)
-        return EnsembleResult(reward, confidence, disagreement, variance, entropy,
-                              float(np.std(weights)), members)
+        return EnsembleResult(
+            reward, confidence, disagreement, variance, entropy, float(np.std(weights)), members
+        )

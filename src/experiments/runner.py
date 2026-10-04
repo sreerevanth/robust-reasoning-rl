@@ -18,7 +18,7 @@ def experiment(config: dict[str, Any]) -> dict[str, Any]:
     mode = exp.get("mode", "fixture")
     if mode not in {"fixture", "train"}:
         raise ValueError("Experiment mode must be fixture or train")
-    levels = exp.get("levels", [0, .1, .2, .4, .6])
+    levels = exp.get("levels", [0, 0.1, 0.2, 0.4, 0.6])
     if not levels or any(not 0 <= level <= 1 for level in levels):
         raise ValueError("Corruption levels must be nonempty and in [0,1]")
     seeds = exp.get("seeds", [config["seed"]])
@@ -40,8 +40,10 @@ def experiment(config: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Fixture sweeps must use the explicitly labelled fixture backend")
     methods = ["base", "baseline", "robust"] if mode == "train" else ["fixture_verifier_audit"]
     rows = []
-    failures = []
-    manifest = provenance(config, execution_kind="training_sweep" if mode == "train" else "software_fixture_sweep")
+    failures: list[dict[str, Any]] = []
+    manifest = provenance(
+        config, execution_kind="training_sweep" if mode == "train" else "software_fixture_sweep"
+    )
     write_json(output / "manifest.json", manifest)
     for seed in seeds:
         for level in levels:
@@ -51,37 +53,68 @@ def experiment(config: dict[str, Any]) -> dict[str, Any]:
                 run_dir = output / f"seed-{seed}" / f"level-{level:g}" / method
                 run["output_dir"] = str(run_dir / "evaluation")
                 for index, member in enumerate(run["training_verifier"]["members"]):
-                    member["corruption"] = {**exp.get("corruption", {"kind": "flip"}),
-                                            "probability": level, "seed": seed + index * 1009}
+                    member["corruption"] = {
+                        **exp.get("corruption", {"kind": "flip"}),
+                        "probability": level,
+                        "seed": seed + index * 1009,
+                    }
                 try:
                     training_result = None
                     if mode == "train" and method != "base":
                         train_config = copy.deepcopy(run)
                         train_config["dataset"] = exp["train_dataset"]
                         train_config["output_dir"] = str(run_dir / "training")
-                        train_config["reward"] = {"strategy": "standard"} if method == "baseline" else exp.get(
-                            "robust_reward", {"strategy": "combined"})
+                        train_config["reward"] = (
+                            {"strategy": "standard"}
+                            if method == "baseline"
+                            else exp.get("robust_reward", {"strategy": "combined"})
+                        )
                         training_result = train(train_config)
                         if train_config["training"]["lora"]["enabled"]:
                             run["model"]["adapter"] = training_result["checkpoint"]
                         else:
                             run["model"]["name"] = training_result["checkpoint"]
                     payload = evaluate(run)
-                    row = {"seed": seed, "method": method, "corruption_level": level,
-                           "corruption_kind": exp.get("corruption", {}).get("kind", "flip"),
-                           "execution_kind": manifest["execution_kind"], **payload["metrics"]}
+                    row = {
+                        "seed": seed,
+                        "method": method,
+                        "corruption_level": level,
+                        "corruption_kind": exp.get("corruption", {}).get("kind", "flip"),
+                        "execution_kind": manifest["execution_kind"],
+                        **payload["metrics"],
+                    }
                     if training_result:
                         row["train_loss"] = training_result["metrics"].get("train_loss")
                         row["training_steps"] = run["training"]["max_steps"]
-                        row.update({f"training_{k}": v for k, v in training_result["reward_statistics"].items()})
+                        row.update(
+                            {
+                                f"training_{k}": v
+                                for k, v in training_result["reward_statistics"].items()
+                            }
+                        )
                     rows.append(row)
                     pd.DataFrame(rows).to_csv(output / "summary.csv", index=False)
-                    write_json(output / "summary.json", {"metadata": manifest, "runs": rows, "failures": failures})
-                    event("experiment_run_complete", method=method, seed=seed, corruption_level=level)
+                    write_json(
+                        output / "summary.json",
+                        {"metadata": manifest, "runs": rows, "failures": failures},
+                    )
+                    event(
+                        "experiment_run_complete", method=method, seed=seed, corruption_level=level
+                    )
                 except Exception as error:
-                    failures.append({"seed": seed, "level": level, "method": method,
-                                     "type": type(error).__name__, "message": str(error)})
-                    write_json(output / "summary.json", {"metadata": manifest, "runs": rows, "failures": failures})
+                    failures.append(
+                        {
+                            "seed": seed,
+                            "level": level,
+                            "method": method,
+                            "type": type(error).__name__,
+                            "message": str(error),
+                        }
+                    )
+                    write_json(
+                        output / "summary.json",
+                        {"metadata": manifest, "runs": rows, "failures": failures},
+                    )
                     if not exp.get("continue_on_error", False):
                         raise
     return {"metadata": manifest, "runs": rows, "failures": failures}
