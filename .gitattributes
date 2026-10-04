@@ -3,3 +3,4 @@
 *.md text eol=lf
 *.yaml text eol=lf
 *.toml text eol=lf
+*.jsonl text eol=lf

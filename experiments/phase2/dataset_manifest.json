@@ -11,17 +11,17 @@
     "train": {
       "path": "data/gsm8k_phase2_train.jsonl",
       "count": 32,
-      "sha256": "1b00c4ae328370d6d74e2c933a37e5a9a4c2c985b703472a0db53da676a6bf7f"
+      "sha256": "32ac95780b79362e197e20fe068f2bd546a91ab017b60a9806ca4664fa2dce59"
     },
     "validation": {
       "path": "data/gsm8k_phase2_validation.jsonl",
       "count": 16,
-      "sha256": "89900498bfde18578a702408fc118ceb35c1d40adffda5d81c5266314796df5b"
+      "sha256": "175beece197728339c351d25d206f3dd0e386eda3e47ed22879b1c459b632688"
     },
     "test": {
       "path": "data/gsm8k_phase2_test.jsonl",
       "count": 32,
-      "sha256": "2d3a60159cf40ae14bb42df5552792dcd5146b42f0b3a6e247917166a10fa109"
+      "sha256": "c93a8279006102ffd47c022e97168766fe82d447a312cf0d9007744a5bbfbde7"
     }
   }
 }

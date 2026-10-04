@@ -95,7 +95,9 @@ def main() -> None:
                     },
                 )
             )
-        path.write_text("".join(json.dumps(asdict(e)) + "\n" for e in examples), encoding="utf-8")
+        path.write_text(
+            "".join(json.dumps(asdict(e)) + "\n" for e in examples), encoding="utf-8", newline="\n"
+        )
         manifest["splits"][name] = {
             "path": path.relative_to(root).as_posix(),
             "count": len(examples),
