@@ -78,12 +78,12 @@ def plot_results(results: str | Path) -> list[Path]:
         key=lambda c: int(c[5:]),
     )
     fig, ax = plt.subplots(figsize=(7, 4.5), layout="constrained")
-    for (method, level), subset in frame.groupby(["method", "corruption_level"]):
+    for (sampling_method, level), subset in frame.groupby(["method", "corruption_level"]):
         ax.plot(
             [int(k[5:]) for k in ks],
             [subset[k].mean() for k in ks],
             marker="o",
-            label=f"{method}, corruption={level:g}",
+            label=f"{sampling_method}, corruption={level}",
         )
     ax.set(xlabel="Sampling budget k", ylabel="pass@k", title="Sampling attribution" + suffix)
     ax.legend()
