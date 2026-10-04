@@ -1,5 +1,6 @@
 """Seed means and empirical standard deviations, with individual run visibility."""
 
+import json
 from pathlib import Path
 
 import matplotlib
@@ -27,6 +28,15 @@ def plot_results(results: str | Path) -> list[Path]:
     generated = []
     fixture = "execution_kind" in frame and frame["execution_kind"].str.contains("fixture").any()
     suffix = " (software fixture; not research evidence)" if fixture else ""
+    if not fixture:
+        metadata_path = paths[0].parent / "manifest.json"
+        if metadata_path.exists():
+            metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+            label = metadata.get("config", {}).get("experiment", {}).get("label", "")
+            if "smoke" in label:
+                suffix = "\nPretrained pipeline smoke; not capability evidence"
+            elif "preliminary" in label:
+                suffix = "\nPreliminary experiment; limited training and test budget"
     plt.rcParams.update(
         {
             "font.size": 11,
