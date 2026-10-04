@@ -3,6 +3,7 @@
 import hashlib
 from dataclasses import asdict
 from pathlib import Path
+from time import perf_counter
 from typing import Any
 
 from src.data.loading import load_dataset
@@ -19,6 +20,8 @@ from src.utils.reproducibility import seed_everything
 
 def evaluate(config: dict[str, Any], generator: Generator | None = None) -> dict[str, Any]:
     validate(config)
+    started = perf_counter()
+    output = Path(config["output_dir"])
     seed_everything(config["seed"])
     examples = load_dataset(config["dataset"])
     generator = generator or build_generator(config)
@@ -34,7 +37,8 @@ def evaluate(config: dict[str, Any], generator: Generator | None = None) -> dict
         )
         if len(outputs) != config["generation"]["num_generations"]:
             raise ValueError("Generator returned an unexpected sample count")
-        for response in outputs:
+        telemetry = getattr(generator, "last_generation_metadata", [])
+        for sample_index, response in enumerate(outputs):
             parsed = extract_answer(response)
             observed = reward_source.verify(example, response)
             judged = independent.verify(example, response)
@@ -49,10 +53,24 @@ def evaluate(config: dict[str, Any], generator: Generator | None = None) -> dict
                     observed.confidence,
                     observed.disagreement,
                     judged.reward == 1.0,
-                    {"evaluation_verifier": asdict(judged)},
+                    {
+                        "evaluation_verifier": asdict(judged),
+                        "question": example.question,
+                        "reference": example.reference,
+                        "sample_index": sample_index,
+                        **(telemetry[sample_index] if telemetry else {}),
+                    },
                 )
             )
         event("evaluated_example", example_id=example.id, samples=len(outputs))
+        write_json(
+            output / "progress.json",
+            {
+                "completed_generations": len(records),
+                "elapsed_seconds": perf_counter() - started,
+                "last_example": example.id,
+            },
+        )
     metrics = compute_metrics(records, config["evaluation"]["k"])
     payload = {
         "metadata": provenance(
@@ -62,11 +80,12 @@ def evaluate(config: dict[str, Any], generator: Generator | None = None) -> dict
                 if config["model"]["backend"] == "fixture"
                 else "model_evaluation"
             ),
+            elapsed_seconds=perf_counter() - started,
+            experiment_label=config.get("experiment", {}).get("label"),
         ),
         "metrics": metrics,
         "records": [asdict(r) for r in records],
     }
-    output = Path(config["output_dir"])
     write_json(output / "evaluation.json", payload)
     write_json(output / "config.json", config)
     with (output / "generations.jsonl").open("w", encoding="utf-8") as handle:

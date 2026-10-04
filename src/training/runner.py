@@ -4,8 +4,8 @@ from pathlib import Path
 from typing import Any
 
 from src.data.loading import load_dataset
-from src.models.generation import prompt_for
-from src.rewards.factory import build_ensemble
+from src.models.generation import policy_prompt
+from src.rewards.factory import build_ensemble, build_verifier
 from src.rewards.shaping import RewardConfig
 from src.training.rewards import RewardFunction
 from src.utils.config import validate
@@ -31,11 +31,15 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
     from trl import GRPOConfig, GRPOTrainer
 
     seed_everything(config["seed"])
+    if config["model"].get("cpu_threads"):
+        import torch
+
+        torch.set_num_threads(config["model"]["cpu_threads"])
     examples = load_dataset(config["dataset"])
     dataset = Dataset.from_list(
         [
             {
-                "prompt": prompt_for(e.question),
+                "prompt": policy_prompt(e.question, config["model"]),
                 "reference": e.reference,
                 "example_id": e.id,
                 "question": e.question,
@@ -73,7 +77,10 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
     output.mkdir(parents=True, exist_ok=True)
     write_json(output / "run.json", provenance(config, execution_kind="training_started"))
     reward = RewardFunction(
-        build_ensemble(config["training_verifier"]), RewardConfig(**config["reward"])
+        build_ensemble(config["training_verifier"]),
+        RewardConfig(**config["reward"]),
+        audit_path=output / "reward_audit.jsonl",
+        independent=build_verifier(config["evaluation_verifier"]),
     )
     args = GRPOConfig(
         output_dir=str(output),
@@ -91,6 +98,7 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
         seed=config["seed"],
         data_seed=config["seed"],
         gradient_checkpointing=t["gradient_checkpointing"],
+        dataloader_pin_memory=not t["use_cpu"],
         bf16=t["bf16"],
         use_cpu=t["use_cpu"],
         report_to="none",
