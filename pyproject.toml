@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robust-reasoning-rl"
+version = "0.1.0"
+description = "Reproducible reasoning RL experiments under imperfect verifiers"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "PyYAML>=6", "pandas>=2.2", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+training = ["torch>=2.6", "transformers>=4.56,<5", "datasets>=3,<5", "trl==0.26.2", "peft>=0.17,<0.19", "accelerate>=1.4,<2"]
+dev = ["pytest>=8", "ruff>=0.9", "mypy>=1.14", "types-PyYAML", "pandas-stubs"]
+
+[project.scripts]
+robust-rl = "src.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+ignore_missing_imports = true
+
