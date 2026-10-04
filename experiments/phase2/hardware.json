@@ -5,6 +5,11 @@
   "cuda_available": false,
   "cuda_version": null,
   "gpus": [],
+  "system_video_adapters": {
+    "Name": "AMD Radeon (TM) Graphics",
+    "AdapterRAM": 536870912,
+    "DriverVersion": "31.0.21914.8004"
+  },
   "system_ram_bytes": 16486756352,
   "available_ram_bytes": 3110178816,
   "physical_cpus": 8,

@@ -3,6 +3,7 @@
 import hashlib
 import json
 import platform
+import subprocess
 from dataclasses import asdict
 from pathlib import Path
 
@@ -22,6 +23,19 @@ def main() -> None:
     dataset_name = "openai/gsm8k"
     model_revision = "12fd25f77366fa6b3b4b768ec3050bf629380bac"
     dataset_revision = "740312add88f781978c0658806c59bc2815b9866"
+    system_adapters = None
+    if platform.system() == "Windows":
+        detected = subprocess.check_output(
+            [
+                "powershell",
+                "-NoProfile",
+                "-Command",
+                "Get-CimInstance Win32_VideoController | "
+                "Select-Object Name,AdapterRAM,DriverVersion | ConvertTo-Json",
+            ],
+            text=True,
+        )
+        system_adapters = json.loads(detected)
     write_json(
         out / "hardware.json",
         {
@@ -30,6 +44,7 @@ def main() -> None:
             "torch": torch.__version__,
             "cuda_available": torch.cuda.is_available(),
             "cuda_version": torch.version.cuda,
+            "system_video_adapters": system_adapters,
             "gpus": [
                 {
                     "name": torch.cuda.get_device_properties(i).name,

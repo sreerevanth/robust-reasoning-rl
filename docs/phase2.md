@@ -18,7 +18,10 @@ template; training and inference now both use that template. The model revision 
 
 The recorded host is Windows, Python 3.11.9, PyTorch 2.14.1+cpu, eight physical CPU cores,
 16 logical processors, and 16,486,756,352 bytes of RAM. CUDA is unavailable and its version
-is null; there is no CUDA GPU or VRAM. About 3 GB RAM was available at inspection time.
+is null. A separate OS adapter inspection identifies AMD Radeon integrated graphics with
+536,870,912 bytes of reported adapter memory; this is not a CUDA device and should not be
+interpreted as dedicated CUDA VRAM. NVIDIA's driver tool is absent. About 3 GB RAM was
+available at inspection time.
 See [hardware.json](../experiments/phase2/hardware.json). CPU experiments use four PyTorch
 threads. Model loading, training activations, and concurrent host applications affect runtime.
 
