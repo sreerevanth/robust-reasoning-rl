@@ -42,7 +42,7 @@ def extract_answer(response: str) -> ExtractedAnswer:
         nested = _boxed(answer)
         if nested:
             answer = nested[1]
-        answer = answer.strip().strip("$*").rstrip(".!;").strip()
+        answer = answer.strip().rstrip(".!;").strip("$* ")
         return ExtractedAnswer(text[:match.start()].strip(), answer or None)
     candidate = text.strip("$ ").rstrip(".!;")
     if numeric_value(candidate) is not None:
