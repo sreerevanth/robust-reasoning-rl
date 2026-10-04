@@ -1,0 +1,31 @@
+name: CPU checks
+on: [push, pull_request]
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '${{ matrix.python-version }}'
+      - run: python -m pip install -e '.[dev]'
+      - run: ruff check src tests scripts
+      - run: ruff format --check src tests scripts
+      - run: mypy src
+      - run: pytest -q
+      - run: python -m src.cli evaluate --config configs/evaluation.yaml
+      - run: python -m src.cli experiment --config configs/smoke.yaml
+      - run: python -m src.cli plot --results results/fixture-sweep
+  training-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -e '.[dev,training]'
+      - run: pytest tests/test_training_local.py -q
