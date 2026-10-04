@@ -1,0 +1,32 @@
+seed: 42
+output_dir: checkpoints/robust
+dataset:
+  source: local
+  path: data/tiny_train.jsonl
+model:
+  backend: huggingface
+  name: HuggingFaceTB/SmolLM2-135M-Instruct
+generation:
+  num_generations: 4
+  max_tokens: 128
+training_verifier:
+  strategy: mean
+  members:
+    - kind: rule
+      corruption: {kind: flip, probability: 0.2, seed: 42}
+    - kind: rule
+      corruption: {kind: flip, probability: 0.2, seed: 1051}
+    - kind: rule
+      corruption: {kind: flip, probability: 0.2, seed: 2060}
+reward:
+  strategy: combined
+  penalty: 0.2
+  moderate_threshold: 0.4
+  severe_threshold: 0.9
+  moderate_scale: 0.5
+  severe_scale: 0.0
+training:
+  max_steps: 100
+  batch_size: 4
+  beta: 0.04
+  lora: {enabled: true, r: 8, alpha: 16, target_modules: all-linear}

@@ -1,0 +1,12 @@
+seed: 42
+output_dir: results/fixture-sweep
+dataset: {source: local, path: data/tiny_eval.jsonl}
+model: {backend: fixture}
+training_verifier:
+  strategy: mean
+  members: [{kind: rule}, {kind: rule}, {kind: rule}]
+experiment:
+  mode: fixture
+  levels: [0, 0.1, 0.2, 0.4, 0.6]
+  seeds: [42, 43, 44]
+  corruption: {kind: flip}

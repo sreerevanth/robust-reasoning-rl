@@ -1,0 +1,21 @@
+# Actual training sweep. This incurs model downloads and training compute.
+seed: 42
+output_dir: results/grpo-corruption
+dataset: {source: local, path: data/tiny_eval.jsonl}
+model: {backend: huggingface, name: HuggingFaceTB/SmolLM2-135M-Instruct}
+training_verifier:
+  strategy: mean
+  members: [{kind: rule}, {kind: rule}, {kind: rule}]
+experiment:
+  mode: train
+  train_dataset: {source: local, path: data/tiny_train.jsonl}
+  levels: [0, 0.1, 0.2, 0.4, 0.6]
+  seeds: [42, 43, 44]
+  corruption: {kind: flip, confidence_scale: 1.0}
+  robust_reward:
+    strategy: combined
+    penalty: 0.2
+    moderate_threshold: 0.4
+    severe_threshold: 0.9
+    moderate_scale: 0.5
+    severe_scale: 0

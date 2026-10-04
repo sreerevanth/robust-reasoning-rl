@@ -1,0 +1,22 @@
+# Offline software smoke evaluation. Replace backend for actual model evaluation.
+seed: 42
+output_dir: results/fixture-evaluation
+dataset:
+  source: local
+  path: data/tiny_eval.jsonl
+model:
+  backend: fixture
+generation:
+  num_generations: 4
+  temperature: 0.7
+  top_p: 0.95
+  max_tokens: 128
+training_verifier:
+  strategy: mean
+  members:
+    - kind: exact
+    - kind: rule
+evaluation_verifier:
+  kind: rule
+evaluation:
+  k: [1, 2, 4]
