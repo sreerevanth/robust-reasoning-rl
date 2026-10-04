@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-04T18:11:17.937830+00:00",
+    "git_commit": "ca3710ca50ae4c105d20fbdca7afd779725325bb",
+    "git_dirty": false,
+    "python": "3.11.9",
+    "packages": {
+      "numpy": "2.4.6",
+      "torch": "2.14.1",
+      "transformers": "4.57.6",
+      "trl": "0.26.2",
+      "peft": "0.18.1",
+      "datasets": "4.8.5",
+      "accelerate": "1.15.0"
+    },
+    "config": {
+      "seed": 42,
+      "output_dir": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\pretrained-smoke",
+      "dataset": {
+        "source": "local",
+        "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_phase2_validation.jsonl",
+        "limit": 2
+      },
+      "model": {
+        "backend": "huggingface",
+        "name": "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+        "prompt_format": "chat",
+        "device": "cpu",
+        "cpu_threads": 4
+      },
+      "generation": {
+        "num_generations": 4,
+        "temperature": 0.7,
+        "top_p": 0.95,
+        "max_tokens": 192
+      },
+      "training_verifier": {
+        "strategy": "mean",
+        "members": [
+          {
+            "kind": "rule"
+          },
+          {
+            "kind": "rule"
+          },
+          {
+            "kind": "rule"
+          }
+        ]
+      },
+      "evaluation_verifier": {
+        "kind": "rule"
+      },
+      "reward": {
+        "strategy": "standard"
+      },
+      "evaluation": {
+        "k": [
+          1,
+          4
+        ]
+      },
+      "training": {
+        "learning_rate": 5e-06,
+        "batch_size": 4,
+        "gradient_accumulation_steps": 1,
+        "max_steps": 1,
+        "save_steps": 1,
+        "logging_steps": 1,
+        "beta": 0.04,
+        "gradient_checkpointing": false,
+        "bf16": false,
+        "use_cpu": true,
+        "lora": {
+          "enabled": true,
+          "r": 8,
+          "alpha": 16,
+          "dropout": 0.05,
+          "target_modules": "all-linear"
+        }
+      },
+      "experiment": {
+        "label": "pretrained_pipeline_smoke_not_capability_evidence",
+        "mode": "train",
+        "train_dataset": {
+          "source": "local",
+          "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_phase2_train.jsonl",
+          "limit": 8
+        },
+        "seeds": [
+          42
+        ],
+        "levels": [
+          0.2
+        ],
+        "corruption": {
+          "kind": "flip",
+          "confidence_scale": 1.0
+        },
+        "robust_reward": {
+          "strategy": "combined",
+          "penalty": 0.2,
+          "moderate_threshold": 0.4,
+          "severe_threshold": 0.9,
+          "moderate_scale": 0.5,
+          "severe_scale": 0.0
+        }
+      }
+    },
+    "execution_kind": "training_sweep"
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "method": "base",
+      "corruption_level": 0.2,
+      "corruption_kind": "flip",
+      "execution_kind": "training_sweep",
+      "num_examples": 2,
+      "num_generations": 8,
+      "independent_accuracy": 0.0,
+      "independent_verifier_accuracy": 0.0,
+      "observed_reward": 0.08333333333333333,
+      "reward_coverage": 1.0,
+      "paired_independent_accuracy": 0.0,
+      "reward_hacking_gap": 0.08333333333333333,
+      "false_positive_reward_rate": 0.0,
+      "false_negative_rate": null,
+      "reward_correctness_correlation": null,
+      "verifier_disagreement": 0.22222222222222224,
+      "confidence": 0.7777777777777778,
+      "pass@1": 0.0,
+      "pass@4": 0.0,
+      "answer_consistency": 0.0,
+      "answer_diversity": 1.0,
+      "extraction_failure_rate": 0.0
+    },
+    {
+      "seed": 42,
+      "method": "baseline",
+      "corruption_level": 0.2,
+      "corruption_kind": "flip",
+      "execution_kind": "training_sweep",
+      "num_examples": 2,
+      "num_generations": 8,
+      "independent_accuracy": 0.0,
+      "independent_verifier_accuracy": 0.0,
+      "observed_reward": 0.08333333333333333,
+      "reward_coverage": 1.0,
+      "paired_independent_accuracy": 0.0,
+      "reward_hacking_gap": 0.08333333333333333,
+      "false_positive_reward_rate": 0.0,
+      "false_negative_rate": null,
+      "reward_correctness_correlation": null,
+      "verifier_disagreement": 0.22222222222222224,
+      "confidence": 0.7777777777777778,
+      "pass@1": 0.0,
+      "pass@4": 0.0,
+      "answer_consistency": 0.0,
+      "answer_diversity": 1.0,
+      "extraction_failure_rate": 0.0,
+      "train_loss": 0.07163034379482269,
+      "training_steps": 1,
+      "training_samples": 4,
+      "training_suppressed": 0,
+      "training_downweighted": 0,
+      "training_missing": 0
+    },
+    {
+      "seed": 42,
+      "method": "robust",
+      "corruption_level": 0.2,
+      "corruption_kind": "flip",
+      "execution_kind": "training_sweep",
+      "num_examples": 2,
+      "num_generations": 8,
+      "independent_accuracy": 0.0,
+      "independent_verifier_accuracy": 0.0,
+      "observed_reward": 0.08333333333333333,
+      "reward_coverage": 1.0,
+      "paired_independent_accuracy": 0.0,
+      "reward_hacking_gap": 0.08333333333333333,
+      "false_positive_reward_rate": 0.0,
+      "false_negative_rate": null,
+      "reward_correctness_correlation": null,
+      "verifier_disagreement": 0.22222222222222224,
+      "confidence": 0.7777777777777778,
+      "pass@1": 0.0,
+      "pass@4": 0.0,
+      "answer_consistency": 0.0,
+      "answer_diversity": 1.0,
+      "extraction_failure_rate": 0.0,
+      "train_loss": -0.015121959149837494,
+      "training_steps": 1,
+      "training_samples": 4,
+      "training_suppressed": 0,
+      "training_downweighted": 3,
+      "training_missing": 0
+    }
+  ],
+  "failures": []
+}

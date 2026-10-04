@@ -1,0 +1,155 @@
+{
+  "source_root": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\pretrained-smoke",
+  "files": [
+    {
+      "path": "aggregate.csv",
+      "bytes": 755,
+      "sha256": "f00787ac0c5d8a3aa244c8e47f8dbfaad7c36bef67b6f8bc67b5aab056ef0383"
+    },
+    {
+      "path": "failure_analysis.json",
+      "bytes": 18606,
+      "sha256": "aa089837ab45d9d65bd7eeda23aa34292dbdffa83814e2f29d30c9c01ccb581f"
+    },
+    {
+      "path": "failure_analysis.md",
+      "bytes": 6156,
+      "sha256": "c9a7cca5a1b0f1c17b19810b8d04dcb9decd85e198b30d89f49cd61df136117e"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 2718,
+      "sha256": "a35cba32410310fa84fd5687fdbb1bc43cb773767096e6cfbd029ba074523e43"
+    },
+    {
+      "path": "per_seed.csv",
+      "bytes": 481,
+      "sha256": "ea8c5b8c827dcabc8f4a58bd2854cb54954f1331396f34b078014b057b8288a2"
+    },
+    {
+      "path": "plots/disagreement.png",
+      "bytes": 95711,
+      "sha256": "d0ee264547b70affc05d9a626e2bd30f0f2259d69c68eb375e53c5ce479263f4"
+    },
+    {
+      "path": "plots/observed_reward.pdf",
+      "bytes": 16331,
+      "sha256": "e60299ded0bff5f7a64e492d65d713a272dc01834c7add04533ab0c79d81b08f"
+    },
+    {
+      "path": "plots/observed_reward.png",
+      "bytes": 107940,
+      "sha256": "00873ba493cdb20b1d64b91f4178db9a29ef399a51690030a1d21491842711f4"
+    },
+    {
+      "path": "plots/reward_correctness.png",
+      "bytes": 97650,
+      "sha256": "76969508c78d5af251730d92c08c3a204716e43801b400ca3ca6eb181fda6e3e"
+    },
+    {
+      "path": "plots/reward_hacking.pdf",
+      "bytes": 17244,
+      "sha256": "ee631f780018b7b822df29de93e7746595f4d1d4c739ee08958206a00bd05936"
+    },
+    {
+      "path": "plots/reward_hacking.png",
+      "bytes": 115576,
+      "sha256": "7301349891374b31c3a607123b31d8b06ea8b30c39aca9c4dbd6606fe15dcd4c"
+    },
+    {
+      "path": "plots/robustness.pdf",
+      "bytes": 16460,
+      "sha256": "1152f6b3c2585e11abbe81dd4709a9c4f74b335c08577ad2f1dd86ed10742e57"
+    },
+    {
+      "path": "plots/robustness.png",
+      "bytes": 103589,
+      "sha256": "177100a5f67eaa42562a7797fc9465ac2d101d418b8850914f19a8bda92724c9"
+    },
+    {
+      "path": "plots/sampling.png",
+      "bytes": 102173,
+      "sha256": "b386885f2519d578b641bc18c6da8f2c3da06a7f44080f528b0eee79080b3657"
+    },
+    {
+      "path": "report.md",
+      "bytes": 1458,
+      "sha256": "c5de131f975cd4a875c169d6ca06a80921710c5ecad63e0905e8f4a686cfae9f"
+    },
+    {
+      "path": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "bytes": 25556,
+      "sha256": "f6d2e38f4b44190ff20602f2242ae3505b2543bbab4a64765768da3c122299a9"
+    },
+    {
+      "path": "seed-42/level-0.2/base/evaluation/generations.jsonl",
+      "bytes": 14669,
+      "sha256": "03137b014e2dfc5a98b2f3251e46bc8bb35d2091ccca00322dd3f8e2cb77a33c"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "bytes": 25714,
+      "sha256": "a283427ca9b28384abd6bfa1ff987da826a4042c50a6aa7e17404f5ff0c0427f"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/evaluation/generations.jsonl",
+      "bytes": 14669,
+      "sha256": "03137b014e2dfc5a98b2f3251e46bc8bb35d2091ccca00322dd3f8e2cb77a33c"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/training/reward_audit.jsonl",
+      "bytes": 8002,
+      "sha256": "68dc3983ed5dd253a737881d91ec2a716c29d664f980eba7353825d2eefeb1d8"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/training/run.json",
+      "bytes": 3254,
+      "sha256": "4119d5ec6a63cf67958c6a6c4c9b645611e5abb7084aa8a7ebf9deaca1ec0f8b"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/training/training.json",
+      "bytes": 5565,
+      "sha256": "8281b5bfa32a59a28f3d663163606db1f579efd93261bd51223c2994d7349aae"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "bytes": 25710,
+      "sha256": "b29a86ac68d4ce471a90759b7e9ae478e319a0caff350a26d40fe026132597a2"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/evaluation/generations.jsonl",
+      "bytes": 14669,
+      "sha256": "03137b014e2dfc5a98b2f3251e46bc8bb35d2091ccca00322dd3f8e2cb77a33c"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/training/reward_audit.jsonl",
+      "bytes": 8055,
+      "sha256": "c0009e353d3aaebf84bc7ed0fe671b72ff1664f820be9efd91b1de9c97e672d8"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/training/run.json",
+      "bytes": 3398,
+      "sha256": "8d8330295bea75cb8f5cd9e8ded239dd5910f3b4bacfa22f57ced603cd656e50"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/training/training.json",
+      "bytes": 5791,
+      "sha256": "2b7b716a039014f2cbddcb1327270cb63310ed8cc84e86337dde5d905dee387f"
+    },
+    {
+      "path": "summary.csv",
+      "bytes": 1075,
+      "sha256": "18a8ac8d7d27e85dc880699af301e9b44b189a0764abbf0441ed9aad317a467a"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 5925,
+      "sha256": "1067d80735fafe50d66341f571d2a44deadcb66d22a50c34944b822bcb131c4b"
+    },
+    {
+      "path": "training_diagnostics.csv",
+      "bytes": 791,
+      "sha256": "09ec97e5baf0c335823fe387f53f7393a42cc1813442511fa945e9ffa2240928"
+    }
+  ]
+}

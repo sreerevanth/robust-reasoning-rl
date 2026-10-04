@@ -1,0 +1,4 @@
+corruption_level,method,seed_count,pass@1_mean,pass@1_std,pass@4_mean,pass@4_std,independent_accuracy_mean,independent_accuracy_std,observed_reward_mean,observed_reward_std,reward_hacking_gap_mean,reward_hacking_gap_std,false_positive_reward_rate_mean,false_positive_reward_rate_std,false_negative_rate_mean,false_negative_rate_std,verifier_disagreement_mean,verifier_disagreement_std,extraction_failure_rate_mean,extraction_failure_rate_std
+0.2,base,1,0.0,,0.0,,0.0,,0.08333333333333333,,0.08333333333333333,,0.0,,,,0.22222222222222224,,0.0,
+0.2,baseline,1,0.0,,0.0,,0.0,,0.08333333333333333,,0.08333333333333333,,0.0,,,,0.22222222222222224,,0.0,
+0.2,robust,1,0.0,,0.0,,0.0,,0.08333333333333333,,0.08333333333333333,,0.0,,,,0.22222222222222224,,0.0,

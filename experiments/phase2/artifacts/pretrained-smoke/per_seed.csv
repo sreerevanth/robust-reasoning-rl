@@ -1,0 +1,4 @@
+corruption_level,method,seed,pass@1,pass@4,independent_accuracy,observed_reward,reward_hacking_gap,false_positive_reward_rate,false_negative_rate,verifier_disagreement,extraction_failure_rate
+0.2,base,42,0.0,0.0,0.0,0.08333333333333333,0.08333333333333333,0.0,,0.22222222222222224,0.0
+0.2,baseline,42,0.0,0.0,0.0,0.08333333333333333,0.08333333333333333,0.0,,0.22222222222222224,0.0
+0.2,robust,42,0.0,0.0,0.0,0.08333333333333333,0.08333333333333333,0.0,,0.22222222222222224,0.0

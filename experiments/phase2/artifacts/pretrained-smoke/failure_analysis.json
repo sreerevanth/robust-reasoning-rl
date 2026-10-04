@@ -1,0 +1,446 @@
+{
+  "selection": "first eligible per method/category in sorted artifact order",
+  "counts": {
+    "base/answer_incorrect_reward_negative": 8,
+    "base/high_disagreement": 2,
+    "baseline/answer_incorrect_reward_negative": 8,
+    "baseline/high_disagreement": 2,
+    "robust/answer_incorrect_reward_negative": 8,
+    "robust/high_disagreement": 2
+  },
+  "examples": {
+    "base/answer_incorrect_reward_negative": {
+      "source": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, let's break it down step by step.\n\nFrank starts with a starting point of 5 steps back. He then takes 5 steps back again, so he is 5 steps back and then 10 steps forward, which is 5 + 10 = 15 steps forward.\n\nNext, Frank takes 5 steps back again, so he is 5 steps back and then 20 steps forward, which is 5 + 20 = 25 steps forward.\n\nFinally, Frank takes 5 steps back again, so he is 5 steps back and then 5 + 20 = 25 steps forward.\n\nTherefore, Frank is 25 steps forward from his original starting point.\n\nFinal answer: 25.",
+      "reasoning": "To solve this problem, let's break it down step by step.\n\nFrank starts with a starting point of 5 steps back. He then takes 5 steps back again, so he is 5 steps back and then 10 steps forward, which is 5 + 10 = 15 steps forward.\n\nNext, Frank takes 5 steps back again, so he is 5 steps back and then 20 steps forward, which is 5 + 20 = 25 steps forward.\n\nFinally, Frank takes 5 steps back again, so he is 5 steps back and then 5 + 20 = 25 steps forward.\n\nTherefore, Frank is 25 steps forward from his original starting point.",
+      "final_answer": "25",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "generated_tokens": 170,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "base/high_disagreement": {
+      "source": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.\nFrank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.\nFinal answer: 26 steps forward.",
+      "reasoning": "Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.\nFrank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.",
+      "final_answer": "26 steps forward",
+      "verifier_outputs": {
+        "reward": 0.3333333333333333,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.3333333333333333,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "26 steps forward",
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 3,
+        "generated_tokens": 70,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "baseline/answer_incorrect_reward_negative": {
+      "source": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, let's break it down step by step.\n\nFrank starts with a starting point of 5 steps back. He then takes 5 steps back again, so he is 5 steps back and then 10 steps forward, which is 5 + 10 = 15 steps forward.\n\nNext, Frank takes 5 steps back again, so he is 5 steps back and then 20 steps forward, which is 5 + 20 = 25 steps forward.\n\nFinally, Frank takes 5 steps back again, so he is 5 steps back and then 5 + 20 = 25 steps forward.\n\nTherefore, Frank is 25 steps forward from his original starting point.\n\nFinal answer: 25.",
+      "reasoning": "To solve this problem, let's break it down step by step.\n\nFrank starts with a starting point of 5 steps back. He then takes 5 steps back again, so he is 5 steps back and then 10 steps forward, which is 5 + 10 = 15 steps forward.\n\nNext, Frank takes 5 steps back again, so he is 5 steps back and then 20 steps forward, which is 5 + 20 = 25 steps forward.\n\nFinally, Frank takes 5 steps back again, so he is 5 steps back and then 5 + 20 = 25 steps forward.\n\nTherefore, Frank is 25 steps forward from his original starting point.",
+      "final_answer": "25",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "generated_tokens": 170,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "baseline/high_disagreement": {
+      "source": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.\nFrank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.\nFinal answer: 26 steps forward.",
+      "reasoning": "Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.\nFrank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.",
+      "final_answer": "26 steps forward",
+      "verifier_outputs": {
+        "reward": 0.3333333333333333,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.3333333333333333,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "26 steps forward",
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 3,
+        "generated_tokens": 70,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "robust/answer_incorrect_reward_negative": {
+      "source": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, let's break it down step by step.\n\nFrank starts with a starting point of 5 steps back. He then takes 5 steps back again, so he is 5 steps back and then 10 steps forward, which is 5 + 10 = 15 steps forward.\n\nNext, Frank takes 5 steps back again, so he is 5 steps back and then 20 steps forward, which is 5 + 20 = 25 steps forward.\n\nFinally, Frank takes 5 steps back again, so he is 5 steps back and then 5 + 20 = 25 steps forward.\n\nTherefore, Frank is 25 steps forward from his original starting point.\n\nFinal answer: 25.",
+      "reasoning": "To solve this problem, let's break it down step by step.\n\nFrank starts with a starting point of 5 steps back. He then takes 5 steps back again, so he is 5 steps back and then 10 steps forward, which is 5 + 10 = 15 steps forward.\n\nNext, Frank takes 5 steps back again, so he is 5 steps back and then 20 steps forward, which is 5 + 20 = 25 steps forward.\n\nFinally, Frank takes 5 steps back again, so he is 5 steps back and then 5 + 20 = 25 steps forward.\n\nTherefore, Frank is 25 steps forward from his original starting point.",
+      "final_answer": "25",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "generated_tokens": 170,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "robust/high_disagreement": {
+      "source": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.\nFrank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.\nFinal answer: 26 steps forward.",
+      "reasoning": "Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.\nFrank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.",
+      "final_answer": "26 steps forward",
+      "verifier_outputs": {
+        "reward": 0.3333333333333333,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.3333333333333333,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "26 steps forward",
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 3,
+        "generated_tokens": 70,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    }
+  },
+  "interpretation": "Answer correctness is not proof of reasoning validity; synthetic false positives are not proof of learned exploitation."
+}

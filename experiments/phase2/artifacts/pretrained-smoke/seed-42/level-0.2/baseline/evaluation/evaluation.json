@@ -1,0 +1,724 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-04T18:14:05.876380+00:00",
+    "git_commit": "a4464a1110601673a4d4b2867a6ae33948bc76fa",
+    "git_dirty": true,
+    "python": "3.11.9",
+    "packages": {
+      "numpy": "2.4.6",
+      "torch": "2.14.1",
+      "transformers": "4.57.6",
+      "trl": "0.26.2",
+      "peft": "0.18.1",
+      "datasets": "4.8.5",
+      "accelerate": "1.15.0"
+    },
+    "config": {
+      "seed": 42,
+      "output_dir": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\pretrained-smoke\\seed-42\\level-0.2\\baseline\\evaluation",
+      "dataset": {
+        "source": "local",
+        "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_phase2_validation.jsonl",
+        "limit": 2
+      },
+      "model": {
+        "backend": "huggingface",
+        "name": "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+        "prompt_format": "chat",
+        "device": "cpu",
+        "cpu_threads": 4,
+        "adapter": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\pretrained-smoke\\seed-42\\level-0.2\\baseline\\training\\final"
+      },
+      "generation": {
+        "num_generations": 4,
+        "temperature": 0.7,
+        "top_p": 0.95,
+        "max_tokens": 192
+      },
+      "training_verifier": {
+        "strategy": "mean",
+        "members": [
+          {
+            "kind": "rule",
+            "corruption": {
+              "kind": "flip",
+              "confidence_scale": 1.0,
+              "probability": 0.2,
+              "seed": 42
+            }
+          },
+          {
+            "kind": "rule",
+            "corruption": {
+              "kind": "flip",
+              "confidence_scale": 1.0,
+              "probability": 0.2,
+              "seed": 1051
+            }
+          },
+          {
+            "kind": "rule",
+            "corruption": {
+              "kind": "flip",
+              "confidence_scale": 1.0,
+              "probability": 0.2,
+              "seed": 2060
+            }
+          }
+        ]
+      },
+      "evaluation_verifier": {
+        "kind": "rule"
+      },
+      "reward": {
+        "strategy": "standard"
+      },
+      "evaluation": {
+        "k": [
+          1,
+          4
+        ]
+      },
+      "training": {
+        "learning_rate": 5e-06,
+        "batch_size": 4,
+        "gradient_accumulation_steps": 1,
+        "max_steps": 1,
+        "save_steps": 1,
+        "logging_steps": 1,
+        "beta": 0.04,
+        "gradient_checkpointing": false,
+        "bf16": false,
+        "use_cpu": true,
+        "lora": {
+          "enabled": true,
+          "r": 8,
+          "alpha": 16,
+          "dropout": 0.05,
+          "target_modules": "all-linear"
+        }
+      },
+      "experiment": {
+        "label": "pretrained_pipeline_smoke_not_capability_evidence",
+        "mode": "train",
+        "train_dataset": {
+          "source": "local",
+          "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_phase2_train.jsonl",
+          "limit": 8
+        },
+        "seeds": [
+          42
+        ],
+        "levels": [
+          0.2
+        ],
+        "corruption": {
+          "kind": "flip",
+          "confidence_scale": 1.0
+        },
+        "robust_reward": {
+          "strategy": "combined",
+          "penalty": 0.2,
+          "moderate_threshold": 0.4,
+          "severe_threshold": 0.9,
+          "moderate_scale": 0.5,
+          "severe_scale": 0.0
+        }
+      }
+    },
+    "execution_kind": "model_evaluation",
+    "elapsed_seconds": 57.55315660001361,
+    "experiment_label": "pretrained_pipeline_smoke_not_capability_evidence"
+  },
+  "metrics": {
+    "num_examples": 2,
+    "num_generations": 8,
+    "independent_accuracy": 0.0,
+    "independent_verifier_accuracy": 0.0,
+    "observed_reward": 0.08333333333333333,
+    "reward_coverage": 1.0,
+    "paired_independent_accuracy": 0.0,
+    "reward_hacking_gap": 0.08333333333333333,
+    "false_positive_reward_rate": 0.0,
+    "false_negative_rate": null,
+    "reward_correctness_correlation": null,
+    "verifier_disagreement": 0.22222222222222224,
+    "confidence": 0.7777777777777778,
+    "pass@1": 0.0,
+    "pass@4": 0.0,
+    "answer_consistency": 0.0,
+    "answer_diversity": 1.0,
+    "extraction_failure_rate": 0.0
+  },
+  "records": [
+    {
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, let's break it down step by step.\n\nFrank starts with a starting point of 5 steps back. He then takes 5 steps back again, so he is 5 steps back and then 10 steps forward, which is 5 + 10 = 15 steps forward.\n\nNext, Frank takes 5 steps back again, so he is 5 steps back and then 20 steps forward, which is 5 + 20 = 25 steps forward.\n\nFinally, Frank takes 5 steps back again, so he is 5 steps back and then 5 + 20 = 25 steps forward.\n\nTherefore, Frank is 25 steps forward from his original starting point.\n\nFinal answer: 25.",
+      "reasoning": "To solve this problem, let's break it down step by step.\n\nFrank starts with a starting point of 5 steps back. He then takes 5 steps back again, so he is 5 steps back and then 10 steps forward, which is 5 + 10 = 15 steps forward.\n\nNext, Frank takes 5 steps back again, so he is 5 steps back and then 20 steps forward, which is 5 + 20 = 25 steps forward.\n\nFinally, Frank takes 5 steps back again, so he is 5 steps back and then 5 + 20 = 25 steps forward.\n\nTherefore, Frank is 25 steps forward from his original starting point.",
+      "final_answer": "25",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "generated_tokens": 170,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "Frank starts with 5 steps back, then 10 steps forward, and then 2 steps back, which equals 5 + 10 - 2 = 5 steps forward.\n\nFinal answer: 5 steps forward.",
+      "reasoning": "Frank starts with 5 steps back, then 10 steps forward, and then 2 steps back, which equals 5 + 10 - 2 = 5 steps forward.",
+      "final_answer": "5 steps forward",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "5 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "5 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "5 steps forward",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "5 steps forward",
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 1,
+        "generated_tokens": 50,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, we need to follow the steps you've described, which is a key aspect of the problem. Let's start by calculating the total steps forward Frank needs to make: 5 steps back + 10 steps forward = 15 steps forward.\n\nThen, we'll add the steps forward Frank made to his original starting point: 5 + 10 + 2 = 15 steps forward.\n\nFinally, we'll add the steps forward Frank made to his original starting point again: 15 + 2 = 17 steps forward.\n\nSo, Frank is equal to 17 steps forward from his original starting point. The answer is: 17.\n\nFinal answer: 17.",
+      "reasoning": "To solve this problem, we need to follow the steps you've described, which is a key aspect of the problem. Let's start by calculating the total steps forward Frank needs to make: 5 steps back + 10 steps forward = 15 steps forward.\n\nThen, we'll add the steps forward Frank made to his original starting point: 5 + 10 + 2 = 15 steps forward.\n\nFinally, we'll add the steps forward Frank made to his original starting point again: 15 + 2 = 17 steps forward.\n\nSo, Frank is equal to 17 steps forward from his original starting point. The answer is: 17.",
+      "final_answer": "17",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 2,
+        "generated_tokens": 158,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.\nFrank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.\nFinal answer: 26 steps forward.",
+      "reasoning": "Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.\nFrank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.",
+      "final_answer": "26 steps forward",
+      "verifier_outputs": {
+        "reward": 0.3333333333333333,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": "26 steps forward",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.3333333333333333,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "26 steps forward",
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 3,
+        "generated_tokens": 70,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-19c4a0a233d9abcb",
+      "response": "There are 14 kindergartners in Ms. Watson's class.\nThere are 24 first graders in Ms. Watson's class.\nThere are 42 second graders in Ms. Watson's class.\n#### 14\nThe answer is: 14",
+      "reasoning": "There are 14 kindergartners in Ms. Watson's class.\nThere are 24 first graders in Ms. Watson's class.\nThere are 42 second graders in Ms. Watson's class.\n#### 14",
+      "final_answer": "14",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "There are 14 kindergartners and 24 first graders and some second graders in Ms. Watson's class. Overall Ms. Watson has 42 students. How many second graders are in Ms. Watson\u2019s class?",
+        "reference": "4",
+        "sample_index": 0,
+        "generated_tokens": 60,
+        "prompt_tokens": 100,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-19c4a0a233d9abcb",
+      "response": "There are 14 kindergartners + 24 first graders = 38 second graders.\n\nFinal answer: Final answer: 38.",
+      "reasoning": "There are 14 kindergartners + 24 first graders = 38 second graders.\n\nFinal answer:",
+      "final_answer": "38",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "There are 14 kindergartners and 24 first graders and some second graders in Ms. Watson's class. Overall Ms. Watson has 42 students. How many second graders are in Ms. Watson\u2019s class?",
+        "reference": "4",
+        "sample_index": 1,
+        "generated_tokens": 35,
+        "prompt_tokens": 100,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-19c4a0a233d9abcb",
+      "response": "Ms. Watson has 42 students.\n\nFinal answer: Ms. Watson has 42 / 2 = 20 second graders in her class.",
+      "reasoning": "Ms. Watson has 42 students.",
+      "final_answer": "Ms. Watson has 42 / 2 = 20 second graders in her class",
+      "verifier_outputs": {
+        "reward": 0.3333333333333333,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "Ms. Watson has 42 / 2 = 20 second graders in her class",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "Ms. Watson has 42 / 2 = 20 second graders in her class",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": "Ms. Watson has 42 / 2 = 20 second graders in her class",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.3333333333333333,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "Ms. Watson has 42 / 2 = 20 second graders in her class",
+            "kind": "exact"
+          }
+        },
+        "question": "There are 14 kindergartners and 24 first graders and some second graders in Ms. Watson's class. Overall Ms. Watson has 42 students. How many second graders are in Ms. Watson\u2019s class?",
+        "reference": "4",
+        "sample_index": 2,
+        "generated_tokens": 35,
+        "prompt_tokens": 100,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-19c4a0a233d9abcb",
+      "response": "First, let's find out how many kindergartners are in Ms. Watson's class:\n\n14 kindergartners = 14 * 4 = 60 kindergartners\n\nNow, let's find out how many students are in Ms. Watson's class:\n\n24 first graders = 24 * 4 = 96 first graders\n\nSo, there are 60 kindergartners in Ms. Watson's class, and 96 first graders.\n\nFinal answer: 96 second graders\n\nSo, Ms. Watson has 96 second graders in her class.",
+      "reasoning": "First, let's find out how many kindergartners are in Ms. Watson's class:\n\n14 kindergartners = 14 * 4 = 60 kindergartners\n\nNow, let's find out how many students are in Ms. Watson's class:\n\n24 first graders = 24 * 4 = 96 first graders\n\nSo, there are 60 kindergartners in Ms. Watson's class, and 96 first graders.",
+      "final_answer": "96 second graders",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "96 second graders",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "96 second graders",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "96 second graders",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "96 second graders",
+            "kind": "exact"
+          }
+        },
+        "question": "There are 14 kindergartners and 24 first graders and some second graders in Ms. Watson's class. Overall Ms. Watson has 42 students. How many second graders are in Ms. Watson\u2019s class?",
+        "reference": "4",
+        "sample_index": 3,
+        "generated_tokens": 134,
+        "prompt_tokens": 100,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    }
+  ]
+}
