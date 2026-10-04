@@ -95,11 +95,16 @@ def create_report(results: str | Path) -> dict[str, Any]:
         pd.DataFrame(paired_rows).to_csv(root / "paired_method_differences.csv", index=False)
     config = summary["metadata"]["config"]
     planned = config.get("experiment", {})
+    expected_methods = (
+        ["fixture_verifier_audit"]
+        if planned.get("mode") == "fixture"
+        else ["base", "baseline", "robust"]
+    )
     missing = [
         {"seed": seed, "level": level, "method": method}
         for seed in planned.get("seeds", [config["seed"]])
         for level in planned.get("levels", [])
-        for method in ("base", "baseline", "robust")
+        for method in expected_methods
         if (seed, level, method) not in by_key
     ]
     write_json(
@@ -145,6 +150,16 @@ def create_report(results: str | Path) -> dict[str, Any]:
         "stay undefined. Tiny budgets do not support significance testing or causal claims. "
         "Repeated base responses across corruption levels are not independent evidence.\n"
     )
+    if missing:
+        text += (
+            f"\n**Incomplete campaign:** {len(missing)} planned conditions remain uncompleted.\n"
+        )
+    if (frame["independent_accuracy"] == 0).all():
+        text += (
+            "\nEvery completed condition has zero independently judged correctness. "
+            "This correctness floor prevents a conclusion about comparative reasoning gains. "
+            "Reward gaps can reflect injected errors rather than learned exploitation.\n"
+        )
     (root / "report.md").write_text(text, encoding="utf-8", newline="\n")
     diagnostics = []
     for path in sorted(root.glob("seed-*/level-*/*/training/training.json")):
