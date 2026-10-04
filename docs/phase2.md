@@ -31,6 +31,10 @@ These extremely small budgets cannot establish convergence, benchmark performanc
 statistical significance. The unexecuted GPU configuration includes 0/10/20/40/60%,
 three seeds, 200 updates, 256 training questions, 128 test questions, and pass@1/4/8.
 Even that configuration remains a subset study, not a claim of a complete GSM8K benchmark.
+Temperature and top-p are explicit. In this pinned integration, pretrained inference additionally
+inherits Transformers' default top-k 50, whereas TRL training has top-k disabled by its default.
+This difference is shared by both trained methods; inference comparisons remain matched across
+all policies. It should not be confused with identical training and inference sampling distributions.
 
 ## Splits and preprocessing
 
@@ -109,9 +113,17 @@ Robust-policy failures are retained. Categories without examples are explicitly 
 correct example is manufactured to complete the display. Long generations are excerpted in
 Markdown while full text remains in JSON/JSONL. Replayed base responses are flagged and do
 not count as additional independent model-generation evidence.
+The official test split is held out from this finetuning, not proven absent from model pretraining
+or instruction tuning. Prior benchmark exposure and teacher effects cannot be excluded by this study.
 
 Use training diagnostics to distinguish real optimization from a completed trainer loop with no
 effective update: inspect reward variance, fraction of zero-variance groups, gradient norms,
 and LoRA B norm (initialized at zero by default). If pass@1 stays at zero or a large fraction of
 outputs is truncated, the experiment cannot discriminate robust reasoning capability. Even
 improved pass@4 would only be suggestive sampling evidence under this small budget.
+
+The existing severe threshold 0.9 is above the maximum binary disagreement 8/9 achievable
+by three members. Consequently the severe suppression branch is inactive in this specific
+campaign; moderate attenuation is the operative safety mechanism. This was not retuned after
+observing outputs. The generated reports include paired seed-level method differences and an
+explicit list of any uncompleted planned conditions, so incomplete campaigns are visible.

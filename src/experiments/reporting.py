@@ -75,6 +75,51 @@ def create_report(results: str | Path) -> dict[str, Any]:
             row[f"{metric}_std"] = float(values.std(ddof=1)) if len(values) > 1 else None
         aggregate_rows.append(row)
     aggregate = pd.DataFrame(aggregate_rows)
+    paired_rows = []
+    by_key = {(r["seed"], r["corruption_level"], r["method"]): r for r in summary["runs"]}
+    for (seed, level, method), robust in by_key.items():
+        baseline = by_key.get((seed, level, "baseline"))
+        if method == "robust" and baseline is not None:
+            row = {"seed": seed, "corruption_level": level}
+            for metric in (
+                "independent_accuracy",
+                "pass@1",
+                "pass@4",
+                "observed_reward",
+                "reward_hacking_gap",
+            ):
+                if robust.get(metric) is not None and baseline.get(metric) is not None:
+                    row[f"robust_minus_baseline_{metric}"] = robust[metric] - baseline[metric]
+            paired_rows.append(row)
+    if paired_rows:
+        pd.DataFrame(paired_rows).to_csv(root / "paired_method_differences.csv", index=False)
+    config = summary["metadata"]["config"]
+    planned = config.get("experiment", {})
+    missing = [
+        {"seed": seed, "level": level, "method": method}
+        for seed in planned.get("seeds", [config["seed"]])
+        for level in planned.get("levels", [])
+        for method in ("base", "baseline", "robust")
+        if (seed, level, method) not in by_key
+    ]
+    write_json(
+        root / "analysis.json",
+        {
+            "completed_conditions": len(frame),
+            "recorded_failures": summary["failures"],
+            "uncompleted_planned_conditions": missing,
+            "all_independent_correctness_zero": bool((frame["independent_accuracy"] == 0).all()),
+            "unique_questions_per_evaluation": sorted(
+                frame.get("num_examples", pd.Series(dtype=int)).unique().tolist()
+            ),
+            "paired_differences": paired_rows,
+            "interpretation": (
+                "Descriptive preliminary evidence. Synthetic reward inflation "
+                "is not proof of learned exploitation; "
+                "no significance or capability superiority claim."
+            ),
+        },
+    )
     measured.to_csv(root / "per_seed.csv", index=False)
     aggregate.to_csv(root / "aggregate.csv", index=False)
     compact = aggregate[

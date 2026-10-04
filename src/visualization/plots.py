@@ -61,6 +61,9 @@ def plot_results(results: str | Path) -> list[Path]:
             ax.plot(x, y, marker="o", label=str(method))
             ax.fill_between(x, y - std, y + std, alpha=0.15)
         ax.set(xlabel="Reward corruption (%)", ylabel=label, title=label + suffix)
+        ax.set_xticks(sorted(frame["corruption_level"].unique() * 100))
+        if metric in {"independent_accuracy", "observed_reward"}:
+            ax.set_ylim(0, 1)
         ax.legend()
         ax.grid(alpha=0.2)
         for ext in ("png", "pdf"):
@@ -78,6 +81,7 @@ def plot_results(results: str | Path) -> list[Path]:
         ax.set(
             xlabel=x_metric.replace("_", " "), ylabel="Independent correctness", title=name + suffix
         )
+        ax.set_ylim(0, 1)
         ax.legend()
         path = out / f"{name}.png"
         fig.savefig(path)
@@ -96,6 +100,7 @@ def plot_results(results: str | Path) -> list[Path]:
             label=f"{sampling_method}, corruption={level}",
         )
     ax.set(xlabel="Sampling budget k", ylabel="pass@k", title="Sampling attribution" + suffix)
+    ax.set_ylim(0, 1)
     ax.legend()
     path = out / "sampling.png"
     fig.savefig(path)

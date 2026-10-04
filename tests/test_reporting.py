@@ -24,7 +24,10 @@ def test_report_aggregates_sample_std_and_preserves_missing(tmp_path):
                 "extraction_failure_rate": 0.0,
             }
         )
-    (tmp_path / "summary.json").write_text(json.dumps({"runs": rows, "failures": []}))
+    metadata = {"config": {"seed": 42, "experiment": {"seeds": [42, 123, 456], "levels": [0.2]}}}
+    (tmp_path / "summary.json").write_text(
+        json.dumps({"metadata": metadata, "runs": rows, "failures": []})
+    )
     report = create_report(tmp_path)
     assert report["runs"] == 3 and report["aggregate_rows"] == 1
     import pandas as pd
@@ -34,6 +37,10 @@ def test_report_aggregates_sample_std_and_preserves_missing(tmp_path):
     assert frame["independent_accuracy_std"][0] == 0.5
     assert "undefined" in (tmp_path / "report.md").read_text()
     assert "No qualifying measured example" in (tmp_path / "failure_analysis.md").read_text()
-    (tmp_path / "summary.json").write_text(json.dumps({"runs": rows + [rows[0]], "failures": []}))
+    analysis = json.loads((tmp_path / "analysis.json").read_text())
+    assert len(analysis["uncompleted_planned_conditions"]) == 6
+    (tmp_path / "summary.json").write_text(
+        json.dumps({"metadata": metadata, "runs": rows + [rows[0]], "failures": []})
+    )
     with pytest.raises(ValueError, match="Duplicate"):
         create_report(tmp_path)

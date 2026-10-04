@@ -23,6 +23,8 @@ NAMES = {
     "failure_analysis.json",
     "failure_analysis.md",
     "training_diagnostics.csv",
+    "paired_method_differences.csv",
+    "analysis.json",
 }
 
 
