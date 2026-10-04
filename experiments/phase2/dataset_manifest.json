@@ -1,0 +1,27 @@
+{
+  "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+  "dataset": "openai/gsm8k",
+  "dataset_revision": "740312add88f781978c0658806c59bc2815b9866",
+  "subset": "main",
+  "selection_seed": 20261004,
+  "selection": "shuffle full official splits; first 32 train, next 16 validation, first 32 test",
+  "preprocessing": "reference is stripped text after final ####; no difficulty filtering",
+  "splits": {
+    "train": {
+      "path": "data/gsm8k_phase2_train.jsonl",
+      "count": 32,
+      "sha256": "1b00c4ae328370d6d74e2c933a37e5a9a4c2c985b703472a0db53da676a6bf7f"
+    },
+    "validation": {
+      "path": "data/gsm8k_phase2_validation.jsonl",
+      "count": 16,
+      "sha256": "89900498bfde18578a702408fc118ceb35c1d40adffda5d81c5266314796df5b"
+    },
+    "test": {
+      "path": "data/gsm8k_phase2_test.jsonl",
+      "count": 32,
+      "sha256": "2d3a60159cf40ae14bb42df5552792dcd5146b42f0b3a6e247917166a10fa109"
+    }
+  }
+}

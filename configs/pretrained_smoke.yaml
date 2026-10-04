@@ -1,0 +1,36 @@
+# Frozen before model generation: real pretrained-model pipeline validation only.
+seed: 42
+output_dir: results/pretrained-smoke
+dataset: {source: local, path: data/gsm8k_phase2_validation.jsonl, limit: 2}
+model:
+  backend: huggingface
+  name: HuggingFaceTB/SmolLM2-135M-Instruct
+  revision: 12fd25f77366fa6b3b4b768ec3050bf629380bac
+  prompt_format: chat
+  device: cpu
+  cpu_threads: 4
+generation: {num_generations: 4, temperature: 0.7, top_p: 0.95, max_tokens: 192}
+evaluation: {k: [1, 4]}
+training:
+  use_cpu: true
+  max_steps: 1
+  batch_size: 4
+  gradient_accumulation_steps: 1
+  gradient_checkpointing: false
+  logging_steps: 1
+  save_steps: 1
+  beta: 0.04
+  lora: {enabled: true, r: 8, alpha: 16, dropout: 0.05, target_modules: all-linear}
+training_verifier:
+  strategy: mean
+  members: [{kind: rule}, {kind: rule}, {kind: rule}]
+evaluation_verifier: {kind: rule}
+experiment:
+  label: pretrained_pipeline_smoke_not_capability_evidence
+  mode: train
+  train_dataset: {source: local, path: data/gsm8k_phase2_train.jsonl, limit: 8}
+  seeds: [42]
+  levels: [0.2]
+  corruption: {kind: flip, confidence_scale: 1.0}
+  robust_reward: {strategy: combined, penalty: 0.2, moderate_threshold: 0.4,
+                  severe_threshold: 0.9, moderate_scale: 0.5, severe_scale: 0.0}
