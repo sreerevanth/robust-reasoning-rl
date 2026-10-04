@@ -1,0 +1,4 @@
+{"id":"eval-1","question":"What is 4 + 5?","reference":"9","metadata":{"class":"addition"}}
+{"id":"eval-2","question":"What is 9 - 3?","reference":"6","metadata":{"class":"subtraction"}}
+{"id":"eval-3","question":"What is 2 * 7?","reference":"14","metadata":{"class":"multiplication"}}
+{"id":"eval-4","question":"What is 3 / 6?","reference":"1/2","metadata":{"class":"division"}}

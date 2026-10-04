@@ -1,0 +1,4 @@
+{"id":"train-1","question":"What is 2 + 3?","reference":"5","metadata":{"class":"addition"}}
+{"id":"train-2","question":"What is 7 - 4?","reference":"3","metadata":{"class":"subtraction"}}
+{"id":"train-3","question":"What is 3 * 4?","reference":"12","metadata":{"class":"multiplication"}}
+{"id":"train-4","question":"What is 8 / 2?","reference":"4","metadata":{"class":"division"}}
