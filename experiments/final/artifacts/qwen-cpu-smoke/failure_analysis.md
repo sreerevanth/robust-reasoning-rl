@@ -98,7 +98,7 @@ Let's break down Frank's movements:
    - Ending position after this movement: \( x + 10 \)
 
 3. **Third Movement (backward):**
-   - From the previous ending position, take 
+   - From the previous ending position, take
 ```
 
 ## base/answer_correct_false_negative
@@ -128,7 +128,7 @@ Let's break down Frank's movements:
    - Ending position after this movement: \( x + 10 \)
 
 3. **Third Movement (backward):**
-   - From the previous ending position, take 
+   - From the previous ending position, take
 ```
 
 ## baseline/extraction_failure
@@ -227,7 +227,7 @@ Let's break down Frank's movements:
    - Ending position after this movement: \( x + 10 \)
 
 3. **Third Movement (backward):**
-   - From the previous ending position, take 
+   - From the previous ending position, take
 ```
 
 ## baseline/answer_correct_false_negative
@@ -257,7 +257,7 @@ Let's break down Frank's movements:
    - Ending position after this movement: \( x + 10 \)
 
 3. **Third Movement (backward):**
-   - From the previous ending position, take 
+   - From the previous ending position, take
 ```
 
 ## robust/extraction_failure
@@ -377,7 +377,7 @@ Let's break down Frank's movements:
    - Ending position after this movement: \( x + 10 \)
 
 3. **Third Movement (backward):**
-   - From the previous ending position, take 
+   - From the previous ending position, take
 ```
 
 ## robust/answer_correct_false_negative
@@ -407,5 +407,5 @@ Let's break down Frank's movements:
    - Ending position after this movement: \( x + 10 \)
 
 3. **Third Movement (backward):**
-   - From the previous ending position, take 
+   - From the previous ending position, take
 ```

@@ -303,6 +303,8 @@ def create_report(results: str | Path) -> dict[str, Any]:
             excerpt = (
                 response if len(response) <= 800 else response[:400] + "\n[…]\n" + response[-400:]
             )
+            # Keep original bytes in JSON/JSONL; normalize only Markdown excerpt line endings.
+            excerpt = "\n".join(line.rstrip() for line in excerpt.splitlines())
             lines += [
                 f"Source: `{record['source']}`; ID: `{record['example_id']}`.",
                 "",

@@ -3,6 +3,7 @@
 All examples below link to retained model outputs. Category labels concern final answers;
 they do not automatically prove valid or invalid reasoning. The generated per-method reports
 select the first eligible record in sorted artifact order, including standard and robust failures.
+Markdown excerpts remove trailing line whitespace; full original text remains in JSON/JSONL.
 
 ## Correct answer with visible arithmetic
 
