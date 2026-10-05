@@ -35,7 +35,30 @@ def test_fixture_sweep_and_plots(tmp_path):
     assert {r["method"] for r in result["runs"]} == {"fixture_verifier_audit"}
     assert len({r["independent_accuracy"] for r in result["runs"]}) == 1
     plots = plot_results(tmp_path)
-    assert len(plots) == 9 and all(path.stat().st_size > 1000 for path in plots)
+    assert len(plots) == 13 and all(path.stat().st_size > 1000 for path in plots)
+
+
+def test_resume_keeps_completed_evidence_and_rejects_changed_protocol(tmp_path, monkeypatch):
+    cfg = load_config(ROOT / "configs/smoke.yaml")
+    cfg["output_dir"] = str(tmp_path)
+    cfg["experiment"].update(seeds=[42], levels=[0, 0.2])
+    first = experiment(cfg)
+    cfg["experiment"]["resume"] = True
+
+    def fail_if_called(config):
+        raise AssertionError("Completed condition was rerun")
+
+    monkeypatch.setattr("src.experiments.runner.evaluate", fail_if_called)
+    assert experiment(cfg)["runs"] == first["runs"]
+    evidence = tmp_path / "seed-42/level-0/fixture_verifier_audit/evaluation/evaluation.json"
+    original = evidence.read_bytes()
+    evidence.write_bytes(original + b"\n")
+    with pytest.raises(ValueError, match="evidence changed"):
+        experiment(cfg)
+    evidence.write_bytes(original)
+    cfg["generation"]["max_tokens"] += 1
+    with pytest.raises(ValueError, match="changed configuration"):
+        experiment(cfg)
 
 
 def test_sweep_rejects_fake_training_and_records_failure(tmp_path, monkeypatch):

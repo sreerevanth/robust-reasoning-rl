@@ -1,0 +1,34 @@
+{
+  "source": "experiments\\phase2\\artifacts\\cpu-pilot",
+  "records": 48,
+  "categories": {
+    "parsed_wrong": 5,
+    "nonscalar_final": 16,
+    "missing_marker": 7,
+    "truncated": 20
+  },
+  "cases": {
+    "parsed_wrong": {
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "reference": "31",
+      "response_excerpt": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6"
+    },
+    "nonscalar_final": {
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "reference": "31",
+      "response_excerpt": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, he will have 25 x 1 = 25 new pens.\n\nHe saves money by using empty pens. So, he will save a total of 25 x 1 = 25 pens.\n\nFinal answer: Ram will have 25 pens."
+    },
+    "missing_marker": {
+      "example_id": "gsm8k-test-78dd8c8b20f38c37",
+      "reference": "60",
+      "response_excerpt": "To solve this problem, we need to first convert the distance from miles to kilometers, and then find the percentage of the distance covered.\n\nDistance from Alaska to Texas is 6000 km. Since the distance is in kilometers, we need to convert it to miles. 6000 km * 1.5 = 9000 miles.\n\nNow, we can use the formula for percentage to find the percentage of the distance covered: ((distance in miles / distance from Alaska) * 100) * 1000 = (9000 * 100) / 9000 * 1000 = 9%.\n\nSo, Michael has covered a total distance of 9% of the distance from Alaska to Texas, which is 9000 miles."
+    },
+    "truncated": {
+      "example_id": "gsm8k-test-6dbed0240798dcb4",
+      "reference": "250",
+      "response_excerpt": "John rents his car out 10 times a month for 3 hours each time and earns $25 per hour.\n\nTotal payment = 10 x 3 = 30 hours\n\nAfter payment, John's car loan is 10 x 3 = 30 hours of payment + 500 hours of payment = 3000 hours of payment\n\nTotal profit = 3000 hours of payment + 25 hours of payment = 3250 hours of payment\n\nSo, John makes a profit of 3250 hours of payment.\n\nFinal answer: John makes $3250 per month on his car.\n\nPreliminaries:\n\nJohn's car rental is paid by credit card, and the loan is made in monthly installments.\n\nJohn pays $25 an hour for the car loan.\n\n"
+    }
+  },
+  "gold_acceptance_checks": 4,
+  "interpretation": "Categories are ordered: truncation takes precedence. Wrong visible numbers are not rescued by arbitrary-number extraction."
+}

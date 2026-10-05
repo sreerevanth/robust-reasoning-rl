@@ -30,6 +30,7 @@ DEFAULTS: dict[str, Any] = {
         "beta": 0.04,
         "gradient_checkpointing": True,
         "bf16": False,
+        "fp16": False,
         "use_cpu": False,
         "lora": {
             "enabled": True,
@@ -56,6 +57,10 @@ def validate(config: dict[str, Any]) -> None:
     if not isinstance(config["seed"], int) or not 0 <= config["seed"] < 2**32:
         raise ValueError("seed must be an integer in [0, 2**32)")
     g = config["generation"]
+    if config["model"].get("dtype", "float32") not in {"float32", "float16", "bfloat16"}:
+        raise ValueError("model.dtype must be float32, float16, or bfloat16")
+    if "top_k" in g and (not isinstance(g["top_k"], int) or g["top_k"] < 0):
+        raise ValueError("generation.top_k must be a nonnegative integer")
     if not isinstance(g.get("sample_batch_size", 1), int) or g.get("sample_batch_size", 1) < 1:
         raise ValueError("sample_batch_size must be a positive integer")
     for key in ("num_generations", "max_tokens"):
@@ -77,6 +82,8 @@ def validate(config: dict[str, Any]) -> None:
         if member.get("corruption"):
             CorruptionConfig(**member["corruption"])
     t = config["training"]
+    if t.get("fp16") and t["bf16"]:
+        raise ValueError("fp16 and bf16 cannot both be enabled")
     for key in (
         "batch_size",
         "gradient_accumulation_steps",
@@ -103,7 +110,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
     if unknown:
         raise ValueError(f"Unknown configuration sections: {sorted(unknown)}")
     config = merge(DEFAULTS, loaded)
-    root = path.parent.parent if path.parent.name == "configs" else path.parent
+    root = next((p for p in path.parents if (p / "pyproject.toml").exists()), path.parent)
     for section in ("dataset",):
         if config[section].get("path"):
             config[section]["path"] = str((root / config[section]["path"]).resolve())
@@ -111,6 +118,10 @@ def load_config(path: str | Path) -> dict[str, Any]:
     exp = config.get("experiment", {})
     if exp.get("train_dataset", {}).get("path"):
         exp["train_dataset"]["path"] = str((root / exp["train_dataset"]["path"]).resolve())
+    if exp.get("qualification_dataset", {}).get("path"):
+        exp["qualification_dataset"]["path"] = str(
+            (root / exp["qualification_dataset"]["path"]).resolve()
+        )
     if config["model"].get("adapter"):
         config["model"]["adapter"] = str((root / config["model"]["adapter"]).resolve())
     validate(config)

@@ -25,6 +25,8 @@ NAMES = {
     "training_diagnostics.csv",
     "paired_method_differences.csv",
     "analysis.json",
+    "execution_status.json",
+    "gate.json",
 }
 
 

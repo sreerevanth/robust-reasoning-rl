@@ -62,6 +62,7 @@ class HFGenerator:
             model_config["name"],
             revision=model_config.get("revision"),
             trust_remote_code=False,
+            **({"dtype": getattr(torch, model_config["dtype"])} if "dtype" in model_config else {}),
         )
         if model_config.get("adapter"):
             from peft import PeftModel
@@ -93,6 +94,8 @@ class HFGenerator:
         }
         if options["do_sample"]:
             options.update(temperature=self.config["temperature"], top_p=self.config["top_p"])
+            if "top_k" in self.config:
+                options["top_k"] = self.config["top_k"]
         outputs = []
         self.last_generation_metadata = []
         # One call per sample keeps deterministic decoding compatible with count > 1.

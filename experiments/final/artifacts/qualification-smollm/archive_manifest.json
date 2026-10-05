@@ -1,0 +1,25 @@
+{
+  "source_root": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\qualification-smollm",
+  "files": [
+    {
+      "path": "evaluation.json",
+      "bytes": 57341,
+      "sha256": "a22a86a28c9a17fb21a5279bf399891c23232afa204863d8918b6173bb8be27b"
+    },
+    {
+      "path": "generations.jsonl",
+      "bytes": 44364,
+      "sha256": "25b69d965c15ab91af9e6bc3950b3fe086608ce6630334e920982748d7de0281"
+    },
+    {
+      "path": "parser-audit/evaluation.json",
+      "bytes": 57793,
+      "sha256": "e52ff74b314709268f117f205ecd76289fc368c06f4700b875862068b0fe0916"
+    },
+    {
+      "path": "parser-audit/generations.jsonl",
+      "bytes": 44755,
+      "sha256": "22d15f839505525bdffbf87ad73d46c1d6f51686f9bf4151529b545aa11af6c5"
+    }
+  ]
+}

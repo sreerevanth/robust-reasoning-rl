@@ -1,0 +1,1078 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-05T05:58:15.856020+00:00",
+    "git_commit": "290fdffb39008202556cb00d7b274be9a322f5df",
+    "git_dirty": true,
+    "python": "3.11.9",
+    "packages": {
+      "numpy": "2.4.6",
+      "torch": "2.14.1",
+      "transformers": "4.57.6",
+      "trl": "0.26.2",
+      "peft": "0.18.1",
+      "datasets": "4.8.5",
+      "accelerate": "1.15.0"
+    },
+    "config": {
+      "seed": 42,
+      "output_dir": "results\\qualification-smollm\\parser-audit",
+      "dataset": {
+        "source": "local",
+        "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_phase2_validation.jsonl",
+        "limit": 16
+      },
+      "model": {
+        "backend": "huggingface",
+        "name": "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+        "prompt_format": "chat",
+        "device": "cpu",
+        "cpu_threads": 4
+      },
+      "generation": {
+        "num_generations": 1,
+        "temperature": 0,
+        "top_p": 0.95,
+        "max_tokens": 512
+      },
+      "training_verifier": {
+        "strategy": "mean",
+        "members": [
+          {
+            "kind": "rule"
+          },
+          {
+            "kind": "rule"
+          },
+          {
+            "kind": "rule"
+          }
+        ]
+      },
+      "evaluation_verifier": {
+        "kind": "rule"
+      },
+      "reward": {
+        "strategy": "standard"
+      },
+      "evaluation": {
+        "k": [
+          1
+        ]
+      },
+      "training": {
+        "learning_rate": 5e-06,
+        "batch_size": 4,
+        "gradient_accumulation_steps": 1,
+        "max_steps": 100,
+        "save_steps": 50,
+        "logging_steps": 5,
+        "beta": 0.04,
+        "gradient_checkpointing": true,
+        "bf16": false,
+        "use_cpu": false,
+        "lora": {
+          "enabled": true,
+          "r": 8,
+          "alpha": 16,
+          "dropout": 0.05,
+          "target_modules": "all-linear"
+        }
+      }
+    },
+    "execution_kind": "model_evaluation",
+    "elapsed_seconds": 38.0470146999869,
+    "experiment_label": null
+  },
+  "metrics": {
+    "num_examples": 16,
+    "num_generations": 16,
+    "independent_accuracy": 0.0,
+    "independent_verifier_accuracy": 0.0,
+    "observed_reward": 0.0,
+    "reward_coverage": 1.0,
+    "paired_independent_accuracy": 0.0,
+    "reward_hacking_gap": 0.0,
+    "false_positive_reward_rate": 0.0,
+    "false_negative_rate": null,
+    "reward_correctness_correlation": null,
+    "verifier_disagreement": 0.0,
+    "confidence": 1.0,
+    "pass@1": 0.0,
+    "answer_consistency": null,
+    "answer_diversity": 1.0,
+    "extraction_failure_rate": 0.3125,
+    "mean_generated_tokens": 263.3125,
+    "truncation_rate": 0.1875
+  },
+  "records": [
+    {
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, we need to follow the steps of the dance move and calculate the total steps forward.\n\nStep 1: Take 5 steps back\nStep 2: Take 10 steps forward\nStep 3: Take 2 steps back\nStep 4: Double that amount forward\n\nTotal steps forward = 5 + 10 + 2 = 15 steps forward\n\nFinal answer: 15 steps forward\n\nFinal answer: 15",
+      "reasoning": "To solve this problem, we need to follow the steps of the dance move and calculate the total steps forward.\n\nStep 1: Take 5 steps back\nStep 2: Take 10 steps forward\nStep 3: Take 2 steps back\nStep 4: Double that amount forward\n\nTotal steps forward = 5 + 10 + 2 = 15 steps forward\n\nFinal answer: 15 steps forward",
+      "final_answer": "15",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 103,
+        "prompt_tokens": 105,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-19c4a0a233d9abcb",
+      "response": "Ms. Watson has 42 students.\n\nFinal answer: 42.",
+      "reasoning": "Ms. Watson has 42 students.",
+      "final_answer": "42",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "There are 14 kindergartners and 24 first graders and some second graders in Ms. Watson's class. Overall Ms. Watson has 42 students. How many second graders are in Ms. Watson\u2019s class?",
+        "reference": "4",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 19,
+        "prompt_tokens": 100,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-a22eeeb1e7375c0a",
+      "response": "To solve this problem, we need to use the property that the product of two numbers is equal to the sum of their squares. In this case, we have two numbers, 51 and 3, and we want to find their product and sum.\n\nLet's denote the number as x. We know that the product of 51 and 3 is 156, and the sum of 51 and 3 is 156. We can write the equation as x^2 + 51x + 156 = 156.\n\nNow, we can solve for x by adding 156 to both sides of the equation: x^2 + 51x + 156 + 156 = 156 + 156. This simplifies to 225 = 156, and then 225 = 156 + 156.\n\nSubtracting 156 from both sides gives us 225 - 156 = 156, which is the same as 225 - 156 = 156.\n\nFinally, dividing both sides by 156 gives us x = 156 / 156 = 1.\n\nSo, the number that ends with 1 is 1.",
+      "reasoning": "To solve this problem, we need to use the property that the product of two numbers is equal to the sum of their squares. In this case, we have two numbers, 51 and 3, and we want to find their product and sum.\n\nLet's denote the number as x. We know that the product of 51 and 3 is 156, and the sum of 51 and 3 is 156. We can write the equation as x^2 + 51x + 156 = 156.\n\nNow, we can solve for x by adding 156 to both sides of the equation: x^2 + 51x + 156 + 156 = 156 + 156. This simplifies to 225 = 156, and then 225 = 156 + 156.\n\nSubtracting 156 from both sides gives us 225 - 156 = 156, which is the same as 225 - 156 = 156.\n\nFinally, dividing both sides by 156 gives us x = 156 / 156 = 1.\n\nSo, the number that ends with 1 is 1.",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Armand is playing a guessing game with his dad where he has to guess a number his dad is thinking of. His dad tells him that the number, when multiplied by 3, is three less than twice 51. What is the number?",
+        "reference": "33",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 296,
+        "prompt_tokens": 102,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-ec6445571a528221",
+      "response": "To solve this problem, we need to calculate the total number of sit-ups performed by Barney, Carrie, Jerrie, and the combined number of sit-ups performed by all three.\n\nBarney can perform 45 sit-ups in one minute.\nCarrie can do twice as many sit-ups per minute as Barney can.\nJerrie can do 5 more sit-ups per minute than Carrie can do.\n\nWe know that Barney can perform 45 sit-ups in one minute.\nCarrie can do 45 sit-ups in two minutes.\nJerrie can do 5 more sit-ups per minute than Carrie can do.\n\nWe can set up the equation as follows:\n\nBarney * 45 sit-ups in one minute = Carrie * 45 sit-ups in two minutes = Jerry * 5 more sit-ups per minute = 5 * 5 = 25 sit-ups\n\nNow, we can solve for the combined number of sit-ups:\n\nBarney * 45 sit-ups in one minute = Carrie * 45 sit-ups in two minutes = Jerry * 5 more sit-ups per minute = 25 * 5 = 125 sit-ups\n\nSo, the combined total number of sit-ups performed by Barney, Carrie, Jerrie, and the combined number of sit-ups performed by all three is 125.",
+      "reasoning": "To solve this problem, we need to calculate the total number of sit-ups performed by Barney, Carrie, Jerrie, and the combined number of sit-ups performed by all three.\n\nBarney can perform 45 sit-ups in one minute.\nCarrie can do twice as many sit-ups per minute as Barney can.\nJerrie can do 5 more sit-ups per minute than Carrie can do.\n\nWe know that Barney can perform 45 sit-ups in one minute.\nCarrie can do 45 sit-ups in two minutes.\nJerrie can do 5 more sit-ups per minute than Carrie can do.\n\nWe can set up the equation as follows:\n\nBarney * 45 sit-ups in one minute = Carrie * 45 sit-ups in two minutes = Jerry * 5 more sit-ups per minute = 5 * 5 = 25 sit-ups\n\nNow, we can solve for the combined number of sit-ups:\n\nBarney * 45 sit-ups in one minute = Carrie * 45 sit-ups in two minutes = Jerry * 5 more sit-ups per minute = 25 * 5 = 125 sit-ups\n\nSo, the combined total number of sit-ups performed by Barney, Carrie, Jerrie, and the combined number of sit-ups performed by all three is 125.",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Barney can perform 45 sit-ups in one minute. Carrie can do twice as many sit-ups per minute as Barney can.  And Jerrie can do 5 more sit-ups per minute than Carrie can do.  If Barney does sit-ups for 1 minute, and Carrie does sit-ups for two minutes, and Jerrie does sit-ups for three minutes, what would be the combined total number of sit-ups performed?",
+        "reference": "510",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 319,
+        "prompt_tokens": 150,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-ee5f7d6f2684e1bb",
+      "response": "To solve this problem, we need to calculate the pressure exerted by each leg in pounds per square inch (PSI) and then multiply them together.\n\nThe first leg has a cross-sectional area of .5 square inches, which is equal to 0.05 square inches per square inch.\n\nThe second leg has a cross-sectional area of .5 square inches, which is equal to 0.05 square inches per square inch.\n\nNow, we multiply the cross-sectional areas of the legs together:\n\n(0.05 x 0.05) = 0.00025\n\nSo, each leg of the giant spider weighs 0.00025 ounces per square inch.\n\nTo find the pressure exerted by each leg, we multiply the weight of the leg by the pressure per square inch:\n\n(0.00025 x 2.5) = 0.0000025 pounds per square inch\n\nFinally, we add the pressure exerted by each leg to find the total pressure exerted by the giant spider:\n\nTotal pressure = 0.0000025 + 0.0000025 = 0.00025 pounds per square inch\n\nFinal answer: 0.0025 pounds per square inch.",
+      "reasoning": "To solve this problem, we need to calculate the pressure exerted by each leg in pounds per square inch (PSI) and then multiply them together.\n\nThe first leg has a cross-sectional area of .5 square inches, which is equal to 0.05 square inches per square inch.\n\nThe second leg has a cross-sectional area of .5 square inches, which is equal to 0.05 square inches per square inch.\n\nNow, we multiply the cross-sectional areas of the legs together:\n\n(0.05 x 0.05) = 0.00025\n\nSo, each leg of the giant spider weighs 0.00025 ounces per square inch.\n\nTo find the pressure exerted by each leg, we multiply the weight of the leg by the pressure per square inch:\n\n(0.00025 x 2.5) = 0.0000025 pounds per square inch\n\nFinally, we add the pressure exerted by each leg to find the total pressure exerted by the giant spider:\n\nTotal pressure = 0.0000025 + 0.0000025 = 0.00025 pounds per square inch",
+      "final_answer": "0.0025",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "0.0025 pounds per square inch",
+            "kind": "exact"
+          }
+        },
+        "question": "A giant spider is discovered.  It weighs 2.5 times the previous largest spider, which weighed 6.4 ounces.  Each of its legs has a cross-sectional area of .5 square inches.  How much pressure in ounces per square inch does each leg undergo?",
+        "reference": "4",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 293,
+        "prompt_tokens": 109,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-64f2c6eaf9bbbda5",
+      "response": "Last week, Mr. Sanchez bought 6 feet of rope for their class activity.\nMr. Sanchez bought 6 feet of rope for 6 feet of rope.\nThere are 12 inches in a foot, so Mr. Sanchez bought 6 feet * 12 inches = 72 inches of ribbon.\n#### 72\nThe answer is: 72",
+      "reasoning": "Last week, Mr. Sanchez bought 6 feet of rope for their class activity.\nMr. Sanchez bought 6 feet of rope for 6 feet of rope.\nThere are 12 inches in a foot, so Mr. Sanchez bought 6 feet * 12 inches = 72 inches of ribbon.\n#### 72",
+      "final_answer": "72",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Last week, Mr. Sanchez bought 6 feet of rope for their class activity. He found that he lacks rope for the activity so this week, he bought 4 feet less than last week. Since there are 12 inches in a foot, how many inches of ribbon did Mr. Sanchez buy in all?",
+        "reference": "96",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 83,
+        "prompt_tokens": 117,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-10c0187b881fb380",
+      "response": "John bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15",
+      "reasoning": "John bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15 eBook readers less than Anna did.\nJohn bought 15",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "John and Anna bought some eBook readers. John bought 15 eBook readers less than Anna did. Unfortunately, John lost 3 eBook readers. If Anna bought 50 eBook readers, how many eBook readers do they have altogether?",
+        "reference": "82",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 512,
+        "prompt_tokens": 98,
+        "finish_reason": "length",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-94f4730c8837c673",
+      "response": "To solve this problem, we need to calculate the total number of llamas Jill has now.\n\nFirst, we need to find out how many llamas Jill has already bred. We know that 1 calf was born, and 5 of them got pregnant with twins. So, Jill has 1 calf + 5 twins = 6 llamas.\n\nNext, we need to find out how many llamas Jill sold at the market. We know that 8 of the llamas got pregnant with 1 calf, and 1 of them got pregnant with twins. So, Jill sold 8 llamas * 1 calf = 8 llamas.\n\nNow, we need to find out how many llamas Jill has now. We know that 6 llamas got pregnant with 1 calf, and 1 of them got pregnant with twins. So, Jill has 6 llamas * 1 calf = 6 llamas.\n\nFinally, we need to find out how many llamas Jill sold at the market. We know that 1/3 of the llamas Jill sold at the market were llamas. So, Jill sold 1/3 * 6 llamas = 6 llamas.\n\nTherefore, Jill has 6 llamas now.\n\nFinal answer: 6.",
+      "reasoning": "To solve this problem, we need to calculate the total number of llamas Jill has now.\n\nFirst, we need to find out how many llamas Jill has already bred. We know that 1 calf was born, and 5 of them got pregnant with twins. So, Jill has 1 calf + 5 twins = 6 llamas.\n\nNext, we need to find out how many llamas Jill sold at the market. We know that 8 of the llamas got pregnant with 1 calf, and 1 of them got pregnant with twins. So, Jill sold 8 llamas * 1 calf = 8 llamas.\n\nNow, we need to find out how many llamas Jill has now. We know that 6 llamas got pregnant with 1 calf, and 1 of them got pregnant with twins. So, Jill has 6 llamas * 1 calf = 6 llamas.\n\nFinally, we need to find out how many llamas Jill sold at the market. We know that 1/3 of the llamas Jill sold at the market were llamas. So, Jill sold 1/3 * 6 llamas = 6 llamas.\n\nTherefore, Jill has 6 llamas now.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Jill runs a business breeding llamas. Nine of her llamas got pregnant with 1 calf, and 5 of them got pregnant with twins. After they give birth, Jill traded 8 of the calves for 2 new adult llamas. Then she sells 1/3 of her herd at the market. How many total llamas  (calves and adults) does Jill have now?",
+        "reference": "18",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 291,
+        "prompt_tokens": 136,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-8e4796d4884bc3f4",
+      "response": "To solve this problem, we need to consider the total cost of the orders and the amount of each type of sushi.\n\nThe total cost of the orders is the sum of the costs of the jellyfish and eel: $200.\n\nThe combined cost of the orders is the sum of the costs of the jellyfish and eel: $200.\n\nWe can set up the equation as follows:\n\n$200 + $200 = $400\n\nNow, we can solve for the cost of the eel:\n\n$400 = $200 * 2\n\n$400 = 400 * 2\n\n$400 = 800\n\n$400 = 800\n\n$400 = 80\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\nFinal answer: $8\n\nFinal answer: $8",
+      "reasoning": "To solve this problem, we need to consider the total cost of the orders and the amount of each type of sushi.\n\nThe total cost of the orders is the sum of the costs of the jellyfish and eel: $200.\n\nThe combined cost of the orders is the sum of the costs of the jellyfish and eel: $200.\n\nWe can set up the equation as follows:\n\n$200 + $200 = $400\n\nNow, we can solve for the cost of the eel:\n\n$400 = $200 * 2\n\n$400 = 400 * 2\n\n$400 = 800\n\n$400 = 800\n\n$400 = 80\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\n$40 = 8\n\nFinal answer: $8",
+      "final_answer": "8",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "An avant-garde sushi house sells jellyfish for a certain amount and eel for nine times that amount. If the combined cost of one order each kind of sushi is $200, how much does the eel cost?",
+        "reference": "180",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 366,
+        "prompt_tokens": 95,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-8a6ea627cb15ed82",
+      "response": "To solve this problem, we need to calculate the total number of televisions sold for three years and then find the number of televisions that will be sold on Black Friday.\n\nFirst, let's find the total number of televisions sold for three years:\n\nTotal televisions sold = 327 televisions * 3 years = 9750 televisions\n\nNow, we need to find the number of televisions that will be sold on Black Friday:\n\nNumber of televisions sold on Black Friday = Total televisions sold * Number of televisions sold per year\n= 9750 televisions * 50 televisions per year\n= 49,500 televisions\n\nSo, the electronics store will sell 49,500 televisions on Black Friday three years from now.\n\nFinal answer: 49,500 televisions.",
+      "reasoning": "To solve this problem, we need to calculate the total number of televisions sold for three years and then find the number of televisions that will be sold on Black Friday.\n\nFirst, let's find the total number of televisions sold for three years:\n\nTotal televisions sold = 327 televisions * 3 years = 9750 televisions\n\nNow, we need to find the number of televisions that will be sold on Black Friday:\n\nNumber of televisions sold on Black Friday = Total televisions sold * Number of televisions sold per year\n= 9750 televisions * 50 televisions per year\n= 49,500 televisions\n\nSo, the electronics store will sell 49,500 televisions on Black Friday three years from now.",
+      "final_answer": "49,500",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "49,500 televisions",
+            "kind": "exact"
+          }
+        },
+        "question": "On Black Friday a popular electronics store sells 327 televisions. This is 50 more than they sold last Black Friday. If this sales trend continues and they sell 50 more televisions each year for three years, how many televisions will they sell on Black Friday three years from now?",
+        "reference": "477",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 177,
+        "prompt_tokens": 111,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-a7352b51ce3db4c0",
+      "response": "To solve this problem, we need to calculate the total amount of food given to each fish.\n\nGoldfish: 2 teaspoons\nSwordtails: 2 teaspoons\nGuppies: 2 teaspoons\n\nGoldfish = Swordtails * 2 teaspoons\nSwordtails = Guppies * 2 teaspoons\nGuppies = 2 teaspoons\n\nGoldfish + Swordtails + Guppies = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer:",
+      "reasoning": "To solve this problem, we need to calculate the total amount of food given to each fish.\n\nGoldfish: 2 teaspoons\nSwordtails: 2 teaspoons\nGuppies: 2 teaspoons\n\nGoldfish = Swordtails * 2 teaspoons\nSwordtails = Guppies * 2 teaspoons\nGuppies = 2 teaspoons\n\nGoldfish + Swordtails + Guppies = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons\n\nFinal answer: Goldfish = 5 teaspoons",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Layla is feeding her pet fish. She has two Goldfish which each get one teaspoon of fish food. Her 3 Swordtails each get 2 teaspoons of food. Her 8 Guppies each eat half a teaspoon of food. How much food does she have to give to her fish in total?",
+        "reference": "12",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 512,
+        "prompt_tokens": 114,
+        "finish_reason": "length",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-0a492ea5208f31fc",
+      "response": "To solve this problem, we need to consider the total cost of the pizzas and the distance between the pizzeria and the park.\n\nFirst, let's calculate the total cost of the pizzas:\n\n- 12 dollars for the first pizza (1200 dollars)\n- 2 extra dollars for the second pizza (2000 dollars)\n- 2 extra dollars for the third pizza (2200 dollars)\n\nNow, let's consider the distance between the pizzeria and the park:\n\n- 100 meters away from the pizzeria: 1000 meters\n- 2000 meters away from the pizzeria: 20000 meters\n\nTotal cost: 12000 + 20000 = 32000 dollars\n\nNow, let's calculate the total cost of the pizzas:\n\n- 3 pizzas: 32000 dollars\n- 2 pizzas: 32000 dollars\n- 1 pizza: 32000 dollars\n\nTotal cost: 32000 + 32000 + 1 = 64000 dollars\n\nNow, let's calculate the total cost of the pizzas:\n\n- 12 dollars for the first pizza: 12000 dollars\n- 2 extra dollars for the second pizza: 22000 dollars\n- 2 extra dollars for the third pizza: 22000 dollars\n\nTotal cost: 12000 + 22000 + 22000 = 44000 dollars\n\nNow, let's calculate the total cost of the pizzas:\n\n- 3 pizzas: 32000 dollars\n- 2 pizzas: 32000 dollars\n- 1 pizza: 32000 dollars\n\nTotal cost: 32000 + 32000 + 1 = 64000 dollars\n\nFinally, let's calculate the total cost of the pizzas:\n\n- 12 dollars for the first pizza: 12000 dollars\n- 2 extra dollars for",
+      "reasoning": "To solve this problem, we need to consider the total cost of the pizzas and the distance between the pizzeria and the park.\n\nFirst, let's calculate the total cost of the pizzas:\n\n- 12 dollars for the first pizza (1200 dollars)\n- 2 extra dollars for the second pizza (2000 dollars)\n- 2 extra dollars for the third pizza (2200 dollars)\n\nNow, let's consider the distance between the pizzeria and the park:\n\n- 100 meters away from the pizzeria: 1000 meters\n- 2000 meters away from the pizzeria: 20000 meters\n\nTotal cost: 12000 + 20000 = 32000 dollars\n\nNow, let's calculate the total cost of the pizzas:\n\n- 3 pizzas: 32000 dollars\n- 2 pizzas: 32000 dollars\n- 1 pizza: 32000 dollars\n\nTotal cost: 32000 + 32000 + 1 = 64000 dollars\n\nNow, let's calculate the total cost of the pizzas:\n\n- 12 dollars for the first pizza: 12000 dollars\n- 2 extra dollars for the second pizza: 22000 dollars\n- 2 extra dollars for the third pizza: 22000 dollars\n\nTotal cost: 12000 + 22000 + 22000 = 44000 dollars\n\nNow, let's calculate the total cost of the pizzas:\n\n- 3 pizzas: 32000 dollars\n- 2 pizzas: 32000 dollars\n- 1 pizza: 32000 dollars\n\nTotal cost: 32000 + 32000 + 1 = 64000 dollars\n\nFinally, let's calculate the total cost of the pizzas:\n\n- 12 dollars for the first pizza: 12000 dollars\n- 2 extra dollars for",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "answer": null,
+              "kind": "exact"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Jimmy is a pizza delivery man. Each pizza costs 12 dollars and the delivery charge is 2 extra dollars if the area is farther than 1 km from the pizzeria. Jimmy delivers 3 pizzas in the park, which is located 100 meters away from the pizzeria. Also, he delivers 2 pizzas in a building 2 km away from the pizzeria. How much money did Jimmy get paid for the pizzas?",
+        "reference": "64",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 512,
+        "prompt_tokens": 153,
+        "finish_reason": "length",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-8e8fee637548eb90",
+      "response": "To solve this problem, we need to consider the total time Mark needs to bake the bread and the time he spends kneading it and baking it.\n\nMark needs to let the bread rise for 120 minutes. This means he needs to let the bread rise for 120 minutes * 60 minutes per hour = 720 minutes.\n\nMark also needs to spend 10 minutes kneading the bread and 30 minutes baking it. This means he spends 10 minutes * 30 minutes = 30 minutes.\n\nNow, we can calculate the total time Mark needs to bake the bread: 720 minutes (letting the bread rise) + 30 minutes (kneading and baking) = 820 minutes.\n\nTherefore, Mark needs to spend 820 minutes to finish making the bread.\n\nFinal answer: Mark needs to spend 820 minutes to finish making the bread.",
+      "reasoning": "To solve this problem, we need to consider the total time Mark needs to bake the bread and the time he spends kneading it and baking it.\n\nMark needs to let the bread rise for 120 minutes. This means he needs to let the bread rise for 120 minutes * 60 minutes per hour = 720 minutes.\n\nMark also needs to spend 10 minutes kneading the bread and 30 minutes baking it. This means he spends 10 minutes * 30 minutes = 30 minutes.\n\nNow, we can calculate the total time Mark needs to bake the bread: 720 minutes (letting the bread rise) + 30 minutes (kneading and baking) = 820 minutes.\n\nTherefore, Mark needs to spend 820 minutes to finish making the bread.",
+      "final_answer": "820",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "Mark needs to spend 820 minutes to finish making the bread",
+            "kind": "exact"
+          }
+        },
+        "question": "Mark is baking bread. He has to let it rise for 120 minutes twice. He also needs to spend 10 minutes kneading it and 30 minutes baking it. How many minutes does it take Mark to finish making the bread?",
+        "reference": "280",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 205,
+        "prompt_tokens": 103,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-ef5f2140fcc3a082",
+      "response": "To solve this problem, we need to calculate the total amount of money Erick collected from selling the fruits at the new prices.\n\nFirst, let's calculate the total amount of money Erick collected from selling the fruits at the original prices:\n\n- 80 lemons: $8 * 10 = $80\n- 140 grapes: $140 * 2 = $280\n\nNow, let's calculate the total amount of money Erick collected from selling the fruits at the new prices:\n\n- 80 lemons: $80 * 10 = $800\n- 140 grapes: $140 * 2 = $280\n\nTotal amount of money Erick collected from selling the fruits at the new prices: $800 + $280 = $1080\n\nFinal answer: Erick collected $1080 from selling the fruits at the new prices.\n\nSo, the answer is: $1080",
+      "reasoning": "To solve this problem, we need to calculate the total amount of money Erick collected from selling the fruits at the new prices.\n\nFirst, let's calculate the total amount of money Erick collected from selling the fruits at the original prices:\n\n- 80 lemons: $8 * 10 = $80\n- 140 grapes: $140 * 2 = $280\n\nNow, let's calculate the total amount of money Erick collected from selling the fruits at the new prices:\n\n- 80 lemons: $80 * 10 = $800\n- 140 grapes: $140 * 2 = $280\n\nTotal amount of money Erick collected from selling the fruits at the new prices: $800 + $280 = $1080\n\nFinal answer: Erick collected $1080 from selling the fruits at the new prices.\n\nSo,",
+      "final_answer": "1080",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "When Erick went to the market to sell his fruits, he realized that the price of lemons had risen by $4 for each lemon. The price of grapes had also increased by half the price that the price of lemon increased by per grape. If he had planned to sell the lemons at $8 and the grapes at $7, and he had 80 lemons and 140 grapes in his basket, how much money did he collect from selling the fruits at the new prices?",
+        "reference": "2220",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 221,
+        "prompt_tokens": 150,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-ed295d15d6d5b0ef",
+      "response": "Marcy got 3 more than Barry, so Marcy got 3 + 3 = 6 votes.\nJoey got 8 votes, so Joey got 8 - 6 = 2 votes.\nTherefore, Marcy got 6 + 2 = 8 votes.\nFinal answer: 8",
+      "reasoning": "Marcy got 3 more than Barry, so Marcy got 3 + 3 = 6 votes.\nJoey got 8 votes, so Joey got 8 - 6 = 2 votes.\nTherefore, Marcy got 6 + 2 = 8 votes.",
+      "final_answer": "8",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Marcy's grade is electing their class president. Marcy got three times as many votes as Barry, who got twice as many as 3 more than the number of votes Joey got. If Joey got 8 votes, how many votes did Marcy get?",
+        "reference": "66",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 68,
+        "prompt_tokens": 107,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    {
+      "example_id": "gsm8k-validation-c980b7c245475f89",
+      "response": "To solve this problem, we need to determine the total length of the three squares and then find the height of the flag.\n\nFirst, let's find the total length of the three squares:\n\n- The first square is 8 feet by 5 feet, so its length is 8 * 5 = 40 feet.\n- The second square is 10 feet by 7 feet, so its length is 10 * 7 = 70 feet.\n- The third square is 5 feet by 5 feet, so its length is 5 * 5 = 25 feet.\n\nNow, let's find the total length of the three squares:\n\n- The first square is 40 feet.\n- The second square is 70 feet.\n- The third square is 25 feet.\n\nSince the total length of the three squares is 40 + 70 + 25 = 145 feet, the flag will be 145 feet long.\n\nFinal answer: The flag will be 145 feet long.",
+      "reasoning": "To solve this problem, we need to determine the total length of the three squares and then find the height of the flag.\n\nFirst, let's find the total length of the three squares:\n\n- The first square is 8 feet by 5 feet, so its length is 8 * 5 = 40 feet.\n- The second square is 10 feet by 7 feet, so its length is 10 * 7 = 70 feet.\n- The third square is 5 feet by 5 feet, so its length is 5 * 5 = 25 feet.\n\nNow, let's find the total length of the three squares:\n\n- The first square is 40 feet.\n- The second square is 70 feet.\n- The third square is 25 feet.\n\nSince the total length of the three squares is 40 + 70 + 25 = 145 feet, the flag will be 145 feet long.",
+      "final_answer": "145",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "kind": "rational"
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "The flag will be 145 feet long",
+            "kind": "exact"
+          }
+        },
+        "question": "Bobby has three squares of fabric that he will turn into a flag. The first square is 8 feet by 5 feet. The second one is 10 feet by 7 feet. The third one is 5 feet by 5 feet. If he wants his flag to be 15 feet long, how tall will it be?",
+        "reference": "9",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 236,
+        "prompt_tokens": 121,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    }
+  ]
+}

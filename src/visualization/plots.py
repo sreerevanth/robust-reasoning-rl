@@ -50,8 +50,12 @@ def plot_results(results: str | Path) -> list[Path]:
         ("independent_accuracy", "Independent correctness", "robustness"),
         ("reward_hacking_gap", "Reward − paired correctness", "reward_hacking"),
         ("observed_reward", "Observed reward", "observed_reward"),
+        ("verifier_disagreement", "Verifier disagreement", "disagreement_corruption"),
+        ("extraction_failure_rate", "Extraction failure rate", "extraction_failure"),
     ]
     for metric, label, name in panels:
+        if metric not in frame:
+            continue
         fig, ax = plt.subplots(figsize=(7, 4.5), layout="constrained")
         for method, subset in frame.groupby("method"):
             grouped = subset.groupby("corruption_level")[metric].agg(["mean", "std"])

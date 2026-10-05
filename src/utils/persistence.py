@@ -6,6 +6,7 @@ import os
 import platform
 import subprocess
 import tempfile
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -18,7 +19,15 @@ def write_json(path: Path, value: Any) -> None:
         with os.fdopen(fd, "w", encoding="utf-8") as handle:
             json.dump(value, handle, indent=2, allow_nan=False)
             handle.write("\n")
-        os.replace(temporary, path)
+        # Windows sync/antivirus can briefly lock an otherwise writable destination.
+        for attempt in range(5):
+            try:
+                os.replace(temporary, path)
+                break
+            except PermissionError:
+                if attempt == 4:
+                    raise
+                time.sleep(0.05 * (attempt + 1))
     finally:
         if os.path.exists(temporary):
             os.unlink(temporary)

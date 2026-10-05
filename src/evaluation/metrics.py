@@ -89,5 +89,12 @@ def compute_metrics(records: list[Generation], ks: list[int]) -> dict[str, Any]:
             pair_consistency.append(float(np.mean(pairs)))
     result["answer_consistency"] = float(np.mean(pair_consistency)) if pair_consistency else None
     result["answer_diversity"] = float(np.mean(diversity))
-    result["extraction_failure_rate"] = float(np.mean([r.final_answer is None for r in records]))
+    result["extraction_failure_rate"] = float(
+        np.mean(
+            [
+                not r.metadata.get("answer_extraction_valid", r.final_answer is not None)
+                for r in records
+            ]
+        )
+    )
     return result

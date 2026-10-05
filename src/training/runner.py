@@ -1,5 +1,6 @@
 """Baseline and robust training differ only in reward shaping and output location."""
 
+import hashlib
 from pathlib import Path
 from typing import Any
 
@@ -26,14 +27,13 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
         raise ValueError("GRPO requires >=2 generations dividing effective per-device batch size")
     if config["generation"]["temperature"] <= 0:
         raise ValueError("GRPO training requires positive sampling temperature")
+    import torch
     from datasets import Dataset
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from trl import GRPOConfig, GRPOTrainer
 
     seed_everything(config["seed"])
     if config["model"].get("cpu_threads"):
-        import torch
-
         torch.set_num_threads(config["model"]["cpu_threads"])
     examples = load_dataset(config["dataset"])
     dataset = Dataset.from_list(
@@ -60,6 +60,7 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
         model_cfg["name"],
         revision=model_cfg.get("revision"),
         trust_remote_code=False,
+        **({"dtype": getattr(torch, model_cfg["dtype"])} if "dtype" in model_cfg else {}),
     )
     peft = None
     if t["lora"]["enabled"]:
@@ -94,12 +95,14 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
         max_completion_length=config["generation"]["max_tokens"],
         temperature=config["generation"]["temperature"],
         top_p=config["generation"]["top_p"],
+        top_k=config["generation"].get("top_k"),
         beta=t["beta"],
         seed=config["seed"],
         data_seed=config["seed"],
         gradient_checkpointing=t["gradient_checkpointing"],
         dataloader_pin_memory=not t["use_cpu"],
         bf16=t["bf16"],
+        fp16=t.get("fp16", False),
         use_cpu=t["use_cpu"],
         report_to="none",
         remove_unused_columns=False,
@@ -116,8 +119,21 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
         processing_class=tokenizer,
         peft_config=peft,
     )
+
+    def parameter_hashes() -> dict[str, str]:
+        return {
+            name: hashlib.sha256(
+                parameter.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes()
+            ).hexdigest()
+            for name, parameter in trainer.model.named_parameters()
+            if parameter.requires_grad
+        }
+
+    initial_hashes = parameter_hashes()
+    trainable_count = sum(p.numel() for p in trainer.model.parameters() if p.requires_grad)
     try:
         result = trainer.train(resume_from_checkpoint=resume)
+        final_hashes = parameter_hashes()
         trainer.save_model(str(output / "final"))
         tokenizer.save_pretrained(str(output / "final"))
         payload = {
@@ -127,6 +143,16 @@ def train(config: dict[str, Any], resume: str | None = None) -> dict[str, Any]:
             "reward_totals": reward.totals,
             "trainer_log_history": trainer.state.log_history,
             "checkpoint": str(output / "final"),
+            "policy_movement": {
+                "trainable_parameter_count": trainable_count,
+                "optimizer_steps": trainer.state.global_step,
+                "initial_parameter_hashes": initial_hashes,
+                "final_parameter_hashes": final_hashes,
+                "changed_tensors": sum(
+                    initial_hashes[name] != value for name, value in final_hashes.items()
+                ),
+                "resume_checkpoint": resume,
+            },
         }
         if trainer.is_world_process_zero():
             write_json(output / "training.json", payload)

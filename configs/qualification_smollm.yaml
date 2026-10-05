@@ -1,0 +1,17 @@
+# Fixed validation qualification, not final test evidence.
+seed: 42
+output_dir: results/qualification-smollm
+dataset: {source: local, path: data/gsm8k_phase2_validation.jsonl, limit: 16}
+model:
+  backend: huggingface
+  name: HuggingFaceTB/SmolLM2-135M-Instruct
+  revision: 12fd25f77366fa6b3b4b768ec3050bf629380bac
+  prompt_format: chat
+  device: cpu
+  cpu_threads: 4
+generation: {num_generations: 1, temperature: 0, top_p: 0.95, max_tokens: 512}
+evaluation: {k: [1]}
+training_verifier:
+  strategy: mean
+  members: [{kind: rule}, {kind: rule}, {kind: rule}]
+evaluation_verifier: {kind: rule}

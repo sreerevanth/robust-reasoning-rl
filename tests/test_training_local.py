@@ -65,6 +65,9 @@ def test_real_local_grpo(tmp_path, strategy):
     payload = train(cfg)
     assert payload["metadata"]["execution_kind"] == "training_complete"
     assert payload["reward_statistics"]["samples"] >= 2
+    assert payload["policy_movement"]["trainable_parameter_count"] > 0
+    assert payload["policy_movement"]["optimizer_steps"] == 1
+    assert payload["policy_movement"]["initial_parameter_hashes"]
     assert (Path(payload["checkpoint"]) / "adapter_config.json").exists()
     assert (tmp_path / "training/training.json").exists()
     from src.models.generation import HFGenerator

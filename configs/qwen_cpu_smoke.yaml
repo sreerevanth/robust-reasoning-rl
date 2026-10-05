@@ -1,0 +1,38 @@
+# Resource-bounded pipeline check for the qualified model; not final test evidence.
+seed: 42
+output_dir: results/qwen-cpu-smoke
+dataset: {source: local, path: data/gsm8k_phase2_validation.jsonl, limit: 4}
+model:
+  backend: huggingface
+  name: Qwen/Qwen2.5-0.5B-Instruct
+  revision: 7ae557604adf67be50417f59c2c2f167def9a775
+  prompt_format: chat
+  device: cpu
+  cpu_threads: 4
+generation: {num_generations: 2, sample_batch_size: 1, temperature: 0.7, top_p: 0.95, top_k: 0, max_tokens: 128}
+evaluation: {k: [1, 2]}
+training:
+  use_cpu: true
+  max_steps: 1
+  batch_size: 2
+  gradient_accumulation_steps: 1
+  gradient_checkpointing: true
+  logging_steps: 1
+  save_steps: 1
+  beta: 0.04
+  lora: {enabled: true, r: 8, alpha: 16, dropout: 0.05, target_modules: all-linear}
+training_verifier:
+  strategy: mean
+  members: [{kind: rule}, {kind: rule}, {kind: rule}]
+evaluation_verifier: {kind: rule}
+experiment:
+  label: qwen_pretrained_cpu_smoke_one_update
+  mode: train
+  continue_on_error: true
+  reuse_base_generations: true
+  train_dataset: {source: local, path: data/gsm8k_final_train.jsonl, limit: 8}
+  seeds: [42]
+  levels: [0.2]
+  corruption: {kind: flip, confidence_scale: 1.0}
+  robust_reward: {strategy: combined, penalty: 0.2, moderate_threshold: 0.4,
+                  severe_threshold: 0.9, moderate_scale: 0.5, severe_scale: 0.0}

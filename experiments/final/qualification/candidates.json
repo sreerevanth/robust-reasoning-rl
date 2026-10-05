@@ -1,0 +1,32 @@
+[
+  {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "examples": 16,
+    "pass@1": 0.0,
+    "original_pass@1": 0.0,
+    "extraction_failure_rate": 0.3125,
+    "original_extraction_failure_rate": 0.3125,
+    "truncation_rate": 0.1875,
+    "seconds": 220.72569079999812,
+    "device": "cpu",
+    "max_tokens": 512,
+    "temperature": 0,
+    "qualification_gate_passed": false
+  },
+  {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "examples": 16,
+    "pass@1": 0.5,
+    "original_pass@1": 0.25,
+    "extraction_failure_rate": 0.3125,
+    "original_extraction_failure_rate": 0.3125,
+    "truncation_rate": 0.125,
+    "seconds": 811.5427251000074,
+    "device": "cpu",
+    "max_tokens": 512,
+    "temperature": 0,
+    "qualification_gate_passed": true
+  }
+]

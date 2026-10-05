@@ -10,7 +10,7 @@ from src.data.loading import load_dataset
 from src.data.schema import Generation
 from src.evaluation.metrics import compute_metrics
 from src.models.generation import Generator, build_generator
-from src.rewards.answers import extract_answer
+from src.rewards.answers import extract_answer, numeric_value
 from src.rewards.factory import build_ensemble, build_verifier
 from src.utils.config import validate
 from src.utils.logging import event
@@ -58,6 +58,11 @@ def evaluate(config: dict[str, Any], generator: Generator | None = None) -> dict
                         "question": example.question,
                         "reference": example.reference,
                         "sample_index": sample_index,
+                        "answer_extraction_valid": parsed.answer is not None
+                        and (
+                            numeric_value(example.reference) is None
+                            or numeric_value(parsed.answer) is not None
+                        ),
                         **(telemetry[sample_index] if telemetry else {}),
                     },
                 )

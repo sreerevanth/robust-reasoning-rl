@@ -1,0 +1,44 @@
+# Frozen after validation model qualification, before final held-out RL evaluation.
+# UNEXECUTED locally: CUDA is unavailable. Model-selection evidence is separate.
+seed: 42
+output_dir: results/final-study
+dataset: {source: local, path: data/gsm8k_final_test.jsonl, limit: 128}
+model:
+  backend: huggingface
+  name: Qwen/Qwen2.5-0.5B-Instruct
+  revision: 7ae557604adf67be50417f59c2c2f167def9a775
+  prompt_format: chat
+  device: cuda
+  dtype: float16
+generation: {num_generations: 8, sample_batch_size: 8, temperature: 0.7, top_p: 0.95, top_k: 0, max_tokens: 512}
+evaluation: {k: [1, 4, 8]}
+training:
+  use_cpu: false
+  fp16: true
+  bf16: false
+  learning_rate: 0.000005
+  batch_size: 8
+  gradient_accumulation_steps: 2
+  gradient_checkpointing: true
+  max_steps: 200
+  save_steps: 50
+  logging_steps: 5
+  beta: 0.04
+  lora: {enabled: true, r: 8, alpha: 16, dropout: 0.05, target_modules: all-linear}
+training_verifier:
+  strategy: mean
+  members: [{kind: rule}, {kind: rule}, {kind: rule}]
+evaluation_verifier: {kind: rule}
+experiment:
+  label: final_frozen_qwen_gsm8k_128_question_subset
+  mode: train
+  continue_on_error: true
+  reuse_base_generations: true
+  train_dataset: {source: local, path: data/gsm8k_final_train.jsonl, limit: 256}
+  qualification_dataset: {source: local, path: data/gsm8k_phase2_validation.jsonl, limit: 16}
+  qualification_min_pass1: 0.1
+  seeds: [42, 123, 456]
+  levels: [0, 0.1, 0.2, 0.4, 0.6]
+  corruption: {kind: flip, confidence_scale: 1.0}
+  robust_reward: {strategy: combined, penalty: 0.2, moderate_threshold: 0.4,
+                  severe_threshold: 0.9, moderate_scale: 0.5, severe_scale: 0.0}

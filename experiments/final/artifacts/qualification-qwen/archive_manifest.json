@@ -1,0 +1,25 @@
+{
+  "source_root": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\qualification-qwen",
+  "files": [
+    {
+      "path": "evaluation.json",
+      "bytes": 66058,
+      "sha256": "afd1206af91d2003f9b681ecd0417be25ae7b88c0f591da44e4057eb50ae6bfc"
+    },
+    {
+      "path": "generations.jsonl",
+      "bytes": 52975,
+      "sha256": "2f59272be5b7441fb22ec9474e6b2291326a8ff47dd0a24a056d53f8c6939d25"
+    },
+    {
+      "path": "parser-audit/evaluation.json",
+      "bytes": 66413,
+      "sha256": "8230409ece67be7c6bcd5acffdf21299914ea749d600edf95974497ed56c4cce"
+    },
+    {
+      "path": "parser-audit/generations.jsonl",
+      "bytes": 53360,
+      "sha256": "06842f3666f4a222477a56c7897958bda87b2e20c5544d88a0e1469c2ed2b7c7"
+    }
+  ]
+}

@@ -5,3 +5,4 @@
 *.toml text eol=lf
 *.jsonl text eol=lf
 experiments/phase2/artifacts/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+experiments/final/artifacts/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

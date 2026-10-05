@@ -135,6 +135,7 @@ def create_report(results: str | Path) -> dict[str, Any]:
             "independent_accuracy_mean",
             "independent_accuracy_std",
             "reward_hacking_gap_mean",
+            "reward_hacking_gap_std",
         ]
     ]
     text = (
