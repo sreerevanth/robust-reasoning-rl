@@ -9,13 +9,13 @@
   },
   "splits": {
     "train": {
-      "path": "data\\gsm8k_final_train.jsonl",
+      "path": "data/gsm8k_final_train.jsonl",
       "count": 256,
       "excluded_questions": 16,
       "sha256": "d0f71974b4d3edbe532354f50f80dc614b920596eb704594d61a250c78685b6e"
     },
     "test": {
-      "path": "data\\gsm8k_final_test.jsonl",
+      "path": "data/gsm8k_final_test.jsonl",
       "count": 128,
       "excluded_questions": 32,
       "sha256": "bb23ef9239f9f843ac51fa0e30be46bf38cb2549eb825aaeb97a8d9a63a01772"

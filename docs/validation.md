@@ -73,6 +73,9 @@ No weights, caches, virtual environments, credentials, or result ZIPs are intent
 The remote CI run for commit `290fdff` completed successfully:
 [verified Actions run](https://github.com/sreerevanth/robust-reasoning-rl/actions/runs/37266019236).
 This statement refers to that executed run, not a promise that a later commit has passed remotely.
+Remote core CI subsequently exposed Windows separators in the new final dataset manifest.
+The preparation script now writes portable POSIX paths, with a regression assertion; regeneration
+preserves the exact dataset bytes and hashes. This was a portability failure, not a result change.
 
 ```bash
 python scripts/check.py

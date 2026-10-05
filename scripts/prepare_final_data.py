@@ -61,7 +61,7 @@ def prepare() -> None:
             for row in rows:
                 handle.write(json.dumps(row) + "\n")
         manifest["splits"][split] = {
-            "path": str(target.relative_to(ROOT)),
+            "path": target.relative_to(ROOT).as_posix(),
             "count": limit,
             "excluded_questions": len(exclusions[split]),
             "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),

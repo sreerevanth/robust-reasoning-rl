@@ -71,6 +71,7 @@ def test_final_splits_hashes_and_qualification_separation():
     )
     pools = {}
     for split, item in manifest["splits"].items():
+        assert "\\" not in item["path"], "Manifest paths must be portable POSIX paths"
         path = root / item["path"]
         assert hashlib.sha256(path.read_bytes()).hexdigest() == item["sha256"]
         rows = [json.loads(line) for line in path.read_text().splitlines()]
