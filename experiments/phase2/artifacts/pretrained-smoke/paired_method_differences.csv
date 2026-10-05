@@ -1,0 +1,2 @@
+seed,corruption_level,robust_minus_baseline_independent_accuracy,robust_minus_baseline_pass@1,robust_minus_baseline_pass@4,robust_minus_baseline_observed_reward,robust_minus_baseline_reward_hacking_gap
+42,0.2,0.0,0.0,0.0,0.0,0.0

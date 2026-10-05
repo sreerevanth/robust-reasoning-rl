@@ -1,0 +1,649 @@
+{
+  "selection": "first eligible per method/category in sorted artifact order",
+  "counts": {
+    "base/answer_incorrect_reward_negative": 128,
+    "baseline/answer_incorrect_reward_negative": 129,
+    "robust/answer_incorrect_reward_negative": 127,
+    "base/answer_incorrect_false_positive": 16,
+    "base/high_disagreement": 61,
+    "baseline/answer_incorrect_false_positive": 15,
+    "baseline/high_disagreement": 62,
+    "robust/answer_incorrect_false_positive": 17,
+    "robust/high_disagreement": 62
+  },
+  "examples": {
+    "base/answer_incorrect_reward_negative": {
+      "source": "seed-123/level-0/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "baseline/answer_incorrect_reward_negative": {
+      "source": "seed-123/level-0/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "robust/answer_incorrect_reward_negative": {
+      "source": "seed-123/level-0/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "base/answer_incorrect_false_positive": {
+      "source": "seed-123/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    "base/high_disagreement": {
+      "source": "seed-123/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu",
+        "reused_base_generation": true
+      }
+    },
+    "baseline/answer_incorrect_false_positive": {
+      "source": "seed-123/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "baseline/high_disagreement": {
+      "source": "seed-123/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "robust/answer_incorrect_false_positive": {
+      "source": "seed-123/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "robust/high_disagreement": {
+      "source": "seed-123/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-029ef1d7713b4f7c",
+      "response": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.\nFinal answer: 6",
+      "reasoning": "Ram uses a lot of pens.\nHe discovered that he can save money by mixing the ink from five empty pens to make one full pen.\nHe uses this new pen to make new pens when the ink runs low.\nSo, he ends up with 5 empty pens + 1 full pen = 6 pens.\nSo, he gets to have 6 pens.",
+      "final_answer": "6",
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Ram uses a lot of pens. He discovered that he can save money by mixing the ink from five empty pens to make one full pen. If he buys 25 pens and then uses them to make new pens when the ink runs low, how many total pens does he get to have?",
+        "reference": "31",
+        "sample_index": 0,
+        "generated_tokens": 84,
+        "prompt_tokens": 110,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    }
+  },
+  "interpretation": "Answer correctness is not proof of reasoning validity; synthetic false positives are not proof of learned exploitation."
+}

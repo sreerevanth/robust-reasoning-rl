@@ -1,0 +1,93 @@
+{
+  "completed_conditions": 27,
+  "recorded_failures": [],
+  "uncompleted_planned_conditions": [],
+  "all_independent_correctness_zero": true,
+  "unique_questions_per_evaluation": [
+    4
+  ],
+  "paired_differences": [
+    {
+      "seed": 42,
+      "corruption_level": 0,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.0,
+      "robust_minus_baseline_reward_hacking_gap": 0.0
+    },
+    {
+      "seed": 42,
+      "corruption_level": 0.2,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.0,
+      "robust_minus_baseline_reward_hacking_gap": 0.0
+    },
+    {
+      "seed": 42,
+      "corruption_level": 0.4,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.0,
+      "robust_minus_baseline_reward_hacking_gap": 0.0
+    },
+    {
+      "seed": 123,
+      "corruption_level": 0,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.0,
+      "robust_minus_baseline_reward_hacking_gap": 0.0
+    },
+    {
+      "seed": 123,
+      "corruption_level": 0.2,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.0,
+      "robust_minus_baseline_reward_hacking_gap": 0.0
+    },
+    {
+      "seed": 123,
+      "corruption_level": 0.4,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.0,
+      "robust_minus_baseline_reward_hacking_gap": 0.0
+    },
+    {
+      "seed": 456,
+      "corruption_level": 0,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.0,
+      "robust_minus_baseline_reward_hacking_gap": 0.0
+    },
+    {
+      "seed": 456,
+      "corruption_level": 0.2,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.020833333333333343,
+      "robust_minus_baseline_reward_hacking_gap": 0.020833333333333343
+    },
+    {
+      "seed": 456,
+      "corruption_level": 0.4,
+      "robust_minus_baseline_independent_accuracy": 0.0,
+      "robust_minus_baseline_pass@1": 0.0,
+      "robust_minus_baseline_pass@4": 0.0,
+      "robust_minus_baseline_observed_reward": 0.02083333333333337,
+      "robust_minus_baseline_reward_hacking_gap": 0.02083333333333337
+    }
+  ],
+  "interpretation": "Descriptive preliminary evidence. Synthetic reward inflation is not proof of learned exploitation; no significance or capability superiority claim."
+}

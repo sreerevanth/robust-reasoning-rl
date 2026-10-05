@@ -104,6 +104,29 @@ separately transporting those weights.
 
 ## Reading the evidence
 
+The [completed CPU pilot report](../experiments/phase2/artifacts/cpu-pilot/report.md)
+contains all 27 planned conditions with no recorded failures. Every condition has zero
+pass@1, pass@4, and independently judged accuracy. Neither stronger single-attempt behavior
+nor increased sampling success was observed. Robust GRPO did not reduce the reward gap:
+its gap was slightly higher than baseline for seed 456 at both nonzero corruption levels,
+and equal for the other paired conditions. These descriptive differences cannot establish
+learned exploitation or comparative capability under this budget.
+
+All six clean-reward training runs had zero gradient and zero LoRA B norm. The noisy runs
+produced parameter updates; completing an optimizer loop alone is therefore insufficient
+evidence of learning. Each trained condition actually encountered two unique questions from
+the eight-question candidate pool. See the generated
+[training diagnostics](../experiments/phase2/artifacts/cpu-pilot/training_diagnostics.csv),
+[failure cases](../experiments/phase2/artifacts/cpu-pilot/failure_analysis.md), and
+[validation record](phase2_validation.md). The 10% and 60% conditions and the larger GPU
+campaign remain unexecuted due to the CPU budget; they are explicitly deferred, not included
+in the completed 27-condition CPU protocol.
+
+The experiment launch manifest records commit `c86f34d` and a dirty working tree. Subsequent
+reporting and documentation commits occurred while the process ran; per-run Git metadata is
+retained as recorded. It must not be read as evidence of a separately checked-out clean commit
+for each condition. The frozen numerical configuration and full run metadata are archived.
+
 The [pretrained smoke report](../experiments/phase2/artifacts/pretrained-smoke/report.md)
 is generated from three measured conditions and is integration evidence only. It includes
 raw generations, training audits, actual loss/KL/gradient histories, and adapter-update norms.

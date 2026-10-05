@@ -21,3 +21,5 @@ Completed conditions: 3. Recorded failures: 0.
 | 0.200000 | robust | 1 | 0.000000 | undefined | 0.083333 |
 
 Standard deviations are sample standard deviations across seeds. Undefined rates stay undefined. Tiny budgets do not support significance testing or causal claims. Repeated base responses across corruption levels are not independent evidence.
+
+Every completed condition has zero independently judged correctness. This correctness floor prevents a conclusion about comparative reasoning gains. Reward gaps can reflect injected errors rather than learned exploitation.

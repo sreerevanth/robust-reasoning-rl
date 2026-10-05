@@ -9,6 +9,9 @@ corruption sweeps with complete per-generation records.
 experiments. These budgets are preliminary and support no superiority or significance claim.
 See the [Phase 2 protocol and evidence](docs/phase2.md) and the automatically generated
 [pretrained smoke report](experiments/phase2/artifacts/pretrained-smoke/report.md).
+The [completed CPU pilot](experiments/phase2/artifacts/cpu-pilot/report.md) covers all
+27 planned conditions across three seeds. Every condition had zero pass@1 and pass@4;
+this tiny experiment provides no evidence of a robust-method advantage.
 
 ## Motivation and questions
 

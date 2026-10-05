@@ -1,0 +1,135 @@
+{
+  "timestamp": "2026-10-04T18:19:04.212238+00:00",
+  "git_commit": "c86f34d2b89dfb6539493ecdfff98b49e0e0782f",
+  "git_dirty": true,
+  "python": "3.11.9",
+  "packages": {
+    "numpy": "2.4.6",
+    "torch": "2.14.1",
+    "transformers": "4.57.6",
+    "trl": "0.26.2",
+    "peft": "0.18.1",
+    "datasets": "4.8.5",
+    "accelerate": "1.15.0"
+  },
+  "config": {
+    "seed": 42,
+    "output_dir": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\gsm8k-cpu-pilot\\seed-42\\level-0\\baseline\\training",
+    "dataset": {
+      "source": "local",
+      "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_phase2_train.jsonl",
+      "limit": 8
+    },
+    "model": {
+      "backend": "huggingface",
+      "name": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "prompt_format": "chat",
+      "device": "cpu",
+      "cpu_threads": 4
+    },
+    "generation": {
+      "num_generations": 4,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "max_tokens": 192,
+      "sample_batch_size": 4
+    },
+    "training_verifier": {
+      "strategy": "mean",
+      "members": [
+        {
+          "kind": "rule",
+          "corruption": {
+            "kind": "flip",
+            "confidence_scale": 1.0,
+            "probability": 0,
+            "seed": 42
+          }
+        },
+        {
+          "kind": "rule",
+          "corruption": {
+            "kind": "flip",
+            "confidence_scale": 1.0,
+            "probability": 0,
+            "seed": 1051
+          }
+        },
+        {
+          "kind": "rule",
+          "corruption": {
+            "kind": "flip",
+            "confidence_scale": 1.0,
+            "probability": 0,
+            "seed": 2060
+          }
+        }
+      ]
+    },
+    "evaluation_verifier": {
+      "kind": "rule"
+    },
+    "reward": {
+      "strategy": "standard"
+    },
+    "evaluation": {
+      "k": [
+        1,
+        4
+      ]
+    },
+    "training": {
+      "learning_rate": 5e-06,
+      "batch_size": 4,
+      "gradient_accumulation_steps": 1,
+      "max_steps": 2,
+      "save_steps": 2,
+      "logging_steps": 1,
+      "beta": 0.04,
+      "gradient_checkpointing": false,
+      "bf16": false,
+      "use_cpu": true,
+      "lora": {
+        "enabled": true,
+        "r": 8,
+        "alpha": 16,
+        "dropout": 0.05,
+        "target_modules": "all-linear"
+      }
+    },
+    "experiment": {
+      "label": "preliminary_cpu_two_update_four_question_pilot",
+      "mode": "train",
+      "reuse_base_generations": true,
+      "train_dataset": {
+        "source": "local",
+        "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_phase2_train.jsonl",
+        "limit": 8
+      },
+      "seeds": [
+        42,
+        123,
+        456
+      ],
+      "levels": [
+        0,
+        0.2,
+        0.4
+      ],
+      "corruption": {
+        "kind": "flip",
+        "confidence_scale": 1.0
+      },
+      "robust_reward": {
+        "strategy": "combined",
+        "penalty": 0.2,
+        "moderate_threshold": 0.4,
+        "severe_threshold": 0.9,
+        "moderate_scale": 0.5,
+        "severe_scale": 0.0
+      }
+    }
+  },
+  "execution_kind": "training_started"
+}
