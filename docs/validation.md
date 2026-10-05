@@ -1,39 +1,78 @@
-# Validation record — 4 October 2026
+# Final validation — 5 October 2026
 
-Validation was executed locally on Windows using Python 3.11.9 and a project-local virtual
-environment. CUDA was unavailable. This record describes software execution, not benchmark results.
+This is the current validation record. Historical records remain in
+[Phase 1](validation-phase1.md) and [Phase 2](phase2_validation.md).
 
-| Check | Executed result |
-|---|---|
-| `python -m pytest -q` | 98 passed; 2 expected PEFT Conv1D layout warnings |
-| `python -m ruff check src tests scripts` | Passed |
-| `python -m ruff format --check src tests scripts` | 38 files already formatted |
-| `python -m mypy src` | No issues in 29 source files |
+## Environment
+
+Windows, Python 3.11.9, PyTorch 2.14.1+cpu, CUDA unavailable, CUDA version null.
+The host has eight physical cores, sixteen logical processors, and approximately 16 GB RAM;
+only roughly 3 GB was available during the final pass. Integrated AMD graphics are not a
+CUDA device. See [current hardware](../experiments/final/hardware.json).
+
+## Executed checks
+
+| Check | Result |
+| --- | --- |
+| Full training environment, `python scripts/check.py` | 120 tests passed |
+| Ruff lint | Passed |
+| Ruff formatting | 49 files formatted |
+| mypy | Passed, 30 source files |
 | `python -m pip check` | No broken requirements |
-| Evaluation CLI | Completed; 4 fixture questions, 16 generated responses |
-| Corruption experiment CLI | Completed; 15 fixture audit runs, zero failures |
-| Plot CLI | Completed; 9 nonempty plot artifacts |
-| Real training integration | Both baseline and robust paths executed one CPU optimizer step |
-| Checkpoint/inference integration | Real LoRA save/load and stochastic/greedy generation passed |
+| Fresh `python -m venv` and `pip install -e '.[dev]'` | Installed successfully |
+| Fresh core environment quality gates | 118 passed, 2 optional training tests skipped |
+| Fresh core dependency check | No broken requirements |
+| Evaluation CLI | Completed on fixture data |
+| Experiment CLI | 15 explicitly labelled fixture conditions, no failures |
+| Plot CLI | 13 nonempty artifacts per campaign |
+| Training CLI | Real local tiny-model optimizer/save/reload integration passed |
+| Real pretrained Qwen experiment CLI | Three smoke conditions completed, no failures |
+| Aggregation and failure analysis | Generated from actual stored summaries and records |
+| Final CUDA preflight | Externally blocked; no final-study condition launched |
 
-The local training test builds a randomly initialized tiny GPT-2 and tokenizer entirely on disk.
-It invokes the actual TRL trainer, PEFT, and PyTorch optimizer. No pretrained model download is
-needed for these checks. The two warnings are PEFT automatically adapting GPT-2 Conv1D
-fan-in/fan-out layout. They do not indicate test failure.
+The full suite displays one expected PEFT Conv1D layout warning. The standard local training
+path runs in a subprocess and captures its corresponding warning. These are local random-model
+integration tests, not pretrained-model performance evidence. Fresh installation was tested in
+a new environment against this checkout, rather than in a separately cloned checkout.
 
-The fixture campaign uses three seeds and corruption probabilities 0, 0.1, 0.2, 0.4, and 0.6.
-It tests corrupt reward observation for a fixed arithmetic fixture policy. It does not train policies
-or provide evidence of reasoning improvement. Generated files live under ignored `results/`.
+## Measured pretrained evidence
 
-The validated training stack includes TRL 0.26.2, Transformers 4.57.6, PEFT 0.18.1,
-Accelerate 1.15.0, Datasets 4.8.5, and PyTorch 2.14.1. These are the observed installed versions,
-not a promise of identical behavior on other hardware or future dependency versions.
+The preserved SmolLM2 CPU pilot completed all 27 planned conditions across three seeds,
+with zero failed conditions. All pass@1 and pass@4 values were zero. The original pretrained
+SmolLM2 validation smoke completed three conditions. The final pass ran two candidate-model
+qualifications on sixteen validation questions each, preserving original and rejudged records.
+Qwen then completed three CPU smoke conditions with two real one-update GRPO runs.
 
-CI configuration is included, but GitHub Actions was not run here: no Git remote is configured.
-Meaningful pretrained-policy sweeps, large held-out evaluation, convergence studies, and
-statistical comparisons were not executed. They require external training compute.
+The Qwen training checkpoints contain 4,399,104 trainable parameters. Both standard and robust
+runs changed 168 trainable tensors according to before/after SHA256, saved adapters, and
+independently reloaded them for generation. A small smoke success is not a method advantage.
+The CPU train loops are resource-bounded instrumentation checks, not the full study budget.
 
-Reproduce the local checks from the repository root:
+No final 128-question corruption comparison ran. All 45 conditions in the frozen CUDA protocol
+remain unexecuted. No failed condition, missing seed, or unexecuted result is represented as success.
+
+## Evidence paths
+
+- [CPU pilot report](../experiments/phase2/artifacts/cpu-pilot/report.md)
+- [SmolLM2 pretrained smoke](../experiments/phase2/artifacts/pretrained-smoke/report.md)
+- [Candidate qualification table](../experiments/final/qualification/report.md)
+- [Original and audited Qwen outputs](../experiments/final/artifacts/qualification-qwen/)
+- [Qwen CPU smoke report](../experiments/final/artifacts/qwen-cpu-smoke/report.md)
+- [Frozen protocol](../experiments/final/protocol.yaml)
+- [Final research report](final-report.md)
+
+Archive-integrity tests verify recorded byte counts/SHA256 and reject weight extensions.
+Dataset-integrity tests verify SHA256, scalar references, train/test/validation separation,
+and exclusion of the previously inspected pilot test pool. Sweep-resume tests verify skipped
+completed conditions, rejection of changed configs/evidence, and preservation of retried failures.
+Atomic-write tests cover transient and persistent Windows file locks without losing old results.
+No weights, caches, virtual environments, credentials, or result ZIPs are intentionally tracked.
+
+## GitHub CI and reproduction
+
+The remote CI run for commit `290fdff` completed successfully:
+[verified Actions run](https://github.com/sreerevanth/robust-reasoning-rl/actions/runs/37266019236).
+This statement refers to that executed run, not a promise that a later commit has passed remotely.
 
 ```bash
 python scripts/check.py
@@ -41,3 +80,13 @@ python -m src.cli evaluate --config configs/evaluation.yaml
 python -m src.cli experiment --config configs/smoke.yaml
 python -m src.cli plot --results results/fixture-sweep
 ```
+
+For the final pretrained study on a configured CUDA host:
+
+```bash
+python scripts/run_final_study.py --resume
+```
+
+See [GPU setup and resume behavior](gpu-execution.md). GPU installation, memory fit, and the
+full final experiment are externally unvalidated. Classification: **C — Framework + pilot
+complete, final GPU study externally blocked**.

@@ -1,17 +1,17 @@
 # Robust Reasoning RL Under Imperfect Rewards
 
+[![CPU checks](https://github.com/sreerevanth/robust-reasoning-rl/actions/workflows/ci.yaml/badge.svg?branch=codex%2Frobust-reasoning)](https://github.com/sreerevanth/robust-reasoning-rl/actions/workflows/ci.yaml)
+
 A Python research framework for studying whether reasoning policies optimize correctness or
 exploit noisy, incomplete, biased, and inconsistent verifier rewards. It implements shared TRL
 GRPO training paths, uncertainty-aware reward shaping, independent evaluation, and controlled
 corruption sweeps with complete per-generation records.
 
-**Evidence status:** CPU-validated framework plus actual pretrained SmolLM2/GSM8K pipeline
-experiments. These budgets are preliminary and support no superiority or significance claim.
-See the [Phase 2 protocol and evidence](docs/phase2.md) and the automatically generated
-[pretrained smoke report](experiments/phase2/artifacts/pretrained-smoke/report.md).
-The [completed CPU pilot](experiments/phase2/artifacts/cpu-pilot/report.md) covers all
-27 planned conditions across three seeds. Every condition had zero pass@1 and pass@4;
-this tiny experiment provides no evidence of a robust-method advantage.
+**Status C: framework + pilot complete; final GPU study externally blocked.**
+The project includes real pretrained GRPO/save/reload runs, independent GSM8K evaluation,
+qualified Qwen model selection, and a frozen execution package. The primary hypothesis remains
+unestablished. Read the [final research report](docs/final-report.md),
+[validation](docs/validation.md), and [evidence-based resume entry](docs/resume.md).
 
 ## Motivation and questions
 
@@ -138,11 +138,46 @@ Sweep CSVs power robustness, reward-hacking, reward/correctness, disagreement, a
 plots. Curves show seed means and standard deviations, not significance. Failed sweep runs
 remain in the summary. Generated outputs and checkpoints are ignored by Git.
 
+## Results
+
+### CPU Pilot
+
+The [completed instrumentation pilot](experiments/phase2/artifacts/cpu-pilot/report.md)
+contains 27 conditions across three seeds. All pass@1 and pass@4 scores were zero.
+Corrupted reward increased while independent correctness remained zero. Robust GRPO did
+not demonstrate an advantage. The generated tables preserve all seeds and unfavorable results.
+
+![Measured CPU pilot reward gap](experiments/phase2/artifacts/cpu-pilot/plots/reward_hacking.png)
+
+### Final Pretrained Study
+
+The CPU pilot validates the experimental instrumentation but does not establish comparative
+reasoning improvements. The full pretrained corruption study requires GPU execution.
+
+The [model qualification table](experiments/final/qualification/report.md) records SmolLM2
+and Qwen on the same sixteen validation questions. Qwen cleared the capability gate before
+parser repairs; rejudging its unchanged outputs recovered additional correct final answers.
+The [Qwen CPU smoke](experiments/final/artifacts/qwen-cpu-smoke/report.md) verifies actual
+adapter movement, checkpoint save, and reload. Its tiny budget supports no comparative claim.
+Original and corrected-parser qualification records are kept separately.
+
+The frozen study uses Qwen2.5-0.5B-Instruct, 256 training questions, 128 fresh test questions,
+three seeds, five corruption levels, and equal standard/robust budgets. **All 45 final conditions
+remain unexecuted.** On a configured CUDA host:
+
+```bash
+python scripts/run_final_study.py --resume
+```
+
+This command checks capability before RL, resumes verified conditions, generates tables/plots,
+and exports evidence without weights. See [Colab/Kaggle/Linux setup](docs/gpu-execution.md).
+
 ## Project structure
 
 ```text
 configs/                 Baseline, robust, evaluation, real sweep and smoke YAML
-data/                    Disjoint local arithmetic fixtures
+data/                    Disjoint fixtures and pinned GSM8K pools
+experiments/             Frozen protocols and measured lightweight evidence
 src/data/                Schema and configurable dataset adapters
 src/models/              Fixture and pretrained/PEFT generation
 src/rewards/             Parsing, verifiers, corruption, ensembles, shaping
@@ -166,14 +201,13 @@ The parsers support scalar numbers, signs, fractions, boxed answers, and selecte
 they do not prove reasoning steps or symbolic equivalence. Ensemble agreement is not calibrated
 truth. Synthetic corruption can differ from learned-verifier exploitation. Missing-reward zero
 imputation and group centering need careful ablation. Single-process execution is supported.
-Repeated output directories overwrite artifacts; use unique campaign paths.
+Use unique paths for independent replications. The final runner verifies completed evidence
+and configuration before resuming; partial or failed conditions remain explicit.
 
 There are no fabricated results, simulated trained-model gains, or SOTA claims. Local random-model
 training tests validate engineering only. Phase 2 preserves actual pretrained-model artifacts;
 meaningful conclusions still require larger budgets, held-out datasets, several seeds, measured
 compute, and stronger external evaluation.
-Potential research extensions include calibrated learned judges, genuinely independent transfer
-evaluators, loss-level sample masking, adaptive uncertainty, and multi-domain reward attacks.
 
 Read [architecture](docs/architecture.md), [methodology](docs/methodology.md),
 [experiments](docs/experiments.md), and [metrics](docs/metrics.md).

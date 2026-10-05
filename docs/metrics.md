@@ -49,6 +49,7 @@ metrics never replace independent correctness.
 Plots show means across seeds with empirical ±one standard deviation bands; these are **not
 confidence intervals** or significance tests. Scatter panels show individual seed/level runs.
 Sampling curves retain method and corruption level separately rather than pooling levels.
+Their error bars are sample standard deviations across seeds, not confidence intervals.
 
 Phase 2 generation telemetry reports mean generated tokens (including EOS when present,
 excluding prompt and post-EOS batch padding) and truncation rate (fraction terminated by the
@@ -57,3 +58,10 @@ KL, zero-reward-variance group fraction, and LoRA B norm. TRL's `total_flos` may
 because this trainer does not populate that accounting field; it does not mean no compute
 was used. Raw and shaped reward means are reported separately. Only two unique questions
 may be seen during a two-update run even if its configured candidate pool contains eight.
+
+The final pass records whether an extracted answer is valid for a scalar reference. A nonnumeric
+explicit final-answer sentence counts as extraction failure, even if its raw text is nonempty.
+Historical pilot metrics preserve the previous missing-answer-only definition; qualification
+reports show original and corrected-parser values separately. New training metadata records
+SHA256 for every trainable tensor before and after optimization, the changed tensor count,
+trainable parameter count, and actual optimizer steps. Zero changed tensors are reported as such.
