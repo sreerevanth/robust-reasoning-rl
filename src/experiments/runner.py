@@ -203,6 +203,11 @@ def experiment(config: dict[str, Any]) -> dict[str, Any]:
                         "model": run["model"],
                         "config": run,
                     }
+                    failures = [
+                        item
+                        for item in failures
+                        if (item["seed"], item["level"], item["method"]) != (seed, level, method)
+                    ]
                     failures.append(failure)
                     failure_history.append(failure)
                     write_json(run_dir / "failure.json", failure)

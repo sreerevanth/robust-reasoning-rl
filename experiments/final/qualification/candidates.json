@@ -1,6 +1,7 @@
 [
   {
     "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "advertised_parameter_scale": "135M",
     "model_revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
     "examples": 16,
     "pass@1": 0.0,
@@ -16,11 +17,12 @@
   },
   {
     "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "advertised_parameter_scale": "0.5B",
     "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
     "examples": 16,
     "pass@1": 0.5,
     "original_pass@1": 0.25,
-    "extraction_failure_rate": 0.3125,
+    "extraction_failure_rate": 0.25,
     "original_extraction_failure_rate": 0.3125,
     "truncation_rate": 0.125,
     "seconds": 811.5427251000074,

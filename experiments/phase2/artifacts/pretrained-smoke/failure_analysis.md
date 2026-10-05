@@ -2,6 +2,14 @@
 
 Deterministic first eligible example per method/category. All methods are included; unavailable categories are explicitly listed. These labels concern final answers, not reasoning validity. Base duplicates are rescoring of the same responses.
 
+## base/extraction_failure
+
+No qualifying measured example.
+
+## base/truncated
+
+No qualifying measured example.
+
 ## base/answer_correct_reward_positive
 
 No qualifying measured example.
@@ -50,6 +58,14 @@ Frank starts from his original starting point. 25 steps forward from his origina
 Final answer: 26 steps forward.
 ```
 
+## baseline/extraction_failure
+
+No qualifying measured example.
+
+## baseline/truncated
+
+No qualifying measured example.
+
 ## baseline/answer_correct_reward_positive
 
 No qualifying measured example.
@@ -97,6 +113,14 @@ Frank starts with 5 steps back. 10 steps forward = 5 * 5 = 25 steps forward.
 Frank starts from his original starting point. 25 steps forward from his original starting point is 25 + 5 = 26 steps forward.
 Final answer: 26 steps forward.
 ```
+
+## robust/extraction_failure
+
+No qualifying measured example.
+
+## robust/truncated
+
+No qualifying measured example.
 
 ## robust/answer_correct_reward_positive
 

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "timestamp": "2026-10-05T05:58:16.291210+00:00",
-    "git_commit": "290fdffb39008202556cb00d7b274be9a322f5df",
+    "timestamp": "2026-10-05T06:37:32.488961+00:00",
+    "git_commit": "d3fe082b60db7176d5f30648a31877becd8ac9b4",
     "git_dirty": true,
     "python": "3.11.9",
     "packages": {
@@ -81,7 +81,7 @@
       }
     },
     "execution_kind": "model_evaluation",
-    "elapsed_seconds": 0.12881090000155382,
+    "elapsed_seconds": 0.31910490000154823,
     "experiment_label": null
   },
   "metrics": {
@@ -101,7 +101,7 @@
     "pass@1": 0.5,
     "answer_consistency": null,
     "answer_diversity": 1.0,
-    "extraction_failure_rate": 0.3125,
+    "extraction_failure_rate": 0.25,
     "mean_generated_tokens": 320.4375,
     "truncation_rate": 0.125
   },
@@ -292,7 +292,7 @@
       "example_id": "gsm8k-validation-ec6445571a528221",
       "response": "To solve this problem, we need to calculate the number of sit-ups each person performs and then sum them up.\n\n1. **Barney's Sit-Ups:**\n   - Barney can do 45 sit-ups per minute.\n   - In one minute, he does \\( 45 \\) sit-ups.\n\n2. **Carrie's Sit-Ups:**\n   - Carrie can do twice as many sit-ups per minute as Barney.\n   - Therefore, Carrie can do \\( 2 \\times 45 = 90 \\) sit-ups per minute.\n   - In two minutes, she does \\( 90 \\times 2 = 180 \\) sit-ups.\n\n3. **Jerrie's Sit-Ups:**\n   - Jerrie can do 5 more sit-ups per minute than Carrie.\n   - Therefore, Jerrie can do \\( 90 + 5 = 95 \\) sit-ups per minute.\n   - In three minutes, she does \\( 95 \\times 3 = 285 \\) sit-ups.\n\nNow, let's find the combined total number of sit-ups:\n\n\\[\n\\text{Total sit-ups} = \\text{Barney's sit-ups} + \\text{Carrie's sit-ups} + \\text{Jerrie's sit-ups}\n\\]\n\n\\[\n\\text{Total sit-ups} = 45 + 180 + 285\n\\]\n\n\\[\n\\text{Total sit-ups} = 470\n\\]\n\n**Final Answer:** The combined total number of sit-ups performed is \\( 470 \\).",
       "reasoning": "To solve this problem, we need to calculate the number of sit-ups each person performs and then sum them up.\n\n1. **Barney's Sit-Ups:**\n   - Barney can do 45 sit-ups per minute.\n   - In one minute, he does \\( 45 \\) sit-ups.\n\n2. **Carrie's Sit-Ups:**\n   - Carrie can do twice as many sit-ups per minute as Barney.\n   - Therefore, Carrie can do \\( 2 \\times 45 = 90 \\) sit-ups per minute.\n   - In two minutes, she does \\( 90 \\times 2 = 180 \\) sit-ups.\n\n3. **Jerrie's Sit-Ups:**\n   - Jerrie can do 5 more sit-ups per minute than Carrie.\n   - Therefore, Jerrie can do \\( 90 + 5 = 95 \\) sit-ups per minute.\n   - In three minutes, she does \\( 95 \\times 3 = 285 \\) sit-ups.\n\nNow, let's find the combined total number of sit-ups:\n\n\\[\n\\text{Total sit-ups} = \\text{Barney's sit-ups} + \\text{Carrie's sit-ups} + \\text{Jerrie's sit-ups}\n\\]\n\n\\[\n\\text{Total sit-ups} = 45 + 180 + 285\n\\]\n\n\\[\n\\text{Total sit-ups} = 470\n\\]\n\n**",
-      "final_answer": "The combined total number of sit-ups performed is \\( 470 \\)",
+      "final_answer": "470",
       "verifier_outputs": {
         "reward": 0.0,
         "confidence": 1.0,
@@ -305,24 +305,21 @@
             "reward": 0.0,
             "confidence": 1.0,
             "metadata": {
-              "answer": "The combined total number of sit-ups performed is \\( 470 \\)",
-              "kind": "exact"
+              "kind": "rational"
             }
           },
           {
             "reward": 0.0,
             "confidence": 1.0,
             "metadata": {
-              "answer": "The combined total number of sit-ups performed is \\( 470 \\)",
-              "kind": "exact"
+              "kind": "rational"
             }
           },
           {
             "reward": 0.0,
             "confidence": 1.0,
             "metadata": {
-              "answer": "The combined total number of sit-ups performed is \\( 470 \\)",
-              "kind": "exact"
+              "kind": "rational"
             }
           }
         ]
@@ -343,7 +340,7 @@
         "question": "Barney can perform 45 sit-ups in one minute. Carrie can do twice as many sit-ups per minute as Barney can.  And Jerrie can do 5 more sit-ups per minute than Carrie can do.  If Barney does sit-ups for 1 minute, and Carrie does sit-ups for two minutes, and Jerrie does sit-ups for three minutes, what would be the combined total number of sit-ups performed?",
         "reference": "510",
         "sample_index": 0,
-        "answer_extraction_valid": false,
+        "answer_extraction_valid": true,
         "generated_tokens": 339,
         "prompt_tokens": 133,
         "finish_reason": "eos",

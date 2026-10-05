@@ -47,6 +47,7 @@ def extract_answer(response: str) -> ExtractedAnswer:
         if nested:
             answer = nested[1]
         answer = answer.replace(r"\$", "$").strip().rstrip(".!;").strip("$* ")
+        answer = answer.replace(r"\(", "").replace(r"\)", "").strip()
         xml_answer = re.fullmatch(r"<answer>\s*(.*?)\s*</answer>", answer, re.I)
         if xml_answer:
             answer = xml_answer[1]

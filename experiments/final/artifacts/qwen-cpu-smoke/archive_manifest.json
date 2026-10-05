@@ -1,0 +1,185 @@
+{
+  "source_root": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\qwen-cpu-smoke",
+  "files": [
+    {
+      "path": "aggregate.csv",
+      "bytes": 1245,
+      "sha256": "7e228bdb42db15a423fe9623371041dc19aa18ece7e1042608dc1683d3c2b4d2"
+    },
+    {
+      "path": "analysis.json",
+      "bytes": 720,
+      "sha256": "3a88b8f6da01993afa6c86ceed7133f1607891565a8f803eef8718f9ebf7e090"
+    },
+    {
+      "path": "failure_analysis.json",
+      "bytes": 53955,
+      "sha256": "bf6242f9b3261e6ef51c4f7215eaab0e0854d05aec693d2dd43faf34c9399ed4"
+    },
+    {
+      "path": "failure_analysis.md",
+      "bytes": 16042,
+      "sha256": "74be14d5b4024165cd6d82568abf7da5ce03e888fe0b8bf1697a81c8e55b53b7"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 2836,
+      "sha256": "6009c9467c678546c72fd23d7cbe6bef2494376cc995d5197594611c13f006d7"
+    },
+    {
+      "path": "paired_method_differences.csv",
+      "bytes": 235,
+      "sha256": "4d0a11b7698d083c79bf10e5f6f49759dcfd583be9ae54ca62b563a6c21b7783"
+    },
+    {
+      "path": "per_seed.csv",
+      "bytes": 449,
+      "sha256": "ad65b37a920d4e3c249e49b133ac13c51eba72063277e2e4734211aa62acefa3"
+    },
+    {
+      "path": "plots/disagreement.png",
+      "bytes": 97169,
+      "sha256": "7ac17fe67d3be2920e4ce289db64db58389ecaf01d094070fe038920cc906092"
+    },
+    {
+      "path": "plots/disagreement_corruption.pdf",
+      "bytes": 16901,
+      "sha256": "337a763869ac466943b95dea66f4ed90aa67e4617c2aa1351acc34c6880ba0d0"
+    },
+    {
+      "path": "plots/disagreement_corruption.png",
+      "bytes": 92249,
+      "sha256": "e8ef603aa16e787b79a0831dac10710323874ebf5cc107107b490350eefd7327"
+    },
+    {
+      "path": "plots/extraction_failure.pdf",
+      "bytes": 15595,
+      "sha256": "1f9dbdba02089cb7a9995fda9643de764597152c3f641bd4782fcba5c925cc39"
+    },
+    {
+      "path": "plots/extraction_failure.png",
+      "bytes": 89116,
+      "sha256": "f37a760278c5419739059a540ae36c0b751c12b112245d21c48cdc713ff61e36"
+    },
+    {
+      "path": "plots/observed_reward.pdf",
+      "bytes": 15262,
+      "sha256": "9e627fd74034d36af682e90c5a907adb8161c3a4e41151dfb5015d3d0e85f94e"
+    },
+    {
+      "path": "plots/observed_reward.png",
+      "bytes": 91750,
+      "sha256": "af06e3c048a5f33993083e12becfffdcc2049361e59ed36226120879d2b63683"
+    },
+    {
+      "path": "plots/reward_correctness.png",
+      "bytes": 102214,
+      "sha256": "74f2ac5a04d4eaad436585850eb6b7dc7aa46db69735ad65ceeddff1d601e7af"
+    },
+    {
+      "path": "plots/reward_hacking.pdf",
+      "bytes": 15667,
+      "sha256": "ea5c0a20833c98df293d31d51d38dee831929842283b14b53c355f3e27f8dc97"
+    },
+    {
+      "path": "plots/reward_hacking.png",
+      "bytes": 97682,
+      "sha256": "df025c206489a1f81f84c817bb9b038ce8a2f0dceb21e16d2c70b6262dd393af"
+    },
+    {
+      "path": "plots/robustness.pdf",
+      "bytes": 15094,
+      "sha256": "9844660d71e89f58dc871cc57153444d5b16c7f28874e38a09542dbec791d6e7"
+    },
+    {
+      "path": "plots/robustness.png",
+      "bytes": 93553,
+      "sha256": "f1fef7dc92b16fa4489b24aafe1f4fe41293dba024b3c5aa12a81d5ba594594a"
+    },
+    {
+      "path": "plots/sampling.png",
+      "bytes": 109002,
+      "sha256": "1e4b5750e362a0a04063cac9d4200deddb2924fdf099ef0b90a8770d7f75f512"
+    },
+    {
+      "path": "report.md",
+      "bytes": 1910,
+      "sha256": "b7df205cd8914259fa2e699dc95a1fd3b4bb563c62d4edd45825ce4c7adad0d8"
+    },
+    {
+      "path": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "bytes": 29949,
+      "sha256": "1d41a18f7e74261edaf620283411ab1e2ac41211bd2128a3cca24cdae33a90a2"
+    },
+    {
+      "path": "seed-42/level-0.2/base/evaluation/generations.jsonl",
+      "bytes": 18581,
+      "sha256": "dd08bdeca5d3cd7c8659fa9230e4dfc58879ee980a0bc7112bcae7fdae17af28"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "bytes": 30106,
+      "sha256": "41ccac894f89755dcb27e6c306750f62b515b19cee90a7949b584bae7d919dca"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/evaluation/generations.jsonl",
+      "bytes": 18581,
+      "sha256": "dd08bdeca5d3cd7c8659fa9230e4dfc58879ee980a0bc7112bcae7fdae17af28"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/training/reward_audit.jsonl",
+      "bytes": 3277,
+      "sha256": "a276ac042018316304fe1f55e97bc34c89f6be291c8a5569f42fa892b936628c"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/training/run.json",
+      "bytes": 3371,
+      "sha256": "2f908b1983afce7a946a6ab95a1d74e5d7eb5a8d28155ccb9a29498602493bbf"
+    },
+    {
+      "path": "seed-42/level-0.2/baseline/training/training.json",
+      "bytes": 105457,
+      "sha256": "48ede9b11fa3c32ff69b86e6a8511fc6c23d0b6816404d01ac4c7fb5fdcae491"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "bytes": 29638,
+      "sha256": "b1dc72c62a4839806c80e0f9f2f748c9e3915d529d8cd88ac632f3b7c502f788"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/evaluation/generations.jsonl",
+      "bytes": 18105,
+      "sha256": "aede91a8f3b274975ecb4686bc110811b980fcc3ff3a957f007902206b9fdf39"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/training/reward_audit.jsonl",
+      "bytes": 3296,
+      "sha256": "144993d34601b4d950f52940bfb124bc775bfb8ad6b8e6e12d6c79692ab032e0"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/training/run.json",
+      "bytes": 3516,
+      "sha256": "660702d8e5b81223dad1f4d2ab7aa9e7d1072db9e033aadf19da08c7d4152cdf"
+    },
+    {
+      "path": "seed-42/level-0.2/robust/training/training.json",
+      "bytes": 105632,
+      "sha256": "e142a363535c9dcd893d65e38360b87606da8a5b4c96f0f1eb77a01d74041a90"
+    },
+    {
+      "path": "summary.csv",
+      "bytes": 1968,
+      "sha256": "d0a7ab5a00950d091231e4afde00c0888464224f67fe6538b9ef8c800f812fdb"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 7642,
+      "sha256": "caf0a0b89af85ad2cce3af714c51a67f48d3362f2d58df73c9a66d9fe2d0607e"
+    },
+    {
+      "path": "training_diagnostics.csv",
+      "bytes": 904,
+      "sha256": "bc2f3339744cb27b4fa2f7262b5c9ef0d5baee48b791aef40840983244d3a50e"
+    }
+  ]
+}

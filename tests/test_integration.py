@@ -86,6 +86,28 @@ def test_fair_baseline_robust_configs():
     assert baseline["reward"] != robust["reward"]
 
 
+def test_resume_retries_failed_condition_and_retains_failure_history(tmp_path, monkeypatch):
+    cfg = load_config(ROOT / "configs/smoke.yaml")
+    cfg["output_dir"] = str(tmp_path)
+    cfg["experiment"].update(seeds=[42], levels=[0, 0.2], continue_on_error=True)
+
+    def fail_noisy_condition(config):
+        if config["training_verifier"]["members"][0]["corruption"]["probability"] == 0.2:
+            raise RuntimeError("controlled interruption")
+        return evaluate(config)
+
+    monkeypatch.setattr("src.experiments.runner.evaluate", fail_noisy_condition)
+    first = experiment(cfg)
+    assert len(first["runs"]) == len(first["failures"]) == 1
+    assert first["failures"][0]["config"]["model"] == cfg["model"]
+    monkeypatch.setattr("src.experiments.runner.evaluate", evaluate)
+    cfg["experiment"]["resume"] = True
+    resumed = experiment(cfg)
+    assert len(resumed["runs"]) == 2 and not resumed["failures"]
+    assert len(resumed["failure_history"]) == 1
+    assert resumed["runs"][0] == first["runs"][0]
+
+
 def test_real_sweep_orchestration_preserves_controlled_comparison(tmp_path, monkeypatch):
     cfg = load_config(ROOT / "configs/reward_corruption.yaml")
     cfg["output_dir"] = str(tmp_path)

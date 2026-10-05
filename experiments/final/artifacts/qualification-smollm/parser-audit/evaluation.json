@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "timestamp": "2026-10-05T05:58:15.856020+00:00",
-    "git_commit": "290fdffb39008202556cb00d7b274be9a322f5df",
+    "timestamp": "2026-10-05T06:37:31.970810+00:00",
+    "git_commit": "d3fe082b60db7176d5f30648a31877becd8ac9b4",
     "git_dirty": true,
     "python": "3.11.9",
     "packages": {
@@ -81,7 +81,7 @@
       }
     },
     "execution_kind": "model_evaluation",
-    "elapsed_seconds": 38.0470146999869,
+    "elapsed_seconds": 3.9875394999980927,
     "experiment_label": null
   },
   "metrics": {

@@ -142,7 +142,21 @@ def create_report(results: str | Path) -> dict[str, Any]:
         "# Measured experiment report\n\nAutomatically generated from summary.json. "
         "No experimental values are manually supplied.\n\n"
         f"Completed conditions: {len(frame)}. Recorded failures: {len(summary['failures'])}.\n\n"
-        "## Per seed\n\n"
+        "## Main table (seed means)\n\n"
+        + markdown_table(
+            aggregate[
+                [
+                    "corruption_level",
+                    "method",
+                    "pass@1_mean",
+                    *(["pass@4_mean"] if "pass@4_mean" in aggregate else []),
+                    "independent_accuracy_mean",
+                    "observed_reward_mean",
+                    "reward_hacking_gap_mean",
+                ]
+            ]
+        )
+        + "\n\n## Per seed\n\n"
         + markdown_table(measured)
         + "\n\n## Across seeds\n\n"
         + markdown_table(compact)
@@ -177,6 +191,12 @@ def create_report(results: str | Path) -> dict[str, Any]:
             **payload["metrics"],
             **payload["reward_statistics"],
         }
+        row.update(
+            {
+                name: payload.get("policy_movement", {}).get(name)
+                for name in ("trainable_parameter_count", "optimizer_steps", "changed_tensors")
+            }
+        )
         audit = path.parent / "reward_audit.jsonl"
         if audit.exists():
             audit_rows = [
@@ -212,6 +232,10 @@ def create_report(results: str | Path) -> dict[str, Any]:
     if diagnostics:
         pd.DataFrame(diagnostics).to_csv(root / "training_diagnostics.csv", index=False)
     categories = {
+        "extraction_failure": lambda r: (
+            not r["metadata"].get("answer_extraction_valid", r["final_answer"] is not None)
+        ),
+        "truncated": lambda r: r["metadata"].get("finish_reason") == "length",
         "answer_correct_reward_positive": lambda r: (
             r["independent_correctness"]
             and r["observed_reward"] is not None

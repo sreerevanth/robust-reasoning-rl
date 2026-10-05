@@ -2,8 +2,14 @@
   "selection": "first eligible per method/category in sorted artifact order",
   "counts": {
     "base/answer_incorrect_reward_negative": 128,
+    "base/extraction_failure": 63,
+    "base/truncated": 60,
     "baseline/answer_incorrect_reward_negative": 129,
+    "baseline/extraction_failure": 63,
+    "baseline/truncated": 60,
     "robust/answer_incorrect_reward_negative": 127,
+    "robust/extraction_failure": 63,
+    "robust/truncated": 60,
     "base/answer_incorrect_false_positive": 16,
     "base/high_disagreement": 61,
     "baseline/answer_incorrect_false_positive": 15,
@@ -82,6 +88,154 @@
         "device": "cpu"
       }
     },
+    "base/extraction_failure": {
+      "source": "seed-123/level-0/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-78dd8c8b20f38c37",
+      "response": "To solve this problem, we need to first convert the distance from miles to kilometers, and then find the percentage of the distance covered.\n\nDistance from Alaska to Texas is 6000 km. Since the distance is in kilometers, we need to convert it to miles. 6000 km * 1.5 = 9000 miles.\n\nNow, we can use the formula for percentage to find the percentage of the distance covered: ((distance in miles / distance from Alaska) * 100) * 1000 = (9000 * 100) / 9000 * 1000 = 9%.\n\nSo, Michael has covered a total distance of 9% of the distance from Alaska to Texas, which is 9000 miles.",
+      "reasoning": "To solve this problem, we need to first convert the distance from miles to kilometers, and then find the percentage of the distance covered.\n\nDistance from Alaska to Texas is 6000 km. Since the distance is in kilometers, we need to convert it to miles. 6000 km * 1.5 = 9000 miles.\n\nNow, we can use the formula for percentage to find the percentage of the distance covered: ((distance in miles / distance from Alaska) * 100) * 1000 = (9000 * 100) / 9000 * 1000 = 9%.\n\nSo, Michael has covered a total distance of 9% of the distance from Alaska to Texas, which is 9000 miles.",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Michael is traveling on the interstate at an average speed of 50km/hr (taking into account all the necessary stops for gas, relaxation, etc.). If he goes on like this for 3 days, and the distance between Alaska and Texas is 6000 km, what percentage of this distance has he covered?",
+        "reference": "60",
+        "sample_index": 3,
+        "generated_tokens": 177,
+        "prompt_tokens": 118,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "base/truncated": {
+      "source": "seed-123/level-0/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-6dbed0240798dcb4",
+      "response": "John rents his car out 10 times a month for 3 hours each time and earns $25 per hour.\n\nTotal payment = 10 x 3 = 30 hours\n\nAfter payment, John's car loan is 10 x 3 = 30 hours of payment + 500 hours of payment = 3000 hours of payment\n\nTotal profit = 3000 hours of payment + 25 hours of payment = 3250 hours of payment\n\nSo, John makes a profit of 3250 hours of payment.\n\nFinal answer: John makes $3250 per month on his car.\n\nPreliminaries:\n\nJohn's car rental is paid by credit card, and the loan is made in monthly installments.\n\nJohn pays $25 an hour for the car loan.\n\n",
+      "reasoning": "John rents his car out 10 times a month for 3 hours each time and earns $25 per hour.\n\nTotal payment = 10 x 3 = 30 hours\n\nAfter payment, John's car loan is 10 x 3 = 30 hours of payment + 500 hours of payment = 3000 hours of payment\n\nTotal profit = 3000 hours of payment + 25 hours of payment = 3250 hours of payment\n\nSo, John makes a profit of 3250 hours of payment.",
+      "final_answer": "John makes $3250 per month on his car",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "John makes $3250 per month on his car",
+            "kind": "exact"
+          }
+        },
+        "question": "John rents his car out 10 times a month for 3 hours each time.  He gets paid $25 an hour.  If his car payment is $500, how much profit does he make on his car?",
+        "reference": "250",
+        "sample_index": 1,
+        "generated_tokens": 192,
+        "prompt_tokens": 100,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
     "baseline/answer_incorrect_reward_negative": {
       "source": "seed-123/level-0/baseline/evaluation/evaluation.json",
       "example_id": "gsm8k-test-029ef1d7713b4f7c",
@@ -152,6 +306,154 @@
         "device": "cpu"
       }
     },
+    "baseline/extraction_failure": {
+      "source": "seed-123/level-0/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-78dd8c8b20f38c37",
+      "response": "To solve this problem, we need to first convert the distance from miles to kilometers, and then find the percentage of the distance covered.\n\nDistance from Alaska to Texas is 6000 km. Since the distance is in kilometers, we need to convert it to miles. 6000 km * 1.5 = 9000 miles.\n\nNow, we can use the formula for percentage to find the percentage of the distance covered: ((distance in miles / distance from Alaska) * 100) * 1000 = (9000 * 100) / 9000 * 1000 = 9%.\n\nSo, Michael has covered a total distance of 9% of the distance from Alaska to Texas, which is 9000 miles.",
+      "reasoning": "To solve this problem, we need to first convert the distance from miles to kilometers, and then find the percentage of the distance covered.\n\nDistance from Alaska to Texas is 6000 km. Since the distance is in kilometers, we need to convert it to miles. 6000 km * 1.5 = 9000 miles.\n\nNow, we can use the formula for percentage to find the percentage of the distance covered: ((distance in miles / distance from Alaska) * 100) * 1000 = (9000 * 100) / 9000 * 1000 = 9%.\n\nSo, Michael has covered a total distance of 9% of the distance from Alaska to Texas, which is 9000 miles.",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Michael is traveling on the interstate at an average speed of 50km/hr (taking into account all the necessary stops for gas, relaxation, etc.). If he goes on like this for 3 days, and the distance between Alaska and Texas is 6000 km, what percentage of this distance has he covered?",
+        "reference": "60",
+        "sample_index": 3,
+        "generated_tokens": 177,
+        "prompt_tokens": 118,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "baseline/truncated": {
+      "source": "seed-123/level-0/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-6dbed0240798dcb4",
+      "response": "John rents his car out 10 times a month for 3 hours each time and earns $25 per hour.\n\nTotal payment = 10 x 3 = 30 hours\n\nAfter payment, John's car loan is 10 x 3 = 30 hours of payment + 500 hours of payment = 3000 hours of payment\n\nTotal profit = 3000 hours of payment + 25 hours of payment = 3250 hours of payment\n\nSo, John makes a profit of 3250 hours of payment.\n\nFinal answer: John makes $3250 per month on his car.\n\nPreliminaries:\n\nJohn's car rental is paid by credit card, and the loan is made in monthly installments.\n\nJohn pays $25 an hour for the car loan.\n\n",
+      "reasoning": "John rents his car out 10 times a month for 3 hours each time and earns $25 per hour.\n\nTotal payment = 10 x 3 = 30 hours\n\nAfter payment, John's car loan is 10 x 3 = 30 hours of payment + 500 hours of payment = 3000 hours of payment\n\nTotal profit = 3000 hours of payment + 25 hours of payment = 3250 hours of payment\n\nSo, John makes a profit of 3250 hours of payment.",
+      "final_answer": "John makes $3250 per month on his car",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "John makes $3250 per month on his car",
+            "kind": "exact"
+          }
+        },
+        "question": "John rents his car out 10 times a month for 3 hours each time.  He gets paid $25 an hour.  If his car payment is $500, how much profit does he make on his car?",
+        "reference": "250",
+        "sample_index": 1,
+        "generated_tokens": 192,
+        "prompt_tokens": 100,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
     "robust/answer_incorrect_reward_negative": {
       "source": "seed-123/level-0/robust/evaluation/evaluation.json",
       "example_id": "gsm8k-test-029ef1d7713b4f7c",
@@ -219,6 +521,154 @@
         "generated_tokens": 84,
         "prompt_tokens": 110,
         "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "robust/extraction_failure": {
+      "source": "seed-123/level-0/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-78dd8c8b20f38c37",
+      "response": "To solve this problem, we need to first convert the distance from miles to kilometers, and then find the percentage of the distance covered.\n\nDistance from Alaska to Texas is 6000 km. Since the distance is in kilometers, we need to convert it to miles. 6000 km * 1.5 = 9000 miles.\n\nNow, we can use the formula for percentage to find the percentage of the distance covered: ((distance in miles / distance from Alaska) * 100) * 1000 = (9000 * 100) / 9000 * 1000 = 9%.\n\nSo, Michael has covered a total distance of 9% of the distance from Alaska to Texas, which is 9000 miles.",
+      "reasoning": "To solve this problem, we need to first convert the distance from miles to kilometers, and then find the percentage of the distance covered.\n\nDistance from Alaska to Texas is 6000 km. Since the distance is in kilometers, we need to convert it to miles. 6000 km * 1.5 = 9000 miles.\n\nNow, we can use the formula for percentage to find the percentage of the distance covered: ((distance in miles / distance from Alaska) * 100) * 1000 = (9000 * 100) / 9000 * 1000 = 9%.\n\nSo, Michael has covered a total distance of 9% of the distance from Alaska to Texas, which is 9000 miles.",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Michael is traveling on the interstate at an average speed of 50km/hr (taking into account all the necessary stops for gas, relaxation, etc.). If he goes on like this for 3 days, and the distance between Alaska and Texas is 6000 km, what percentage of this distance has he covered?",
+        "reference": "60",
+        "sample_index": 3,
+        "generated_tokens": 177,
+        "prompt_tokens": 118,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    },
+    "robust/truncated": {
+      "source": "seed-123/level-0/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-test-6dbed0240798dcb4",
+      "response": "John rents his car out 10 times a month for 3 hours each time and earns $25 per hour.\n\nTotal payment = 10 x 3 = 30 hours\n\nAfter payment, John's car loan is 10 x 3 = 30 hours of payment + 500 hours of payment = 3000 hours of payment\n\nTotal profit = 3000 hours of payment + 25 hours of payment = 3250 hours of payment\n\nSo, John makes a profit of 3250 hours of payment.\n\nFinal answer: John makes $3250 per month on his car.\n\nPreliminaries:\n\nJohn's car rental is paid by credit card, and the loan is made in monthly installments.\n\nJohn pays $25 an hour for the car loan.\n\n",
+      "reasoning": "John rents his car out 10 times a month for 3 hours each time and earns $25 per hour.\n\nTotal payment = 10 x 3 = 30 hours\n\nAfter payment, John's car loan is 10 x 3 = 30 hours of payment + 500 hours of payment = 3000 hours of payment\n\nTotal profit = 3000 hours of payment + 25 hours of payment = 3250 hours of payment\n\nSo, John makes a profit of 3250 hours of payment.",
+      "final_answer": "John makes $3250 per month on his car",
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": "John makes $3250 per month on his car",
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": "John makes $3250 per month on his car",
+            "kind": "exact"
+          }
+        },
+        "question": "John rents his car out 10 times a month for 3 hours each time.  He gets paid $25 an hour.  If his car payment is $500, how much profit does he make on his car?",
+        "reference": "250",
+        "sample_index": 1,
+        "generated_tokens": 192,
+        "prompt_tokens": 100,
+        "finish_reason": "length",
         "device": "cpu"
       }
     },

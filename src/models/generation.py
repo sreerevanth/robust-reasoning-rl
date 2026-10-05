@@ -98,6 +98,11 @@ class HFGenerator:
                 options["top_k"] = self.config["top_k"]
         outputs = []
         self.last_generation_metadata = []
+        eos_ids = self.model.generation_config.eos_token_id
+        if eos_ids is None:
+            eos_ids = self.tokenizer.eos_token_id
+        eos_ids = eos_ids if isinstance(eos_ids, list) else [eos_ids]
+        eos_ids = [token for token in eos_ids if token is not None]
         # One call per sample keeps deterministic decoding compatible with count > 1.
         with torch.inference_mode():
             batch_size = self.config.get("sample_batch_size", 1) if options["do_sample"] else 1
@@ -108,7 +113,9 @@ class HFGenerator:
                 for sequence in tokens:
                     generated = sequence[inputs["input_ids"].shape[1] :]
                     # Batched generation pads sequences after EOS. Exclude this padding.
-                    eos_positions = (generated == self.tokenizer.eos_token_id).nonzero()
+                    eos_positions = torch.isin(
+                        generated, torch.tensor(eos_ids, device=generated.device)
+                    ).nonzero()
                     terminated = len(eos_positions) > 0
                     if terminated:
                         generated = generated[: int(eos_positions[0].item()) + 1]
@@ -118,6 +125,8 @@ class HFGenerator:
                             "prompt_tokens": inputs["input_ids"].shape[1],
                             "finish_reason": "eos" if terminated else "length",
                             "device": str(self.model.device),
+                            "eos_token_ids": eos_ids,
+                            "do_sample": options["do_sample"],
                         }
                     )
                     outputs.append(self.tokenizer.decode(generated, skip_special_tokens=True))

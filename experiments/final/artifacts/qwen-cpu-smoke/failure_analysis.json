@@ -1,0 +1,1220 @@
+{
+  "selection": "first eligible per method/category in sorted artifact order",
+  "counts": {
+    "base/extraction_failure": 8,
+    "base/truncated": 8,
+    "base/answer_incorrect_reward_negative": 7,
+    "base/answer_incorrect_false_positive": 1,
+    "base/high_disagreement": 5,
+    "baseline/extraction_failure": 8,
+    "baseline/truncated": 8,
+    "baseline/answer_incorrect_reward_negative": 7,
+    "baseline/answer_incorrect_false_positive": 1,
+    "baseline/high_disagreement": 5,
+    "robust/extraction_failure": 7,
+    "robust/truncated": 7,
+    "robust/answer_incorrect_reward_negative": 6,
+    "robust/answer_incorrect_false_positive": 1,
+    "robust/high_disagreement": 3,
+    "robust/answer_correct_reward_positive": 1
+  },
+  "examples": {
+    "base/extraction_failure": {
+      "source": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "base/truncated": {
+      "source": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "base/answer_incorrect_reward_negative": {
+      "source": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "base/answer_incorrect_false_positive": {
+      "source": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take ",
+      "reasoning": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 1,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "base/high_disagreement": {
+      "source": "seed-42/level-0.2/base/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take ",
+      "reasoning": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 1,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "baseline/extraction_failure": {
+      "source": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "baseline/truncated": {
+      "source": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "baseline/answer_incorrect_reward_negative": {
+      "source": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "baseline/answer_incorrect_false_positive": {
+      "source": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take ",
+      "reasoning": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 1,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "baseline/high_disagreement": {
+      "source": "seed-42/level-0.2/baseline/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take ",
+      "reasoning": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 1,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "robust/extraction_failure": {
+      "source": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "robust/truncated": {
+      "source": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "robust/answer_incorrect_reward_negative": {
+      "source": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "reasoning": "To determine how many steps forward Frank is from his original starting point after performing each movement, we need to follow these steps:\n\n1. **Starting Position**: Frank's original position is at zero steps forward.\n2. **First Movement**:\n   - Take 5 steps back.\n   - New position = \\(0 + (-5) = -5\\) steps forward.\n3. **Second Movement**:\n   - Take 10 steps forward.\n   - New position = \\(-5 + 10 = 5\\) steps forward.\n4. **Third Movement**:\n   - Take 2 steps back.\n   - New position",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 0,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "robust/answer_incorrect_false_positive": {
+      "source": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take ",
+      "reasoning": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 1,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "robust/high_disagreement": {
+      "source": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-5e6375912f4d30ca",
+      "response": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take ",
+      "reasoning": "To solve this problem, we need to track Frank's movements step-by-step to determine his final position relative to his original starting point.\n\nLet's break down Frank's movements:\n\n1. **First Movement (backward):**\n   - Start at the origin.\n   - Take 5 steps back.\n   - Ending position after this movement: \\( x \\)\n\n2. **Second Movement (forward):**\n   - Move 10 steps forward from the previous location.\n   - Ending position after this movement: \\( x + 10 \\)\n\n3. **Third Movement (backward):**\n   - From the previous ending position, take",
+      "final_answer": null,
+      "verifier_outputs": {
+        "reward": 0.6666666666666666,
+        "confidence": 0.11111111111111105,
+        "disagreement": 0.888888888888889,
+        "variance": 0.22222222222222224,
+        "vote_entropy": 0.9182958340544896,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 0.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": true,
+              "base": {
+                "answer": null,
+                "kind": "exact"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 0.6666666666666666,
+      "confidence": 0.11111111111111105,
+      "disagreement": 0.888888888888889,
+      "independent_correctness": false,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 0.0,
+          "confidence": 1.0,
+          "metadata": {
+            "answer": null,
+            "kind": "exact"
+          }
+        },
+        "question": "Frank is practicing a new dance move.  It starts with him take 5 steps back, and then 10 steps forward, and then 2 steps back, and then double that amount forward.  How many steps forward is Frank from his original starting point?",
+        "reference": "7",
+        "sample_index": 1,
+        "answer_extraction_valid": false,
+        "generated_tokens": 128,
+        "prompt_tokens": 101,
+        "finish_reason": "length",
+        "device": "cpu"
+      }
+    },
+    "robust/answer_correct_reward_positive": {
+      "source": "seed-42/level-0.2/robust/evaluation/evaluation.json",
+      "example_id": "gsm8k-validation-a22eeeb1e7375c0a",
+      "response": "Let's denote the unknown number as \\( x \\).\n\nAccording to the problem statement:\n\\[ 3x = 2 \\times 51 - 3 \\]\n\nFirst, let's solve for \\( x \\):\n\\[ 3x = 102 - 3 \\]\n\\[ 3x = 99 \\]\n\\[ x = \\frac{99}{3} \\]\n\\[ x = 33 \\]\n\nTherefore, the number Armand needs to think of is 33.\n\nFinal answer: The number is 33.",
+      "reasoning": "Let's denote the unknown number as \\( x \\).\n\nAccording to the problem statement:\n\\[ 3x = 2 \\times 51 - 3 \\]\n\nFirst, let's solve for \\( x \\):\n\\[ 3x = 102 - 3 \\]\n\\[ 3x = 99 \\]\n\\[ x = \\frac{99}{3} \\]\n\\[ x = 33 \\]\n\nTherefore, the number Armand needs to think of is 33.",
+      "final_answer": "33",
+      "verifier_outputs": {
+        "reward": 1.0,
+        "confidence": 1.0,
+        "disagreement": 0.0,
+        "variance": 0.0,
+        "vote_entropy": -0.0,
+        "confidence_dispersion": 0.0,
+        "members": [
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          },
+          {
+            "reward": 1.0,
+            "confidence": 1.0,
+            "metadata": {
+              "corruption": "flip",
+              "applied": false,
+              "base": {
+                "kind": "rational"
+              }
+            }
+          }
+        ]
+      },
+      "observed_reward": 1.0,
+      "confidence": 1.0,
+      "disagreement": 0.0,
+      "independent_correctness": true,
+      "metadata": {
+        "evaluation_verifier": {
+          "reward": 1.0,
+          "confidence": 1.0,
+          "metadata": {
+            "kind": "rational"
+          }
+        },
+        "question": "Armand is playing a guessing game with his dad where he has to guess a number his dad is thinking of. His dad tells him that the number, when multiplied by 3, is three less than twice 51. What is the number?",
+        "reference": "33",
+        "sample_index": 0,
+        "answer_extraction_valid": true,
+        "generated_tokens": 115,
+        "prompt_tokens": 98,
+        "finish_reason": "eos",
+        "device": "cpu"
+      }
+    }
+  },
+  "interpretation": "Answer correctness is not proof of reasoning validity; synthetic false positives are not proof of learned exploitation."
+}

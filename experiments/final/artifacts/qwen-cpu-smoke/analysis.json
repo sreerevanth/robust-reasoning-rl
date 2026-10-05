@@ -1,0 +1,20 @@
+{
+  "completed_conditions": 3,
+  "recorded_failures": [],
+  "uncompleted_planned_conditions": [],
+  "all_independent_correctness_zero": false,
+  "unique_questions_per_evaluation": [
+    4
+  ],
+  "paired_differences": [
+    {
+      "seed": 42,
+      "corruption_level": 0.2,
+      "robust_minus_baseline_independent_accuracy": 0.125,
+      "robust_minus_baseline_pass@1": 0.125,
+      "robust_minus_baseline_observed_reward": 0.04166666666666663,
+      "robust_minus_baseline_reward_hacking_gap": -0.08333333333333337
+    }
+  ],
+  "interpretation": "Descriptive preliminary evidence. Synthetic reward inflation is not proof of learned exploitation; no significance or capability superiority claim."
+}

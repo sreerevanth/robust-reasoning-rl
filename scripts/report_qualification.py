@@ -22,6 +22,10 @@ def report(roots: list[Path], destination: Path) -> None:
         rows.append(
             {
                 "model": config["model"]["name"],
+                "advertised_parameter_scale": {
+                    "HuggingFaceTB/SmolLM2-135M-Instruct": "135M",
+                    "Qwen/Qwen2.5-0.5B-Instruct": "0.5B",
+                }.get(config["model"]["name"], "unspecified"),
                 "model_revision": config["model"]["revision"],
                 "examples": original["metrics"]["num_examples"],
                 "pass@1": audited["metrics"]["pass@1"],

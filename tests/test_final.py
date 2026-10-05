@@ -5,7 +5,7 @@ from pathlib import Path
 
 from src.data.schema import Example
 from src.evaluation.runner import evaluate
-from src.rewards.answers import extract_answer
+from src.rewards.answers import extract_answer, numeric_value
 from src.rewards.verifiers import RuleVerifier
 from src.utils.config import DEFAULTS, load_config
 
@@ -14,6 +14,11 @@ def test_observed_validation_units_remain_wrong_answers():
     for response, answer, reference in [
         ("Final answer: 49,500 televisions", "49,500", "477"),
         ("Final answer: 0.0025 pounds per square inch", "0.0025", "4"),
+        (
+            r"Final answer: The combined total number of sit-ups performed is \( 470 \)",
+            "470",
+            "510",
+        ),
         (
             "The final answer is: Melissa will groom 5664 animals over the 10-day period.",
             "Melissa will groom 5664 animals over the 10-day period",
@@ -60,12 +65,17 @@ def test_real_qwen_final_formats_accept_correct_scalars_and_reject_ambiguity():
 def test_final_splits_hashes_and_qualification_separation():
     root = Path(__file__).resolve().parents[1]
     manifest = json.loads((root / "experiments/final/dataset_manifest.json").read_text())
+    validation_path = root / manifest["validation"]["path"]
+    assert (
+        hashlib.sha256(validation_path.read_bytes()).hexdigest() == manifest["validation"]["sha256"]
+    )
     pools = {}
     for split, item in manifest["splits"].items():
         path = root / item["path"]
         assert hashlib.sha256(path.read_bytes()).hexdigest() == item["sha256"]
         rows = [json.loads(line) for line in path.read_text().splitlines()]
         assert len(rows) == item["count"]
+        assert all(numeric_value(row["reference"]) is not None for row in rows)
         pools[split] = {row["question"] for row in rows}
     validation = {
         json.loads(line)["question"]

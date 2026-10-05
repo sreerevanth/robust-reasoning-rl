@@ -23,6 +23,11 @@ def run(protocol: Path, resume: bool = False, check_only: bool = False) -> int:
     import torch
 
     config = load_config(protocol)
+    data_manifest = json.loads((protocol.parent / "dataset_manifest.json").read_text())
+    for item in [*data_manifest["splits"].values(), data_manifest["validation"]]:
+        path = ROOT / item["path"]
+        if hashlib.sha256(path.read_bytes()).hexdigest() != item["sha256"]:
+            raise ValueError(f"Frozen dataset bytes changed: {path}")
     output = Path(config["output_dir"])
     protocol_hash = hashlib.sha256(protocol.read_bytes()).hexdigest()
     hardware = {
@@ -88,6 +93,16 @@ def run(protocol: Path, resume: bool = False, check_only: bool = False) -> int:
         return 3
     config["experiment"]["resume"] = resume
     result = experiment(config)
+    write_json(
+        output / "execution_status.json",
+        provenance(
+            config,
+            status="completed" if not result["failures"] else "incomplete",
+            hardware=hardware,
+            completed=len(result["runs"]),
+            failed=len(result["failures"]),
+        ),
+    )
     if result["runs"]:
         create_report(output)
         plot_results(output)
@@ -104,19 +119,9 @@ def run(protocol: Path, resume: bool = False, check_only: bool = False) -> int:
             check=True,
         )
         with zipfile.ZipFile(evidence.with_suffix(".zip"), "w", zipfile.ZIP_DEFLATED) as bundle:
-            for path in evidence.rglob("*"):
-                if path.is_file():
-                    bundle.write(path, path.relative_to(evidence))
-    write_json(
-        output / "execution_status.json",
-        provenance(
-            config,
-            status="completed" if not result["failures"] else "incomplete",
-            hardware=hardware,
-            completed=len(result["runs"]),
-            failed=len(result["failures"]),
-        ),
-    )
+            export_manifest = json.loads((evidence / "archive_manifest.json").read_text())
+            for name in ["archive_manifest.json", *[e["path"] for e in export_manifest["files"]]]:
+                bundle.write(evidence / name, name)
     return 1 if result["failures"] else 0
 
 

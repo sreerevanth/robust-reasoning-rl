@@ -66,7 +66,7 @@ def plot_results(results: str | Path) -> list[Path]:
             ax.fill_between(x, y - std, y + std, alpha=0.15)
         ax.set(xlabel="Reward corruption (%)", ylabel=label, title=label + suffix)
         ax.set_xticks(sorted(frame["corruption_level"].unique() * 100))
-        if metric in {"independent_accuracy", "observed_reward"}:
+        if metric != "reward_hacking_gap":
             ax.set_ylim(0, 1)
         ax.legend()
         ax.grid(alpha=0.2)
@@ -97,9 +97,11 @@ def plot_results(results: str | Path) -> list[Path]:
     )
     fig, ax = plt.subplots(figsize=(7, 4.5), layout="constrained")
     for (sampling_method, level), subset in frame.groupby(["method", "corruption_level"]):
-        ax.plot(
+        ax.errorbar(
             [int(k[5:]) for k in ks],
             [subset[k].mean() for k in ks],
+            yerr=[subset[k].std(ddof=1) if len(subset) > 1 else 0 for k in ks],
+            capsize=3,
             marker="o",
             label=f"{sampling_method}, corruption={level}",
         )

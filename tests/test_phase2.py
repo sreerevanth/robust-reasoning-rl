@@ -82,8 +82,8 @@ def test_gsm8k_frozen_splits_are_disjoint_and_match_manifest():
 def test_archived_evidence_retains_recorded_bytes_without_weights():
     import hashlib
 
-    root = Path(__file__).resolve().parents[1] / "experiments/phase2/artifacts"
-    manifests = list(root.glob("*/archive_manifest.json"))
+    root = Path(__file__).resolve().parents[1] / "experiments"
+    manifests = list(root.glob("*/artifacts/*/archive_manifest.json"))
     assert manifests
     for path in manifests:
         manifest = json.loads(path.read_text())

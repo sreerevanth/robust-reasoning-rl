@@ -2,7 +2,11 @@
   "dataset": "openai/gsm8k",
   "revision": "740312add88f781978c0658806c59bc2815b9866",
   "shuffle_seed": 20261005,
-  "validation": "data/gsm8k_phase2_validation.jsonl",
+  "validation": {
+    "path": "data/gsm8k_phase2_validation.jsonl",
+    "count": 16,
+    "sha256": "175beece197728339c351d25d206f3dd0e386eda3e47ed22879b1c459b632688"
+  },
   "splits": {
     "train": {
       "path": "data\\gsm8k_final_train.jsonl",

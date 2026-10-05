@@ -1,0 +1,17 @@
+{
+  "os": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9",
+  "torch": "2.14.1+cpu",
+  "cuda_available": false,
+  "cuda_version": null,
+  "gpu": null,
+  "cuda_vram_bytes": null,
+  "cpu": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+  "physical_cores": 8,
+  "logical_cores": 16,
+  "ram_bytes": 16486756352,
+  "available_ram_bytes": 3130515456,
+  "cpu_threads": 4,
+  "graphics_adapter_evidence": "experiments/phase2/hardware.json",
+  "scope": "Current final-pass inspection; GPU field refers to available CUDA devices."
+}

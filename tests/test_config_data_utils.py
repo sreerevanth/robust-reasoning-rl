@@ -62,3 +62,34 @@ def test_invalid_local_data_and_independent_corruption(tmp_path):
     cfg["evaluation_verifier"]["corruption"] = {"kind": "flip"}
     with pytest.raises(ValueError):
         validate(cfg)
+
+
+@pytest.mark.parametrize("permanent", [False, True])
+def test_atomic_write_handles_windows_lock_without_losing_old_file(
+    tmp_path, monkeypatch, permanent
+):
+    import os
+
+    target = tmp_path / "run.json"
+    target.write_text('{"old": true}')
+    replace = os.replace
+    calls = []
+
+    def locked_replace(source, destination):
+        calls.append(source)
+        if permanent or len(calls) == 1:
+            raise PermissionError("simulated Windows sync lock")
+        replace(source, destination)
+
+    monkeypatch.setattr("src.utils.persistence.os.replace", locked_replace)
+    monkeypatch.setattr("src.utils.persistence.time.sleep", lambda delay: None)
+    if permanent:
+        with pytest.raises(PermissionError):
+            write_json(target, {"new": True})
+        assert json.loads(target.read_text()) == {"old": True}
+        assert len(calls) == 5
+    else:
+        write_json(target, {"new": True})
+        assert json.loads(target.read_text()) == {"new": True}
+        assert len(calls) == 2
+    assert not list(tmp_path.glob("*.tmp"))

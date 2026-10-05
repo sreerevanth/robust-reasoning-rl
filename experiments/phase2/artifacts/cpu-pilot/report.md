@@ -4,6 +4,20 @@ Automatically generated from summary.json. No experimental values are manually s
 
 Completed conditions: 27. Recorded failures: 0.
 
+## Main table (seed means)
+
+| corruption_level | method | pass@1_mean | pass@4_mean | independent_accuracy_mean | observed_reward_mean | reward_hacking_gap_mean |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.000000 | base | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 0.000000 | baseline | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 0.000000 | robust | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 0.200000 | base | 0.000000 | 0.000000 | 0.000000 | 0.180556 | 0.180556 |
+| 0.200000 | baseline | 0.000000 | 0.000000 | 0.000000 | 0.180556 | 0.180556 |
+| 0.200000 | robust | 0.000000 | 0.000000 | 0.000000 | 0.187500 | 0.187500 |
+| 0.400000 | base | 0.000000 | 0.000000 | 0.000000 | 0.409722 | 0.409722 |
+| 0.400000 | baseline | 0.000000 | 0.000000 | 0.000000 | 0.409722 | 0.409722 |
+| 0.400000 | robust | 0.000000 | 0.000000 | 0.000000 | 0.416667 | 0.416667 |
+
 ## Per seed
 
 | corruption_level | method | seed | pass@1 | pass@4 | independent_accuracy | observed_reward | reward_hacking_gap | false_positive_reward_rate | false_negative_rate | verifier_disagreement | extraction_failure_rate |
@@ -38,17 +52,17 @@ Completed conditions: 27. Recorded failures: 0.
 
 ## Across seeds
 
-| corruption_level | method | seed_count | independent_accuracy_mean | independent_accuracy_std | reward_hacking_gap_mean |
-| --- | --- | --- | --- | --- | --- |
-| 0.000000 | base | 3 | 0.000000 | 0.000000 | 0.000000 |
-| 0.000000 | baseline | 3 | 0.000000 | 0.000000 | 0.000000 |
-| 0.000000 | robust | 3 | 0.000000 | 0.000000 | 0.000000 |
-| 0.200000 | base | 3 | 0.000000 | 0.000000 | 0.180556 |
-| 0.200000 | baseline | 3 | 0.000000 | 0.000000 | 0.180556 |
-| 0.200000 | robust | 3 | 0.000000 | 0.000000 | 0.187500 |
-| 0.400000 | base | 3 | 0.000000 | 0.000000 | 0.409722 |
-| 0.400000 | baseline | 3 | 0.000000 | 0.000000 | 0.409722 |
-| 0.400000 | robust | 3 | 0.000000 | 0.000000 | 0.416667 |
+| corruption_level | method | seed_count | independent_accuracy_mean | independent_accuracy_std | reward_hacking_gap_mean | reward_hacking_gap_std |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.000000 | base | 3 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 0.000000 | baseline | 3 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 0.000000 | robust | 3 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 0.200000 | base | 3 | 0.000000 | 0.000000 | 0.180556 | 0.031823 |
+| 0.200000 | baseline | 3 | 0.000000 | 0.000000 | 0.180556 | 0.031823 |
+| 0.200000 | robust | 3 | 0.000000 | 0.000000 | 0.187500 | 0.041667 |
+| 0.400000 | base | 3 | 0.000000 | 0.000000 | 0.409722 | 0.060141 |
+| 0.400000 | baseline | 3 | 0.000000 | 0.000000 | 0.409722 | 0.060141 |
+| 0.400000 | robust | 3 | 0.000000 | 0.000000 | 0.416667 | 0.072169 |
 
 Standard deviations are sample standard deviations across seeds. Undefined rates stay undefined. Tiny budgets do not support significance testing or causal claims. Repeated base responses across corruption levels are not independent evidence.
 

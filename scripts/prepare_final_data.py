@@ -28,7 +28,13 @@ def prepare() -> None:
         "dataset": "openai/gsm8k",
         "revision": REVISION,
         "shuffle_seed": 20261005,
-        "validation": "data/gsm8k_phase2_validation.jsonl",
+        "validation": {
+            "path": "data/gsm8k_phase2_validation.jsonl",
+            "count": len(validation),
+            "sha256": hashlib.sha256(
+                (ROOT / "data/gsm8k_phase2_validation.jsonl").read_bytes()
+            ).hexdigest(),
+        },
         "splits": {},
     }
     selected = {}

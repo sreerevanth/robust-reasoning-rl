@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-10-05T06:06:19.368672+00:00",
+  "git_commit": "d3fe082b60db7176d5f30648a31877becd8ac9b4",
+  "git_dirty": true,
+  "python": "3.11.9",
+  "packages": {
+    "numpy": "2.4.6",
+    "torch": "2.14.1",
+    "transformers": "4.57.6",
+    "trl": "0.26.2",
+    "peft": "0.18.1",
+    "datasets": "4.8.5",
+    "accelerate": "1.15.0"
+  },
+  "config": {
+    "seed": 42,
+    "output_dir": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\results\\qwen-cpu-smoke",
+    "dataset": {
+      "source": "local",
+      "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_phase2_validation.jsonl",
+      "limit": 4
+    },
+    "model": {
+      "backend": "huggingface",
+      "name": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "prompt_format": "chat",
+      "device": "cpu",
+      "cpu_threads": 4
+    },
+    "generation": {
+      "num_generations": 2,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "max_tokens": 128,
+      "sample_batch_size": 1,
+      "top_k": 0
+    },
+    "training_verifier": {
+      "strategy": "mean",
+      "members": [
+        {
+          "kind": "rule"
+        },
+        {
+          "kind": "rule"
+        },
+        {
+          "kind": "rule"
+        }
+      ]
+    },
+    "evaluation_verifier": {
+      "kind": "rule"
+    },
+    "reward": {
+      "strategy": "standard"
+    },
+    "evaluation": {
+      "k": [
+        1,
+        2
+      ]
+    },
+    "training": {
+      "learning_rate": 5e-06,
+      "batch_size": 2,
+      "gradient_accumulation_steps": 1,
+      "max_steps": 1,
+      "save_steps": 1,
+      "logging_steps": 1,
+      "beta": 0.04,
+      "gradient_checkpointing": true,
+      "bf16": false,
+      "fp16": false,
+      "use_cpu": true,
+      "lora": {
+        "enabled": true,
+        "r": 8,
+        "alpha": 16,
+        "dropout": 0.05,
+        "target_modules": "all-linear"
+      }
+    },
+    "experiment": {
+      "label": "qwen_pretrained_cpu_smoke_one_update",
+      "mode": "train",
+      "continue_on_error": true,
+      "reuse_base_generations": true,
+      "train_dataset": {
+        "source": "local",
+        "path": "C:\\Users\\sreer_mg\\OneDrive\\Documents\\ChatGPT\\robust\\data\\gsm8k_final_train.jsonl",
+        "limit": 8
+      },
+      "seeds": [
+        42
+      ],
+      "levels": [
+        0.2
+      ],
+      "corruption": {
+        "kind": "flip",
+        "confidence_scale": 1.0
+      },
+      "robust_reward": {
+        "strategy": "combined",
+        "penalty": 0.2,
+        "moderate_threshold": 0.4,
+        "severe_threshold": 0.9,
+        "moderate_scale": 0.5,
+        "severe_scale": 0.0
+      }
+    }
+  },
+  "execution_kind": "training_sweep"
+}

@@ -1,6 +1,9 @@
 """Optional real optimizer test: random tiny local GPT-2, no network or benchmark claims."""
 
 import copy
+import json
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -47,7 +50,7 @@ def test_real_local_grpo(tmp_path, strategy):
     )
     model.save_pretrained(model_dir)
     cfg = copy.deepcopy(DEFAULTS)
-    cfg["model"] = {"backend": "huggingface", "name": str(model_dir)}
+    cfg["model"] = {"backend": "huggingface", "name": str(model_dir), "cpu_threads": 1}
     cfg["dataset"]["path"] = str(Path(__file__).resolve().parents[1] / "data/tiny_train.jsonl")
     cfg["generation"].update(num_generations=2, max_tokens=8)
     cfg["evaluation"]["k"] = [1, 2]
@@ -62,7 +65,20 @@ def test_real_local_grpo(tmp_path, strategy):
     cfg["training"]["lora"].update(enabled=True, target_modules=["c_attn"])
     cfg["reward"] = {"strategy": strategy}
     cfg["output_dir"] = str(tmp_path / "training")
-    payload = train(cfg)
+    if strategy == "standard":
+        import yaml
+
+        config_path = tmp_path / "cli-training.yaml"
+        config_path.write_text(yaml.safe_dump(cfg), encoding="utf-8")
+        subprocess.run(
+            [sys.executable, "-m", "src.cli", "train", "--config", str(config_path)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        payload = json.loads((tmp_path / "training/training.json").read_text())
+    else:
+        payload = train(cfg)
     assert payload["metadata"]["execution_kind"] == "training_complete"
     assert payload["reward_statistics"]["samples"] >= 2
     assert payload["policy_movement"]["trainable_parameter_count"] > 0
