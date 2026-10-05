@@ -76,6 +76,9 @@ This statement refers to that executed run, not a promise that a later commit ha
 Remote core CI subsequently exposed Windows separators in the new final dataset manifest.
 The preparation script now writes portable POSIX paths, with a regression assertion; regeneration
 preserves the exact dataset bytes and hashes. This was a portability failure, not a result change.
+All three remote jobs (core Python 3.11, core Python 3.12, and training API) passed
+on commit `2c3d629`, as confirmed by the
+[final code Actions run](https://github.com/sreerevanth/robust-reasoning-rl/actions/runs/37277697081).
 
 ```bash
 python scripts/check.py

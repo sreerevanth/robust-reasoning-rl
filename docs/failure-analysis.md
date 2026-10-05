@@ -29,6 +29,15 @@ reasoning. Real wrong answers such as `49,500 televisions` (reference 477) and
 `0.0025 pounds per square inch` (reference 4) remain wrong after formatting normalization.
 Nonnumeric or ambiguous final strings now count as extraction failures on scalar tasks.
 
+A manual audit of the historical SmolLM2 pilot also found an unmarked final sentence
+with the reference number: seed 42, base, sample 0 for `gsm8k-test-6dbed0240798dcb4`
+ends "John's profit on his car is $250." The historical parser returned no final answer.
+Its visible payment and earnings calculations are incorrect despite the matching final number.
+This illustrates a limitation of the historical judged floor; it is not a rescored metric
+or evidence of valid reasoning. The original scores and outputs remain unchanged, and the
+parser was not expanded using this held-out case. See the
+[original evaluation](../experiments/phase2/artifacts/cpu-pilot/seed-42/level-0/base/evaluation/evaluation.json).
+
 ## Incorrect answer with false-positive reward and high disagreement
 
 The original held-out pen-reuse question has reference 31: 25 original pens, five refills,
@@ -69,7 +78,8 @@ show that both adapters changed. Weight movement is not proof of capability impr
 
 ## Unavailable false-negative illustration
 
-The original pilot has no correct answers, so its false-negative rate is undefined. In the
+The original pilot has no accepted correct answers under its recorded judge, so its
+recorded false-negative rate is undefined. In the
 Qwen smoke, the sole accepted answer receives positive ensemble reward; no correct-answer /
 false-negative example was observed. The candidate qualification uses uncorrupted rewards.
 No false-negative illustration is manufactured. The framework supports and tests that corruption
